@@ -3,7 +3,7 @@
 
 You can find my Linkedin [here](https://www.linkedin.com/in/zevenvb/)!
 
-[Below]() is random markdown practice, hopefully I can make some real portfolio changes soon :slightly_smiling_face:
+[Below](#we-clownin-down-below) is random markdown practice, hopefully I can make some real portfolio changes soon :slightly_smiling_face:
 
 here's me by the way
 
