@@ -17,7 +17,7 @@ ok here's a good photo
 Like someone once said somewhere:
 >yeah.
 
-She used `git rm` to remove me from her `life` repository :disappointed:
+`hello world`
 
 [Click](assets/sunnymug.jpg) here for face I guess
 
@@ -29,6 +29,6 @@ favorite emojis:
 - idk what im doing
 
 are you enjoying your experience here?
-- [x] Yes
-- [ ] No
-- [x] help me 
+1. [x] Yes
+2. [ ] No
+3. [x] help me 
