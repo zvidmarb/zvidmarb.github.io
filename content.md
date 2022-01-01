@@ -10,7 +10,11 @@
 
 ## Pomodoro Timer - CSE 110, Software Engineering (January 2021 - March 2021)
 
-### A Vanilla JS web application built on a small team 
+### A vanilla JS web application built alongside a small team of classmates within an agile-based, experiential course framework
+
+#### Summary
+
+
 
 
 
@@ -30,6 +34,11 @@
 ## Curriculum Development / Teaching Assistant - CNH Circle K TechX Summer Program (February 2021 - September 2021)
 TBD
 
+## Software Developer (May 2020 - March 2021), Project Lead (May 2021 - March 2022) - Circle K International, Cal-Nev-Ha District Technology Committee
+
+## Fellowship Chair
+
+## 
 
 
 
