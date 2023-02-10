@@ -7,44 +7,75 @@
     <meta name="description" content>
     <meta name="author" content="Zeven Vidmar-Barker">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/styles2.css">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 </head>
 
 <body>
     <header>
-        <div class="banner">
-            <a id="title">Zeven Vidmar Barker</a>
-            <nav> 
-                <ul>
-                    <li>About</li>
-                    <li>Projects</li>
-                    <li>Resume</li>
-                </ul> 
-            </nav>
-        </div>
-        
+        <a class="title">ZEVEN VIDMAR BARKER</a>
+        <nav> 
+            <a id="menu" class="icon"><span class="material-symbols-outlined md-36">menu</span></span></a>
+            <ul class="dropdown">
+                <li>About</li>
+                <li>Projects</li>
+                <li>Resume</li>
+            </ul> 
+        </nav>
     </header>
     
-    <section class="hero">
-        <img id="headshot" src="img/zeven.jpg">
-        <div class="blurb">
-            <h1>Hi, I'm Zeven!</h1>
+    <section id="hero">
+        <div>
+            <img id="face" src="img/sunnypic4-3.jpg">
+            <ul class="socials">
+                <li class="icon"><img class="LinkedIn" src="img/linkedinfill.svg"></li>
+                <li class="icon"><span class="material-symbols-outlined">mail</span></li>
+                <li class="icon"><img class="GitHub" src="img/github-mark.svg"></li> 
+            </ul>
+        </div>
+        
+        
+        <div>
+            <h1 id="hello">Hi, I'm Zeven!</h1>
             <p>I'm a recent college graduate from <b>UC San Diego</b>, with a B.S. in <b>Math-Computer Science</b> and a minor in <b>Cognitive
                 Science</b>.
                 </br>
                 I'm currently looking for any and all opportunities as a Software Engineer...</p>
+            <a class="button">Lorem Ipsum</a>
         </div>
-        
-        
     </section>
-    <section></section>
+    <section id="projects">
+        <div>
+            <h3>Featured Projects</h3>
+            <div>
+                <div class="projects1"></div>
+                <div class="projects1"></div>
+            </div>
+        </div>
+            
+        <div>
+            <h3>Other Projects</h3>
+            <div>
+                <div class="projects2"></div>
+                <div class="projects2"></div>
+                <div class="projects2"></div>
+                <!--<div class="projects2"></div>-->
+            </div>
+        </div>
+            
+    </section>
     <footer>
-        <ul>
-            <li>LinkedIn</li>
-            <li>GitHub</li>
-            <li>E-mail</li>
+        <p>Copyright</p>
+        <ul class="socials">
+            <li class="icon"><img class="LinkedIn" src="img/linkedinfill.svg"></li>
+            <li class="icon"><span class="material-symbols-outlined">mail</span></li>
+            <li class="icon"><img class="GitHub" src="img/github-mark.svg"></li> 
         </ul>
+        <a class="top">Back to Top</a>
     </footer>
     <script src="src/app.js"></script>
 </body>
