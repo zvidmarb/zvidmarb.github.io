@@ -83,8 +83,10 @@ section {
     list-style-type: none;
     display: flex;
 }
-#hero > div:second-child {
-    grid-template-rows: 2rem 7rem 2.5rem;
+
+
+#hero > div:nth-child(2) {
+    grid-template-rows: 2rem 3.75rem 3.75rem 2.5rem;
 }
 #hello {
     grid-row-start: 1;
@@ -94,8 +96,12 @@ section {
     grid-row-start: 2;
     grid-column: 1 / 5;
 }
-#hello + p + .button {
+#hello + p + p {
     grid-row-start: 3;
+    grid-column: 1 / 5;
+}
+#hello + p + p + .button {
+    grid-row-start: 4;
     grid-column: 2 / 4;
 }
 
