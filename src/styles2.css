@@ -205,6 +205,7 @@ button {
     grid-area: projects;
     display: flex;
     flex-direction: column;
+    padding: 1.5rem 0;
     row-gap: 1rem;
 }
 #featured-projects {
@@ -215,7 +216,6 @@ button {
 
 }
 .project {
-    padding: 0.25rem;
     background-color: whitesmoke;
     border-radius: 0.5rem;
     display: flex;
@@ -227,20 +227,27 @@ button {
     object-fit: cover;
     width: 100%;
     height: auto;
-    border-radius: inherit;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
-.project details {
-    display: flex;
-    align-items: flex-start;
-}
-.project summary {
-    list-style-type: none;  
-}
-.project button { 
-    align-self: flex-end;
+
+.project a {
+    width: 2.5rem;
     height: 2.5rem;
-    width: calc((100%-3rem)/2)
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0.25rem;
+    right: 1rem;
+    background-color: #3B7577;
+    border-radius: 50%;
 }
+.project a span {color: white}
+#project-section button {
+    width: calc((100% - 3rem)/2 + 1rem);
+    align-self: center;
+}
+
 /* FOOTER */
 footer {
     grid-area: footer;
