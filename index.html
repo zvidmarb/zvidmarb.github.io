@@ -17,80 +17,86 @@
 
 <body>
     <header>
-        <a class="title">ZEVEN VIDMAR BARKER</a>
-        <nav> 
-            <a id="menu" class="icon" href="javascript:void(0)" onclick="dropdown()">
-                <span class="material-symbols-outlined">menu</span>
-            </a>
-            <ul class="dropdown">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Resume</a></li>
-            </ul> 
-        </nav>
+        <div class="content">
+            <a class="title">ZEVEN VIDMAR BARKER</a>
+            <nav> 
+                <a id="menu" class="icon" href="javascript:void(0)" onclick="dropdown()">
+                    <span class="material-symbols-outlined">menu</span>
+                </a>
+                <ul class="dropdown">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Resume</a></li>
+                </ul> 
+            </nav>
+        </div>
     </header>
     
     <section id="hero">
-        <div>
-            <img id="face" src="img/sunnypic.jpg">
-            <ul class="socials">
-                <li class="list-icon"><img class="GitHub" src="img/github-mark.svg"></li> 
-                <li class="list-icon"><span class="material-symbols-outlined">mail</span></li>
-                <li class="list-icon"><img class="LinkedIn" src="img/linkedinfill.svg"></li>
-            </ul>
-        </div>
-        
-        
-        <div>
-            <h1 id="hello">Hi, I'm Zeven!</h1>
-            <p>I’m a recent college graduate from UC San Diego, with a B.S. in 
-                Math-Computer Science and a minor in Cognitive Science.</p>
-            <p>I’m currently looking for entry-level Software Engineer positions across 
-                SoCal and the Bay Area. Feel free to contact me through any of my socials!</p>
-            <button>More about me</button>
+        <div class="content">
+            <div>
+                <img id="face" src="img/sunnypic.jpg">
+                <ul class="socials">
+                    <li class="list-icon"><img class="GitHub" src="img/github-mark.svg"></li> 
+                    <li class="list-icon"><span class="material-symbols-outlined">mail</span></li>
+                    <li class="list-icon"><img class="LinkedIn" src="img/linkedinfill.svg"></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h1 id="hello">Hi, I'm Zeven!</h1>
+                <p>I’m a recent college graduate from UC San Diego, with a B.S. in 
+                    Math-Computer Science and a minor in Cognitive Science.</p>
+                <p>I’m currently looking for entry-level Software Engineer positions across 
+                    SoCal and the Bay Area. Feel free to contact me through any of my socials!</p>
+                <button>More about me</button>
+            </div>
         </div>
     </section>
     <section id="project-section">
-        <h2>Featured Projects</h2>
-        <div id="featured-projects">
-            <div class="project">
-                <img src="img/temp.png">
-                <h3>First Project Name</h3>
-                <!--<p>This is a blurb about the project. 
-                    Keep it brief and keep it simple, 
-                    but make sure it hooks the reader!
-                </p>
-                <button>Read more</button>-->
-                <a href="#">
-                    <span class="material-symbols-outlined">chevron_right</span>
-                </a>
+        <div class="content">
+            <h2>Featured Projects</h2>
+            <div id="featured-projects">
+                <div class="project">
+                    <img src="img/temp.png">
+                    <h3>First Project Name</h3>
+                    <!--<p>This is a blurb about the project. 
+                        Keep it brief and keep it simple, 
+                        but make sure it hooks the reader!
+                    </p>
+                    <button>Read more</button>-->
+                    <a href="#">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </a>
+                </div>
+                <div class="project">
+                    <img src="img/temp.png">
+                    <h3>Second Project Name</h3>
+                    <!--<p>This is a blurb about the project. 
+                        Keep it brief and keep it simple, 
+                        but make sure it hooks the reader!
+                    </p>
+                    <button>Read more</button>-->
+                    <a href="#">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </a>
+                </div>
+                <div class="project">
+                    <img src="img/temp.png">
+                    <h3>Third Project Name</h3>
+                    <!--<p>This is a blurb about the project. 
+                        Keep it brief and keep it simple, 
+                        but make sure it hooks the reader!
+                    </p>
+                    <button>Read more</button>-->
+                    <a href="#">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </a>
+                </div>
             </div>
-            <div class="project">
-                <img src="img/temp.png">
-                <h3>Second Project Name</h3>
-                <!--<p>This is a blurb about the project. 
-                    Keep it brief and keep it simple, 
-                    but make sure it hooks the reader!
-                </p>
-                <button>Read more</button>-->
-                <a href="#">
-                    <span class="material-symbols-outlined">chevron_right</span>
-                </a>
-            </div>
-            <div class="project">
-                <img src="img/temp.png">
-                <h3>Third Project Name</h3>
-                <!--<p>This is a blurb about the project. 
-                    Keep it brief and keep it simple, 
-                    but make sure it hooks the reader!
-                </p>
-                <button>Read more</button>-->
-                <a href="#">
-                    <span class="material-symbols-outlined">chevron_right</span>
-                </a>
-            </div>
+            <button>See more ></button>
         </div>
-        <button>See more ></button>
             
 <!-- indecisive over information architecture
         <div>
@@ -105,17 +111,19 @@
             
     </section>
     <footer>
-        <div class="footer-top">
-            <p>Zeven Vidmar Barker © 2022</p>
-            <a class="top">^ Back to Top</a>
-        </div>
-        <div class="footer-main">
-            <p>Contact me!</p>
-            <ul class="socials">
-                <li class="icon"><img class="LinkedIn" src="img/linkedinfill.svg"></li>
-                <li class="icon"><span class="material-symbols-outlined">mail</span></li>
-                <li class="icon"><img class="GitHub" src="img/github-mark.svg"></li> 
-            </ul>
+        <div class="content">
+            <div class="footer-top">
+                <p>Zeven Vidmar Barker © 2022</p>
+                <a class="top">^ Back to Top</a>
+            </div>
+            <div class="footer-main">
+                <p>Contact me!</p>
+                <ul class="socials">
+                    <li class="icon"><img class="LinkedIn" src="img/linkedinfill.svg"></li>
+                    <li class="icon"><span class="material-symbols-outlined">mail</span></li>
+                    <li class="icon"><img class="GitHub" src="img/github-mark.svg"></li> 
+                </ul>
+            </div>
         </div>
     </footer>
     <script src="src/app.js"></script>
