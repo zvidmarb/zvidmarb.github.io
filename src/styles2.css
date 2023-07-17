@@ -252,8 +252,26 @@ button {
 /* FOOTER */
 footer {
     grid-area: footer;
+    font-size: .875rem;
     background-color: lightsalmon;
+    height: 7.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem 1rem;
 }
-
+footer a,p {
+    color: white;
+    font-weight: 600;
+}
+.footer-top {
+    grid-column: 1 / span 4;
+    display: flex;
+    justify-content: space-between;
+}
+.footer-main {
+    grid-area: 2 / 2 / 3 / 4;
+    display: flex;
+    flex-direction: column;
+}
 
 
