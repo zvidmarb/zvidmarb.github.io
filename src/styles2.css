@@ -33,14 +33,14 @@ header {
     grid-area: header;
     background-color: #3B7577;
     height: 3rem;
-
-    top: 0;
+    left: 0;
     position: sticky;
 }
 header > .content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 a {
@@ -54,31 +54,32 @@ a {
 }
 
 #menu {
-    border: 2px solid black;
+    border: 2px solid #F3FBFB;
     border-radius: 4px;
     display: flex;
 }
-nav ul.dropdown {
-    list-style: none;
-    top: 100%;
-    left: 0;
+nav {
+    position: absolute;
+    width: 100%;
+    height: 9rem;
+    background-color: black;
+    z-index: 1;
+}
+nav #dropdown {
     display: none;
+    position: absolute;
+    list-style: none;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    position: absolute;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 9rem;
-    background-color: whitesmoke;
+    
 }
-ul.dropdown li {
+#dropdown li {
     flex-grow: 1;
     width: inherit;
     height: 100%;
 }
-nav ul.dropdown li a {
+nav #dropdown li a {
     color: black;
     font-variant: small-caps;
     font-weight: 400;
@@ -223,12 +224,16 @@ button {
 
 }
 .project {
-    background-color: whitesmoke;
+    background-color: #F3FBFB;
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
     
+}
+.project > h3 {
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
 }
 .project img {
     object-fit: cover;
@@ -262,6 +267,7 @@ footer {
     font-size: .875rem;
     background-color: #3B7577;
     height: 7.5rem;
+    padding: 0.5rem 0;
 }
 footer > .content {
     display: grid;

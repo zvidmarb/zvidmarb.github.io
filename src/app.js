@@ -1,4 +1,4 @@
 function dropdown() {
-    var drop = document.getElementsByClassName("dropdown")[0];
+    var drop = document.getElementById("dropdown");
     (drop.style.display == "none") ?  drop.style.display = "flex" : drop.style.display = "none";
 }
