@@ -10,7 +10,6 @@ padding: 0;
 margin: 0;
 max-width: 100%;
 overflow-x: hidden;
-position: relative;
 }
 
 body {
@@ -35,12 +34,17 @@ header {
     height: 3rem;
     left: 0;
     position: sticky;
+    overflow: visible;
 }
 header > .content {
+    height: inherit;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    overflow: inherit;
+    position: relative;
+    align-content: space-between;
 }
 
 a {
@@ -51,6 +55,7 @@ a {
 .title {
     font-family: "Oswald", sans-serif;
     font-size: 1.75rem;
+    line-height: 3rem;
 }
 
 #menu {
@@ -59,25 +64,27 @@ a {
     display: flex;
 }
 nav {
-    position: absolute;
-    width: 100%;
+    display: flex;
+    width: 100vw;
     height: 9rem;
-    background-color: black;
     z-index: 1;
+    overflow: inherit;
 }
 nav #dropdown {
     display: none;
+    position: absolute; 
+    background-color: blue;
     position: absolute;
     list-style: none;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
-    
+    width: 100%;
 }
-#dropdown li {
+
+nav #dropdown li {
     flex-grow: 1;
     width: inherit;
-    height: 100%;
+    height: 3rem;
 }
 nav #dropdown li a {
     color: black;
@@ -229,6 +236,7 @@ button {
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
+    position: relative;
     
 }
 .project > h3 {
