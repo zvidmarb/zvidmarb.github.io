@@ -9,7 +9,6 @@ html {
 padding: 0;
 margin: 0;
 max-width: 100%;
-overflow-x: hidden;
 }
 
 body {
@@ -32,9 +31,11 @@ header {
     grid-area: header;
     background-color: #3B7577;
     height: 3rem;
-    left: 0;
+    top: 0;
+    align-self: start;
     position: sticky;
     overflow: visible;
+    z-index: 1;
 }
 header > .content {
     height: inherit;
@@ -64,21 +65,22 @@ a {
     display: flex;
 }
 nav {
+    position: relative;
     display: flex;
     width: 100vw;
     height: 9rem;
-    z-index: 1;
     overflow: inherit;
 }
 nav #dropdown {
     display: none;
     position: absolute; 
-    background-color: blue;
+    background-color: #F3FBFB;
     position: absolute;
     list-style: none;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    border: 1px solid black; /*TODO replace w drop shadow*/
 }
 
 nav #dropdown li {
@@ -94,7 +96,6 @@ nav #dropdown li a {
     align-items: center;
     justify-content: center;
     height: inherit;
-
 }
 /* SECTIONS */
 section > .content { /*TODO might be redundant, hero content starts with flex */
@@ -228,7 +229,6 @@ button {
     flex-direction: column;
     row-gap: 1rem;
     align-items: stretch;
-
 }
 .project {
     background-color: #F3FBFB;
