@@ -13,22 +13,27 @@ max-width: 100%;
 
 body {
     /*margin: 0 1rem;*/
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-areas: 
-        "header header header header"
-        "hero hero hero hero"
-        "projects projects projects projects"
-        "footer footer footer footer";
-    gap: 0rem 1rem;
-    grid-auto-rows: minmax(1rem, auto); /*TODO adjust auto height of rows*/
+    display: flex;
+    flex-direction: column;
+    /*@media screen and (max-width: 599px) {
+        grid-template-columns: repeat(4, 1fr) [end];
+    }
+    @media screen and (min-width: 600px) {
+        grid-template-columns: repeat(8, 1fr) [end];
+    }
+    @media screen and (min-width: 905px ) {
+        grid-template-columns: repeat(12, 1fr) [end];
+    }*/
+    /*grid-template-rows: [header] auto [hero] auto [projects] auto [footer] auto;
+    gap: 0rem 1rem;*/
+    /*grid-auto-rows: minmax(1rem, auto); /*TODO adjust auto height of rows*/
 }
 .content {
     margin: 0 1rem;
 }
 /* HEADER */
 header {
-    grid-area: header;
+    /*grid-area: header / 1 / auto / end;*/
     background-color: #3B7577;
     height: 3rem;
     top: 0;
@@ -107,7 +112,7 @@ section > .content { /*TODO might be redundant, hero content starts with flex */
 /* HERO SECTION */
 #hero {
     height: calc(100vh - 3.5rem);
-    grid-area: hero;
+    /*grid-area: hero / 1 / auto / end ;*/
     background-color: #F3FBFB;
 }
 #hero > .content {
@@ -216,7 +221,7 @@ button {
 /* PROJECTS */
 #project-section {
     background-color: #DAF2F3;
-    grid-area: projects;
+    /*grid-area: projects / 1 / auto / end;*/
 }
 #project-section > .content {
     display: flex;
@@ -271,7 +276,7 @@ button {
 
 /* FOOTER */
 footer {
-    grid-area: footer;
+    /*grid-area: footer / 1 / auto / end;*/
     font-size: .875rem;
     background-color: #3B7577;
     height: 7.5rem;
