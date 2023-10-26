@@ -35,7 +35,7 @@ body {
 header {
     /*grid-area: header / 1 / auto / end;*/
     background-color: #3B7577;
-    height: 3rem;
+    height: clamp(3rem, 8vw, 4.5rem); /*TODO idk if i like the fluid clamp*/
     top: 0;
     align-self: start;
     position: sticky;
