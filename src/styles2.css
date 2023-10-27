@@ -53,14 +53,14 @@ header > .content {
     align-content: space-between;
 }
 
-a {
+a { /*TODO generalize? */
     text-decoration: none;
     color: #F3FBFB;
 }
 
 .title {
     font-family: "Oswald", sans-serif;
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 2vw + 1rem, 3rem); /*TODO or define by grid?*/
     line-height: 3rem;
 }
 
