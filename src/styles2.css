@@ -3,6 +3,7 @@ html {
     font-size:100%;
     background-color:white;
     font-family: "Source Sans Pro", sans-serif;
+    --header-height: clamp(3rem, 8vw, 4.5rem);
 }
 
 * {
@@ -35,7 +36,7 @@ body {
 header {
     /*grid-area: header / 1 / auto / end;*/
     background-color: #3B7577;
-    height: clamp(3rem, 8vw, 4.5rem); /*TODO idk if i like the fluid clamp*/
+    height: var(--header-height);
     top: 0;
     align-self: start;
     position: sticky;
@@ -61,7 +62,7 @@ a { /*TODO generalize? */
 .title {
     font-family: "Oswald", sans-serif;
     font-size: clamp(1.5rem, 2vw + 1rem, 3rem); /*TODO or define by grid?*/
-    line-height: 3rem;
+    line-height:  var(--header-height); /*TODO constrain by width AND height of text? */
 }
 
 #menu {
@@ -70,13 +71,13 @@ a { /*TODO generalize? */
     display: flex;
 }
 nav {
-    position: relative;
+    position: relative; /*TODO desktop = static*/
     display: flex;
     width: 100vw;
     height: 9rem;
     overflow: inherit;
 }
-nav #dropdown {
+nav .mobile {
     display: none;
     position: absolute; 
     background-color: #F3FBFB;
@@ -88,12 +89,12 @@ nav #dropdown {
     border: 1px solid black; /*TODO replace w drop shadow*/
 }
 
-nav #dropdown li {
+nav .mobile li {
     flex-grow: 1;
     width: inherit;
     height: 3rem;
 }
-nav #dropdown li a {
+nav .mobile li a {
     color: black;
     font-variant: small-caps;
     font-weight: 400;
@@ -102,6 +103,18 @@ nav #dropdown li a {
     justify-content: center;
     height: inherit;
 }
+/*MOBILE NAV -> DESKTOP NAV*/
+/*Media query for breakpoint at 1240dp*/
+@media screen and (min-width: 77.5rem) {
+    #menu {
+      display: none; /* Hide hamburger icon on desktop */
+    }
+  
+    .nav {
+      display: flex; /* Show navigation on desktop */
+    }
+  }
+
 /* SECTIONS */
 section > .content { /*TODO might be redundant, hero content starts with flex */
     display: grid;
