@@ -45,7 +45,7 @@ body {
 @media screen and (min-width: 77.5rem) { 
     .content {margin: 0 12.5rem } 
 }
-@media screen and (min-width: 77.5rem) { 
+@media screen and (min-width: 90rem) { 
     .content {margin: 0 calc((100vw - 65rem)/2) } /* scaling margins with fixed 1040dp body */
 }
 
@@ -87,34 +87,32 @@ a { /*TODO generalize? */
 #menu {
     border: 2px solid #F3FBFB;
     border-radius: 4px;
-    display: flex; /*TODO switch to none when desktop*/
+    display: flex;
 }
 nav {
-    position: relative; /*TODO desktop = static*/
+    position: relative;
     display: flex;
-    width: 100vw; /*TODO desktop = clamp or same width described in nav-items? latter, for less flexibility */
-    height: 9rem; /* TODO desktop = inherit*/
+    width: 100vw;
+    height: 9rem;
     overflow: inherit; /*"visible", from header*/
 }
 #nav-items {
-    display: none; /*TODO flex for LARGE*/
-    position: absolute; /*TODO LARGE = initial */
-    background-color: #F3FBFB; /*TODO LARGE = transparent buttons, think of click animation/color change */
+    display: none;
+    position: absolute; 
+    background-color: #F3FBFB; 
     list-style: none;
-    flex-direction: column; /*TODO LARGE = row */
+    flex-direction: column;
     align-items: center;
-
-    /*TODO height necessary? inherit for LARGE */
-    width: 100%; /*TODO LARGE =  width of 4/12 columns + 3 gutters (3rem + 33%?) */
+    width: 100%;
     border: 1px solid black; /*TODO replace w drop shadow*/
 }
 
 #nav-items li {
-    width: inherit; /*TODO LARGE = parent - gutters / 3 */
-    height: 3rem; /*TODO  LARGE = INHERIT*/
+    width: inherit;
+    height: 3rem;
 }
 #nav-items li a {
-    color: black; /* TODO LARGE = white */
+    color: black;
     font-variant: small-caps;
     font-weight: 400;
     display: flex;
@@ -131,7 +129,7 @@ nav {
   
     nav {
       position: initial;
-      width: calc((100% - 11rem)/3 + 4rem); /*takes up 4 out of 12 layout columns of space*/
+      width: calc((100% - 11rem)/3 + 3rem); /*takes up 4 out of 12 layout columns of space*/
       height: inherit;
     }
 
@@ -141,7 +139,6 @@ nav {
         background-color: transparent;
         flex-direction: row;
         gap: 1rem;
-        /*height: initial ? or redundant, width: 100% should still be good?*/
         border: none;
     }
 
@@ -154,7 +151,7 @@ nav {
     #nav-items li a {
         color: #F3FBFB;
     }
-  }
+}
 
 /* SECTIONS */
 section > .content { /*TODO might be redundant, hero content starts with flex */
