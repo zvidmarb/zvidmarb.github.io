@@ -30,9 +30,26 @@ body {
     gap: 0rem 1rem;*/
     /*grid-auto-rows: minmax(1rem, auto); /*TODO adjust auto height of rows*/
 }
+
 .content {
     margin: 0 1rem;
 }
+@media screen and (min-width: 37.5rem) {
+    .content {margin: 0 2rem;}
+}
+/* TODO material trippin with this ugly breakpoint */
+@media screen and (min-width: 56.6rem) { 
+    .content {margin: 0 calc((100vw - 52.5rem)/2) } /* scaling margins with fixed 840dp body */
+    
+}
+@media screen and (min-width: 77.5rem) { 
+    .content {margin: 0 12.5rem } 
+}
+@media screen and (min-width: 77.5rem) { 
+    .content {margin: 0 calc((100vw - 65rem)/2) } /* scaling margins with fixed 1040dp body */
+}
+
+
 /* HEADER */
 header {
     /*grid-area: header / 1 / auto / end;*/
@@ -88,12 +105,11 @@ nav {
     align-items: center;
 
     /*TODO height necessary? inherit for LARGE */
-    width: 100%; /*TODO LARGE =  width of 4/12 columns + 3 gutters (3rem + 33%?) */ 
+    width: 100%; /*TODO LARGE =  width of 4/12 columns + 3 gutters (3rem + 33%?) */
     border: 1px solid black; /*TODO replace w drop shadow*/
 }
 
 #nav-items li {
-    flex-grow: 1; /*TODO LARGE? */
     width: inherit; /*TODO LARGE = parent - gutters / 3 */
     height: 3rem; /*TODO  LARGE = INHERIT*/
 }
@@ -120,10 +136,11 @@ nav {
     }
 
     #nav-items {
-        display: flex;
+        display: flex !important; /* precedence over dropdown() */
         position: inherit;
         background-color: transparent;
         flex-direction: row;
+        gap: 1rem;
         /*height: initial ? or redundant, width: 100% should still be good?*/
         border: none;
     }
