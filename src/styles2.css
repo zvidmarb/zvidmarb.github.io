@@ -1,3 +1,4 @@
+/* LONG TERM TODO - consider effects of increasing rem for larger screens, e.g. 24dp for gutters; would any rem dimensions scale funky? */
 /* GENERAL */
 html {
     font-size:100%;
@@ -35,6 +36,7 @@ body {
 /* HEADER */
 header {
     /*grid-area: header / 1 / auto / end;*/
+    width: 100%;
     background-color: #3B7577;
     height: var(--header-height);
     top: 0;
@@ -68,34 +70,35 @@ a { /*TODO generalize? */
 #menu {
     border: 2px solid #F3FBFB;
     border-radius: 4px;
-    display: flex;
+    display: flex; /*TODO switch to none when desktop*/
 }
 nav {
     position: relative; /*TODO desktop = static*/
     display: flex;
-    width: 100vw;
-    height: 9rem;
-    overflow: inherit;
+    width: 100vw; /*TODO desktop = clamp or same width described in nav-items? latter, for less flexibility */
+    height: 9rem; /* TODO desktop = inherit*/
+    overflow: inherit; /*"visible", from header*/
 }
-nav .mobile {
-    display: none;
-    position: absolute; 
-    background-color: #F3FBFB;
-    position: absolute;
+#nav-items {
+    display: none; /*TODO flex for LARGE*/
+    position: absolute; /*TODO LARGE = initial */
+    background-color: #F3FBFB; /*TODO LARGE = transparent buttons, think of click animation/color change */
     list-style: none;
-    flex-direction: column;
+    flex-direction: column; /*TODO LARGE = row */
     align-items: center;
-    width: 100%;
+
+    /*TODO height necessary? inherit for LARGE */
+    width: 100%; /*TODO LARGE =  width of 4/12 columns + 3 gutters (3rem + 33%?) */ 
     border: 1px solid black; /*TODO replace w drop shadow*/
 }
 
-nav .mobile li {
-    flex-grow: 1;
-    width: inherit;
-    height: 3rem;
+#nav-items li {
+    flex-grow: 1; /*TODO LARGE? */
+    width: inherit; /*TODO LARGE = parent - gutters / 3 */
+    height: 3rem; /*TODO  LARGE = INHERIT*/
 }
-nav .mobile li a {
-    color: black;
+#nav-items li a {
+    color: black; /* TODO LARGE = white */
     font-variant: small-caps;
     font-weight: 400;
     display: flex;
@@ -110,8 +113,29 @@ nav .mobile li a {
       display: none; /* Hide hamburger icon on desktop */
     }
   
-    .nav {
-      display: flex; /* Show navigation on desktop */
+    nav {
+      position: initial;
+      width: calc((100% - 11rem)/3 + 4rem); /*takes up 4 out of 12 layout columns of space*/
+      height: inherit;
+    }
+
+    #nav-items {
+        display: flex;
+        position: inherit;
+        background-color: transparent;
+        flex-direction: row;
+        /*height: initial ? or redundant, width: 100% should still be good?*/
+        border: none;
+    }
+
+    #nav-items li {
+        /*flex grow?*/
+        width: calc((100% - 2rem)/3); /*(parent - gutters) / 3*/
+        height: inherit;
+    }
+
+    #nav-items li a {
+        color: #F3FBFB;
     }
   }
 
