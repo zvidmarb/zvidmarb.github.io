@@ -150,6 +150,8 @@ nav {
 
     #nav-items li a {
         color: #F3FBFB;
+        line-height: var(--header-height);
+        font-size: clamp(1.25rem, 2vw + 1rem, 1.5rem)
     }
 }
 
