@@ -160,22 +160,17 @@ nav {
 
 /* SECTIONS */
 section > .content { /*TODO might be redundant, hero content starts with flex */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem 1rem;
-    grid-auto-rows: minmax(1rem, auto); /*TODO adjust auto height of rows*/
+    display: flex;
+    flex-direction: column; /*TODO DESKTOP -> row*/
+    gap: 1rem; /*TODO DESKTOP -> ~1 column + 2 gutter gap*/
 }
 /* HERO SECTION */
 #hero {
-    height: calc(100vh - 3.5rem);
+    height: calc(100vh - 3.5rem); /**/
     /*grid-area: hero / 1 / auto / end ;*/
     background-color: #F3FBFB;
 }
-#hero > .content {
-    display: flex;
-    flex-direction: column;
-    column-gap: 1rem;
-}
+
 #hero > .content > div {
     height: calc(50% - 0.5rem);
     display: grid;
