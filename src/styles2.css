@@ -1,4 +1,6 @@
 /* LONG TERM TODO - consider effects of increasing rem for larger screens, e.g. 24dp for gutters; would any rem dimensions scale funky? */
+/* LONG TERM TODO - consider more abstractly what elements should be using fit-content */
+/**/
 /* GENERAL */
 html {
     font-size:100%;
@@ -159,43 +161,48 @@ nav {
 }
 
 /* SECTIONS */
-section > .content { /*TODO might be redundant, hero content starts with flex */
+section > .content {
     display: flex;
     flex-direction: column; /*TODO DESKTOP -> row*/
     gap: 1rem; /*TODO DESKTOP -> ~1 column + 2 gutter gap*/
 }
+@media screen and (min-width: 77.5rem) {
+    section > .content {flex-direction: row}
+}
+
 /* HERO SECTION */
 #hero {
-    height: calc(100vh - 3.5rem); /**/
+    /*viewport height - header - .5rem for section color transition */
+    height: calc(100vh - 3.5rem); /*TODO DESKTOP -> single line using header-height, same .5rem?*/
     /*grid-area: hero / 1 / auto / end ;*/
     background-color: #F3FBFB;
 }
 
 #hero > .content > div {
-    height: calc(50% - 0.5rem);
+    /*50% of content height - half a col gap for each div*/
+    height: calc(50% - 0.5rem); /*keep this for desktop for now, we'll see about resizing */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(1rem, min-content); /*TODO adjust auto height of rows*/
-    gap: 0.5rem 1rem;
+    gap: 0.5rem 1rem; /*TODO DESKTOP if keeping grid, adjust row gap as needed*/
 }
 #hero > .content > div:first-child {
-    grid-template-rows: 5fr 1fr;
+    grid-template-rows: 5fr 1fr; /*keep for desktop for now*/
 }
 #face {
-    grid-row-start: 1;
+    grid-row-start: 1; /*grid is literally useless here why am i using it*/
     grid-column: 1 / 5;
-    height: calc(100% - 1rem);
-    width: calc(3rem + (100% - 3rem)/2);
-    margin-top: 1rem;
-    margin-left: calc((100% - 3rem)/4);
-    margin-right: calc((100% - 3rem)/4);
+    max-height: calc(100% - 1rem);  /*TODO correct based on top margin */
+    width: calc(3rem + (100% - 3rem)/2); /*TODO S:4c+2g, M:8+2, L-XL:5 */
+    margin-top: 1rem; /*TODO S:3, M:5, L-XL:6-7*/
+    margin-left: calc((100% - 3rem)/4); /*TODO S:2c+1g, M:3+2, L-XL:0*/
+    margin-right: calc((100% - 3rem)/4); /*"*/
     object-fit: cover;
     border: 1px solid black;
     box-shadow: 0 0 10px 0 rgba(0,0,0,25%);
 }
 .socials {
     grid-row-start: 2;
-    grid-column: 2 / 4;
+    grid-column: 2 / 4; /*TODO S:3/7, M:4/10, L-XL:1/5 or think of classes per columns*/
     list-style-type: none;
     display: flex;
     justify-content: space-between;
@@ -208,59 +215,62 @@ section > .content { /*TODO might be redundant, hero content starts with flex */
     height: fit-content;
 }
 .socials img {
-    width: 2.25rem;
+    width: 2.25rem; /* TODO clamp to 4rem? consider more carefully */
     height: auto;
 }
 .socials span {
-    font-size: 2.25rem;
+    font-size: 2.25rem; /* TODO clamp to 4rem? consider more carefully */
 }
 
 /*#hero > div:nth-child(2) {
     grid-template-rows: 1fr 2fr 2fr 2fr;
 }*/
-h1, p {
+h1, p { /*TODO should I be using this so broadly */
     margin: 0;
-    text-align: center;
-    height: fit-content;
+    text-align: center; /*TODO DESKTOP change to left align*/
+    height: fit-content; 
 }
 #hello {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /*TODO S:2.5, M:2.5, L:2.5, XL:3, consider clamp/relative to title*/
     font-weight: 600;
     grid-row-start: 1;
-    grid-column: 2 / 4;
+    grid-column: 2 / 4; /*TODO S:3/7 (4cols), M:5/9?(4cols), L-XL:7/12(5cols) */
 }
 #hello + p {
     grid-row-start: 2;
-    grid-column: 1 / 5;
+    grid-column: 1 / 5; /*TODO S:1/9 (8cols), M:1/13(12cols), L-XL:7/13(6cols) */
     font-weight: 300;
-    font-size: 1.125rem;
+    font-size: 1.125rem; /*TODO S:2, M:2, L:2, XL:2.5, consider clamp/relative to hello*/
 }
 #hello + p + p {
-    grid-row-start: 3;
-    grid-column: 1 / 5;
+    grid-row-start: 3; /*TODO such ugly stylings, refactor*/
+    grid-column: 1 / 5; /*TODO see above*/
     font-weight: 300;
-    font-size: 1.125rem;
+    font-size: 1.125rem; /*TODO see above*/
 }
 #hello + p + p + button {
     grid-row-start: 4;
-    grid-column: 2 / 4;
+    grid-column: 2 / 4; /*TODO S:3/7, M:4/10, L-XL:7/10*/
 }
 
-button {
+button { /*TODO too general?*/
     justify-content: center;
     display: flex;
     align-items: center;
     background-color: #3B7577;
     font-weight: 600;
-    font-size: 1rem;
-    margin: 0.5rem 0 0.5rem;
+    font-size: 1rem; /*TODO S:2, M:2, L:1.5??, XL:1.75??, INVESTIGATE FURTHER */
+    margin: 0.5rem 0 0.5rem; /*TODO anything? */
     color: #F3FBFB;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,15%), 0 1px 2px rgba(0,0,0,30%);
     width: 100%;
-    height: 2.5rem;
+    height: 2.5rem; /*TODO ??*/
 }
 
+@media screen and (min-width: 77.5rem) {
+    
+}
 
 .material-symbols-outlined {
   font-variation-settings:
