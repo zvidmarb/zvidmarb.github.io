@@ -1,56 +1,61 @@
 /* LONG TERM TODO - consider effects of increasing rem for larger screens, e.g. 24dp for gutters; would any rem dimensions scale funky? */
 /* LONG TERM TODO - consider more abstractly what elements should be using fit-content */
-/**/
+/* LONG TERM TODO - check to ensure fixed body scaling margins for M viewport size */
 /* GENERAL */
-html {
-    font-size:100%;
-    background-color:white;
-    font-family: "Source Sans Pro", sans-serif;
-    --header-height: clamp(3rem, 8vw, 4.5rem);
-    --nav-height: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
-}
-
 * {
 padding: 0;
 margin: 0;
 max-width: 100%;
 }
 
-body {
-    /*margin: 0 1rem;*/
-    display: flex;
-    flex-direction: column;
-    /*@media screen and (max-width: 599px) {
-        grid-template-columns: repeat(4, 1fr) [end];
-    }
-    @media screen and (min-width: 600px) {
-        grid-template-columns: repeat(8, 1fr) [end];
-    }
-    @media screen and (min-width: 905px ) {
-        grid-template-columns: repeat(12, 1fr) [end];
-    }*/
-    /*grid-template-rows: [header] auto [hero] auto [projects] auto [footer] auto;
-    gap: 0rem 1rem;*/
-    /*grid-auto-rows: minmax(1rem, auto); /*TODO adjust auto height of rows*/
+html { /*TODO consider :root selector for variables? */
+    font-size:100%;
+    background-color:white;
+    font-family: "Source Sans Pro", sans-serif;
+    --header-height: clamp(3rem, 8vw, 4.5rem);
+    --nav-height: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
+    --cols: 4;
+    --gutters: 3rem;
+    --margins: 1rem; /*XS 0-599dp = 16dp fixed*/
+    --width-1col: calc((100vw-2*var(--margins) - var(--gutters)) / var(--cols))
+    --width-2col: calc(2*var(--width-1col)+1rem)
 }
-
-.content {
-    margin: 0 1rem;
-}
-@media screen and (min-width: 37.5rem) {
-    .content {margin: 0 2rem;}
+@media screen and (min-width: 37.5rem) { 
+    html {
+        --cols: 8;
+        --margins: 2rem; /*S 600-904dp = 32dp fixed*/
+    }
 }
 /* TODO material trippin with this ugly breakpoint */
 @media screen and (min-width: 56.6rem) { 
-    .content {margin: 0 calc((100vw - 52.5rem)/2) } /* scaling margins with fixed 840dp body */
-    
+    html {
+        --cols: 12;
+        /*M 905-1239dp = scaling margin w 840dp body*/
+        --margins: calc((100vw - 52.5rem)/2);
+    }
 }
 @media screen and (min-width: 77.5rem) { 
-    .content {margin: 0 12.5rem } 
+    html {
+        --cols: 12;
+        --margins: 12.5rem /*L 1240-1439dp = 200dp fixed margin*/
+    }
 }
 @media screen and (min-width: 90rem) { 
-    .content {margin: 0 calc((100vw - 65rem)/2) } /* scaling margins with fixed 1040dp body */
+    html {
+        --cols: 12;
+        /*XL 1440+dp = scaling margin w 1040dp body*/
+        --margins: calc((100vw - 65rem)/2); 
+    }
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    margin: 0 var(--margins); 
+}
+
 
 
 /* HEADER */
@@ -163,18 +168,20 @@ nav {
 /* SECTIONS */
 section > .content {
     display: flex;
-    flex-direction: column; /*TODO DESKTOP -> row*/
-    gap: 1rem; /*TODO DESKTOP -> ~1 column + 2 gutter gap*/
+    flex-direction: column;
+    gap: 1rem;
 }
 @media screen and (min-width: 77.5rem) {
-    section > .content {flex-direction: row}
+    section > .content {
+        flex-direction: row;
+        gap: calc(2rem+(100% - 11rem)/12); /*1 col + 2 gutter*/
+    }
 }
 
 /* HERO SECTION */
 #hero {
     /*viewport height - header - .5rem for section color transition */
     height: calc(100vh - 3.5rem); /*TODO DESKTOP -> single line using header-height, same .5rem?*/
-    /*grid-area: hero / 1 / auto / end ;*/
     background-color: #F3FBFB;
 }
 
