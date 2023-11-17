@@ -17,19 +17,29 @@ html { /*TODO consider :root selector for variables? */
     --cols: 4;
     --gutters: 3rem;
     --margins: 1rem; /*XS 0-599dp = 16dp fixed*/
-    --width-1col: calc((100vw-2*var(--margins) - var(--gutters)) / var(--cols))
-    --width-2col: calc(2*var(--width-1col)+1rem)
+    --top-margin: clamp(1rem,.5vw, 7rem);
+    /*generalized variables based on # of cols*/
+    --width-1col: calc((100vw-2*var(--margins) - var(--gutters)) / var(--cols));
+    --width-2col: calc(2*var(--width-1col)+1rem);
+    --width-4col: calc(4*var(--width-1col)+3rem);
+    /*generalized variables based on fraction of total cols*/
+    --half-cols: calc((100vw - 2*var(--margins) - var(--gutters))/2 + round(down, var(--gutters)/2));
+
+    --face-width: calc(var(--half-cols)+2rem);
 }
 @media screen and (min-width: 37.5rem) { 
     html {
         --cols: 8;
         --margins: 2rem; /*S 600-904dp = 32dp fixed*/
+        --gutters: 7rem;
     }
 }
 /* TODO material trippin with this ugly breakpoint */
 @media screen and (min-width: 56.6rem) { 
     html {
         --cols: 12;
+        --third-cols: calc((100vw - 2*var(--margins) - var(--gutters))/3 + round(down, var(--gutters)/3));
+        --face-width: calc(...+2rem);
         /*M 905-1239dp = scaling margin w 840dp body*/
         --margins: calc((100vw - 52.5rem)/2);
     }
@@ -140,7 +150,7 @@ nav {
   
     nav {
       position: initial;
-      width: calc((100% - 11rem)/3 + 3rem); /*takes up 4 out of 12 layout columns of space*/
+      width: var(--width-4col); /*4 out of 12 cols*/
       height: inherit;
     }
 
@@ -174,33 +184,30 @@ section > .content {
 @media screen and (min-width: 77.5rem) {
     section > .content {
         flex-direction: row;
-        gap: calc(2rem+(100% - 11rem)/12); /*1 col + 2 gutter*/
+        gap: calc(2rem + var(--width-1col)); /*1 col + 2 gutter*/
     }
 }
 
 /* HERO SECTION */
 #hero {
     /*viewport height - header - .5rem for section color transition */
-    height: calc(100vh - 3.5rem); /*TODO DESKTOP -> single line using header-height, same .5rem?*/
+    height: calc(100vh - var(--header-height) - .5rem); /*TODO bigger background transition? */
     background-color: #F3FBFB;
 }
 
 #hero > .content > div {
     /*50% of content height - half a col gap for each div*/
     height: calc(50% - 0.5rem); /*keep this for desktop for now, we'll see about resizing */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem 1rem; /*TODO DESKTOP if keeping grid, adjust row gap as needed*/
-}
-#hero > .content > div:first-child {
-    grid-template-rows: 5fr 1fr; /*keep for desktop for now*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem 1rem; 
 }
 #face {
-    grid-row-start: 1; /*grid is literally useless here why am i using it*/
-    grid-column: 1 / 5;
-    max-height: calc(100% - 1rem);  /*TODO correct based on top margin */
-    width: calc(3rem + (100% - 3rem)/2); /*TODO S:4c+2g, M:8+2, L-XL:5 */
-    margin-top: 1rem; /*TODO S:3, M:5, L-XL:6-7*/
+    flex: 5 1 auto; /*ideally 5fr 1fr*/
+    max-height: calc(100% - var(--top-margin)); /*is this necessary? */
+    width: calc(3rem + (100% - 3rem)/2); /*TODO S:4c+2g, M:8+2, L-XL:5c */
+    margin-top: var(--top-margin); /*XS:1rem, S:3, M:5, L-XL:6-7rem*/
     margin-left: calc((100% - 3rem)/4); /*TODO S:2c+1g, M:3+2, L-XL:0*/
     margin-right: calc((100% - 3rem)/4); /*"*/
     object-fit: cover;
@@ -208,8 +215,9 @@ section > .content {
     box-shadow: 0 0 10px 0 rgba(0,0,0,25%);
 }
 .socials {
-    grid-row-start: 2;
-    grid-column: 2 / 4; /*TODO S:3/7, M:4/10, L-XL:1/5 or think of classes per columns*/
+    flex: 1 1 auto; /*ideally 5fr 1fr*/
+    width: var(--half-cols);
+ /*TODO S:3/7, M:4/10, L-XL:1/5 or think of classes per columns*/
     list-style-type: none;
     display: flex;
     justify-content: space-between;
