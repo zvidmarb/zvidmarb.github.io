@@ -47,7 +47,7 @@ html { /*TODO consider :root selector for variables? */
 @media screen and (min-width: 77.5rem) { 
     html {
         --cols: 12;
-        --margins: 12.5rem /*L 1240-1439dp = 200dp fixed margin*/
+        --margins: 12.5rem; /*L 1240-1439dp = 200dp fixed margin*/
     }
 }
 @media screen and (min-width: 90rem) { 
@@ -206,7 +206,7 @@ section > .content {
 #face {
     flex: 5 1 auto; /*ideally 5fr 1fr*/
     max-height: calc(100% - var(--top-margin)); /*is this necessary? */
-    width: calc(3rem + (100% - 3rem)/2); /*TODO S:4c+2g, M:8+2, L-XL:5c */
+    width: calc(3rem + (100% - 3rem)/2); /*TODO S:4c+5g, M:8c+9g, L-XL:5c */
     margin-top: var(--top-margin); /*XS:1rem, S:3, M:5, L-XL:6-7rem*/
     margin-left: calc((100% - 3rem)/4); /*TODO S:2c+1g, M:3+2, L-XL:0*/
     margin-right: calc((100% - 3rem)/4); /*"*/
