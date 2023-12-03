@@ -240,34 +240,23 @@ section > .content {
 .socials span {
     font-size: var(--icon-size); /*XS: ~2rem, S: ~3rem, M-XL: ~4rem*/
 }
-
-/*#hero > div:nth-child(2) {
-    grid-template-rows: 1fr 2fr 2fr 2fr;
-}*/
-h1, p { /*TODO should I be using this so broadly */
+#hello {
     margin: 0;
     text-align: center; /*TODO DESKTOP change to left align*/
-    height: fit-content; 
-}
-#hello {
+    height: fit-content;
     font-size: 1.5rem; /*TODO S:2.5, M:2.5, L:2.5, XL:3, consider clamp/relative to title*/
-    font-weight: 600;
-    grid-row-start: 1;
-    grid-column: 2 / 4; /*TODO S:3/7 (4cols), M:5/9?(4cols), L-XL:7/12(5cols) */
+    font-weight: 600; /*TODO S:3/7 (4cols), M:5/9?(4cols), L-XL:7/12(5cols) */
 }
-#hello + p {
-    grid-row-start: 2;
-    grid-column: 1 / 5; /*TODO S:1/9 (8cols), M:1/13(12cols), L-XL:7/13(6cols) */
+
+#blurb > p {
+    margin: 0;
+    text-align: center; /*TODO DESKTOP change to left align*/
+    height: fit-content;
+    /*TODO S:1/9 (8cols), M:1/13(12cols), L-XL:7/13(6cols) */
     font-weight: 300;
     font-size: 1.125rem; /*TODO S:2, M:2, L:2, XL:2.5, consider clamp/relative to hello*/
 }
-#hello + p + p {
-    grid-row-start: 3; /*TODO such ugly stylings, refactor*/
-    grid-column: 1 / 5; /*TODO see above*/
-    font-weight: 300;
-    font-size: 1.125rem; /*TODO see above*/
-}
-#hello + p + p + button {
+#blurb > button {
     grid-row-start: 4;
     grid-column: 2 / 4; /*TODO S:3/7, M:4/10, L-XL:7/10*/
 }
@@ -299,6 +288,12 @@ button { /*TODO too general?*/
     }
     #socials {
         width: var(--face-width);
+    }
+    #blurb {
+        width: calc((100% - var(--gutters))/2 + 5rem); /*L-XL: 6c+5g*/
+    }
+    #blurb > h1, #blurb > p { /*cascade not working*/
+        text-align: left;
     }
 }
 
