@@ -14,22 +14,16 @@ html { /*TODO consider :root selector for variables? */
     font-family: "Source Sans Pro", sans-serif;
     --header-height: clamp(3rem, 8vw, 4.5rem);
     --nav-height: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
-    --cols: 4;
+    --total-cols: 4;
     --gutters: 3rem;
     --margins: 1rem; /*XS 0-599dp = 16dp fixed*/
-    --top-margin: clamp(1rem,.5vw, 7rem);
-    /*generalized variables based on # of cols*/
-    --width-1col: calc((100vw-2*var(--margins) - var(--gutters)) / var(--cols));
-    --width-2col: calc(2*var(--width-1col)+1rem);
-    --width-4col: calc(4*var(--width-1col)+3rem);
-    /*generalized variables based on fraction of total cols*/
-    --half-cols: calc((100vw - 2*var(--margins) - var(--gutters))/2 + round(down, var(--gutters)/2));
 
-    --face-width: calc(var(--half-cols)+2rem);
+    /*absolute-refrenced width of 1 column; ONLY USE WHEN % NOT APPLICABLE */
+    --width-1col: calc((100vw - 2*var(--margins) - var(--gutters))/ var(--total-cols));
 }
 @media screen and (min-width: 37.5rem) { 
     html {
-        --cols: 8;
+        --total-cols: 8;
         --margins: 2rem; /*S 600-904dp = 32dp fixed*/
         --gutters: 7rem;
     }
@@ -37,7 +31,8 @@ html { /*TODO consider :root selector for variables? */
 /* TODO material trippin with this ugly breakpoint */
 @media screen and (min-width: 56.6rem) { 
     html {
-        --cols: 12;
+        --total-cols: 12;
+        --gutters: 11rem;
         --third-cols: calc((100vw - 2*var(--margins) - var(--gutters))/3 + round(down, var(--gutters)/3));
         --face-width: calc(...+2rem);
         /*M 905-1239dp = scaling margin w 840dp body*/
@@ -46,13 +41,11 @@ html { /*TODO consider :root selector for variables? */
 }
 @media screen and (min-width: 77.5rem) { 
     html {
-        --cols: 12;
         --margins: 12.5rem; /*L 1240-1439dp = 200dp fixed margin*/
     }
 }
 @media screen and (min-width: 90rem) { 
     html {
-        --cols: 12;
         /*XL 1440+dp = scaling margin w 1040dp body*/
         --margins: calc((100vw - 65rem)/2); 
     }
@@ -150,7 +143,7 @@ nav {
   
     nav {
       position: initial;
-      width: var(--width-4col); /*4 out of 12 cols*/
+      width: calc((100% - var(--gutters))/3 + 3rem);  /*4 out of 12 cols*/
       height: inherit;
     }
 
@@ -184,7 +177,7 @@ section > .content {
 @media screen and (min-width: 77.5rem) {
     section > .content {
         flex-direction: row;
-        gap: calc(2rem + var(--width-1col)); /*1 col + 2 gutter*/
+        gap: calc((100% - var(--gutters))/var(--total-cols) + 2rem); /*1 col + 2 gutter*/
     }
 }
 
@@ -204,12 +197,17 @@ section > .content {
     gap: 0.5rem 1rem; 
 }
 #face {
+    --cols: calc(var(--total-cols)/2); /* XS-S: 2 or 4col, saving myself a media query */
+    --face-width: calc( (100% - var(--gutters))/2 + (var(--cols) + 1)*1rem ); /*XS: 2c+3g, S:4c+5g;*/
+    --top-margin: clamp(1rem,.5vw, 7rem);
+
     flex: 5 1 auto; /*ideally 5fr 1fr*/
     max-height: calc(100% - var(--top-margin)); /*is this necessary? */
-    width: calc(3rem + (100% - 3rem)/2); /*TODO S:4c+5g, M:8c+9g, L-XL:5c */
-    margin-top: var(--top-margin); /*XS:1rem, S:3, M:5, L-XL:6-7rem*/
-    margin-left: calc((100% - 3rem)/4); /*TODO S:2c+1g, M:3+2, L-XL:0*/
-    margin-right: calc((100% - 3rem)/4); /*"*/
+    width: var(--face-width); /*XS: 2c+3g, S:4c+5g, M:8c+9g, L-XL:5c+4g */
+    /*  top margin = XS:1rem, S:3, M:5, L-XL:6-7rem
+        left, right = XS-M: complements of face-width, L-XL: 0 */
+    margin: var(--top-margin) calc((100% - var(--face-width))/2) 0;
+
     object-fit: cover;
     border: 1px solid black;
     box-shadow: 0 0 10px 0 rgba(0,0,0,25%);
@@ -282,9 +280,17 @@ button { /*TODO too general?*/
     width: 100%;
     height: 2.5rem; /*TODO ??*/
 }
-
+@media screen and (min-width: 56.6rem) {
+    #face {
+        --face-width: calc(2*(100% - var(--gutters))/3 + 5rem); /*M: 8c+9g*/
+    }
+}
 @media screen and (min-width: 77.5rem) {
-    
+    #face {
+        --face-width: calc(5*var(--width-1col)+ 4rem); /*L-XL: 5c+4g*/
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 .material-symbols-outlined {
