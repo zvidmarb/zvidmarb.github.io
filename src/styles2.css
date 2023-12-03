@@ -181,6 +181,7 @@ section > .content {
     }
 }
 
+
 /* HERO SECTION */
 #hero {
     /*viewport height - header - .5rem for section color transition */
@@ -189,15 +190,16 @@ section > .content {
 }
 
 #hero > .content > div {
-    /*50% of content height - half a col gap for each div*/
-    height: calc(50% - 0.5rem); /*keep this for desktop for now, we'll see about resizing */
+    --cols: calc(var(--total-cols)/2); /* XS-S: 2 or 4col, saving myself a media query */
+
+    /*50% of content height - half a gutter for each div*/
+    height: calc(50% - 0.5rem); /*TODO do not keep for L-XL*/
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem 1rem; 
+    gap: 0.5rem 1rem;
 }
 #face {
-    --cols: calc(var(--total-cols)/2); /* XS-S: 2 or 4col, saving myself a media query */
     --face-width: calc( (100% - var(--gutters))/2 + (var(--cols) + 1)*1rem ); /*XS: 2c+3g, S:4c+5g;*/
     --top-margin: clamp(1rem,.5vw, 7rem);
 
@@ -209,16 +211,17 @@ section > .content {
         (this isn't shorthand-ing properly) */
     margin-top: var(--top-margin);
     margin-left: calc((100% - var(--face-width))/2);
-    margin-left: calc((100% - var(--face-width))/2);
+    margin-right: calc((100% - var(--face-width))/2);
 
     object-fit: cover;
     border: 1px solid black;
     box-shadow: 0 0 10px 0 rgba(0,0,0,25%);
 }
 .socials {
+    --icon-size: clamp(2rem, 4vw + 1rem, 4rem);
     flex: 1 1 auto; /*ideally 5fr 1fr*/
-    width: var(--half-cols);
- /*TODO S:3/7, M:4/10, L-XL:1/5 or think of classes per columns*/
+    /* XS:2c+1g, S: 4c+3g, M: 6c+5g, L-XL: 5c+4g*/
+    width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem);
     list-style-type: none;
     display: flex;
     justify-content: space-between;
@@ -231,11 +234,11 @@ section > .content {
     height: fit-content;
 }
 .socials img {
-    width: 2.25rem; /* TODO clamp to 4rem? consider more carefully */
+    width: var(--icon-size); /*XS: ~2rem, S: ~3rem, M-XL: ~4rem*/
     height: auto;
 }
 .socials span {
-    font-size: 2.25rem; /* TODO clamp to 4rem? consider more carefully */
+    font-size: var(--icon-size); /*XS: ~2rem, S: ~3rem, M-XL: ~4rem*/
 }
 
 /*#hero > div:nth-child(2) {
@@ -293,6 +296,9 @@ button { /*TODO too general?*/
         --face-width: calc(5*var(--width-1col)+ 4rem); /*L-XL: 5c+4g*/
         margin-left: 0;
         margin-right: 0;
+    }
+    #socials {
+        width: var(--face-width);
     }
 }
 
