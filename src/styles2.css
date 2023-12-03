@@ -205,8 +205,11 @@ section > .content {
     max-height: calc(100% - var(--top-margin)); /*is this necessary? */
     width: var(--face-width); /*XS: 2c+3g, S:4c+5g, M:8c+9g, L-XL:5c+4g */
     /*  top margin = XS:1rem, S:3, M:5, L-XL:6-7rem
-        left, right = XS-M: complements of face-width, L-XL: 0 */
-    margin: var(--top-margin) calc((100% - var(--face-width))/2) 0;
+        left, right = XS-M: complements of face-width, L-XL: 0 
+        (this isn't shorthand-ing properly) */
+    margin-top: var(--top-margin);
+    margin-left: calc((100% - var(--face-width))/2);
+    margin-left: calc((100% - var(--face-width))/2);
 
     object-fit: cover;
     border: 1px solid black;
