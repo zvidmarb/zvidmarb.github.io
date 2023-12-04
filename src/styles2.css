@@ -191,6 +191,7 @@ section > .content {
 
 #hero > .content > div {
     --cols: calc(var(--total-cols)/2); /* XS-S: 2 or 4col, saving myself a media query */
+    --top-margin: clamp(1rem,.5vw, 7rem); /*top margin = XS:1rem, S:3, M:5, L-XL:6-7rem*/
 
     /*50% of content height - half a gutter for each div*/
     height: calc(50% - 0.5rem); /*TODO do not keep for L-XL*/
@@ -198,21 +199,15 @@ section > .content {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem 1rem;
+    margin-top: var(--top-margin); 
 }
 #face {
     --face-width: calc( (100% - var(--gutters))/2 + (var(--cols) + 1)*1rem ); /*XS: 2c+3g, S:4c+5g;*/
-    --top-margin: clamp(1rem,.5vw, 7rem);
-
+    
     flex: 5 1 auto; /*ideally 5fr 1fr*/
     max-height: calc(100% - var(--top-margin)); /*is this necessary? */
     width: var(--face-width); /*XS: 2c+3g, S:4c+5g, M:8c+9g, L-XL:5c+4g */
-    /*  top margin = XS:1rem, S:3, M:5, L-XL:6-7rem
-        left, right = XS-M: complements of face-width, L-XL: 0 
-        (this isn't shorthand-ing properly) */
-    margin-top: var(--top-margin);
-    margin-left: calc((100% - var(--face-width))/2);
-    margin-right: calc((100% - var(--face-width))/2);
-
+    margin: 0 calc((100% - var(--face-width))/2); /* left, right = XS-M: complements of face-width, L-XL: 0 */
     object-fit: cover;
     border: 1px solid black;
     box-shadow: 0 0 10px 0 rgba(0,0,0,25%);
@@ -281,8 +276,11 @@ button { /*TODO too general?*/
     }
 }
 @media screen and (min-width: 77.5rem) {
+    #hero-media {
+        width: calc(5*(100% - var(--gutters))/var(--total-cols) + 4rem ); /*L-XL: 5c+4g*/
+    }
     #face {
-        --face-width: calc(5*var(--width-1col)+ 4rem); /*L-XL: 5c+4g*/
+        --face-width: inherit; 
         margin-left: 0;
         margin-right: 0;
     }
