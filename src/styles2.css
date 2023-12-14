@@ -1,6 +1,7 @@
 /* LONG TERM TODO - consider effects of increasing rem for larger screens, e.g. 24dp for gutters; would any rem dimensions scale funky? */
 /* LONG TERM TODO - consider more abstractly what elements should be using fit-content */
 /* LONG TERM TODO - check to ensure fixed body scaling margins for M viewport size */
+/* LONG TERM TODO - round() is pretty fresh, come up w JS alternative for browsers that don't support it*/
 /* GENERAL */
 * {
 padding: 0;
