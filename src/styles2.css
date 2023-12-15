@@ -12,8 +12,9 @@ max-width: 100%;
 html { /*TODO consider :root selector for variables? */
     font-size:100%;
     background-color:white;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: "Source Sans 3", sans-serif;
     --header-height: clamp(3rem, 8vw, 4.5rem);
+    --title-fsize: clamp(1.5rem, 2vw + 1rem, 3rem);
     --nav-height: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
     --total-cols: 4;
     --gutters: 3rem;
@@ -92,7 +93,7 @@ a { /*TODO generalize? */
 
 .title {
     font-family: "Oswald", sans-serif;
-    font-size: clamp(1.5rem, 2vw + 1rem, 3rem); /*TODO or define by grid?*/
+    font-size: var(--title-fsize); /*TODO define by grid instead??*/
     line-height:  var(--header-height); /*TODO constrain by width AND height of text? */
 }
 
@@ -165,7 +166,7 @@ nav {
     #nav-items li a {
         color: #F3FBFB;
         line-height: var(--header-height);
-        font-size: clamp(1.25rem, 2vw + 1rem, 1.5rem)
+        font-size: clamp(1.25rem, 2vw + 1rem, 1.5rem);
     }
 }
 
@@ -195,7 +196,7 @@ section > .content {
     --top-margin: clamp(1rem,.5vw, 7rem); /*top margin = XS:1rem, S:3, M:5, L-XL:6-7rem*/
 
     /*50% of content height - half a gutter for each div*/
-    height: calc(50% - 0.5rem); /*TODO do not keep for L-XL*/
+    height: calc(50% - 0.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -236,21 +237,22 @@ section > .content {
 .socials span {
     font-size: var(--icon-size); /*XS: ~2rem, S: ~3rem, M-XL: ~4rem*/
 }
-#hello {
+#blurb > h1 {
     margin: 0;
     text-align: center; /*TODO DESKTOP change to left align*/
     height: fit-content;
-    font-size: 1.5rem; /*TODO S:2.5, M:2.5, L:2.5, XL:3, consider clamp/relative to title*/
-    font-weight: 600; /*TODO S:3/7 (4cols), M:5/9?(4cols), L-XL:7/12(5cols) */
+    font-size: var(--title-fsize);
+    font-weight: 600; 
+    width: 100%;
 }
 
 #blurb > p {
     margin: 0;
     text-align: center; /*TODO DESKTOP change to left align*/
     height: fit-content;
-    /*TODO S:1/9 (8cols), M:1/13(12cols), L-XL:7/13(6cols) */
+    /*TODO? width XS-M: 100%, L-XL: half cols, 100% of blurb */
     font-weight: 300;
-    font-size: 1.125rem; /*TODO S:2, M:2, L:2, XL:2.5, consider clamp/relative to hello*/
+    font-size: clamp(1rem, 2vw + .5rem, 2.5rem);
 }
 #blurb > button {
     grid-row-start: 4;
@@ -281,16 +283,20 @@ button { /*TODO too general?*/
         align-items: center;
         height: calc(100% - 4rem);
     }
+    #hero > .content > div {
+        height: inherit;
+    }
+
     #hero-media {
         width: calc(5*(100% - var(--gutters))/var(--total-cols) + 4rem ); /*L-XL: 5c+4g*/
     }
     #face {
-        --face-width: inherit; 
+        --face-width: 100%; 
         margin-left: 0;
         margin-right: 0;
     }
-    #socials {
-        width: var(--face-width);
+    .socials {
+        width: 100%;
     }
     #blurb {
         width: calc((100% - var(--gutters))/2 + 5rem); /*L-XL: 6c+5g*/
