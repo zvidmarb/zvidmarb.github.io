@@ -255,8 +255,9 @@ section > .content {
     font-size: clamp(1rem, 2vw + .5rem, 2.5rem);
 }
 #blurb > button {
+    /*TODO XS: S:3/7, M:4/10, L-XL:7/10*/
     grid-row-start: 4;
-    grid-column: 2 / 4; /*TODO S:3/7, M:4/10, L-XL:7/10*/
+    grid-column: 2 / 4; 
 }
 
 button { /*TODO too general?*/
