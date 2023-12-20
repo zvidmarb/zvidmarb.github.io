@@ -35,7 +35,6 @@ html { /*TODO consider :root selector for variables? */
     html {
         --total-cols: 12;
         --gutters: 11rem;
-        --third-cols: calc((100vw - 2*var(--margins) - var(--gutters))/3 + round(down, var(--gutters)/3));
         --face-width: calc(...+2rem);
         /*M 905-1239dp = scaling margin w 840dp body*/
         --margins: calc((100vw - 52.5rem)/2);
@@ -256,23 +255,25 @@ section > .content {
 }
 #blurb > button {
     /*TODO XS: S:3/7, M:4/10, L-XL:7/10*/
-    grid-row-start: 4;
-    grid-column: 2 / 4; 
+    width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem);
 }
 
-button { /*TODO too general?*/
+button { /*TODO consider general vs specific buttons*/
     justify-content: center;
     display: flex;
     align-items: center;
-    background-color: #3B7577;
+   
     font-weight: 600;
     font-size: 1rem; /*TODO S:2, M:2, L:1.5??, XL:1.75??, INVESTIGATE FURTHER */
-    margin: 0.5rem 0 0.5rem; /*TODO anything? */
     color: #F3FBFB;
+    
+    background-color: #3B7577;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,15%), 0 1px 2px rgba(0,0,0,30%);
-    width: 100%;
-    height: 2.5rem; /*TODO ??*/
+
+    margin: 0.5rem 0 0.5rem; /*TODO anything? */
+    height: auto;
+    aspect-ratio: 3.25 / 1;
 }
 @media screen and (min-width: 56.6rem) {
     #face {
@@ -304,6 +305,10 @@ button { /*TODO too general?*/
     }
     #blurb > h1, #blurb > p { /*cascade not working*/
         text-align: left;
+    }
+    #blurb > button {
+        width: calc((100% - 5rem)/2 + 2rem);
+        align-self: start;
     }
     #transition {
         display: flex  !important;
