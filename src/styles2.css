@@ -8,7 +8,9 @@ padding: 0;
 margin: 0;
 max-width: 100%;
 }
-
+:root {
+    --doc-height: 100%;
+   }
 html { /*TODO consider :root selector for variables? */
     font-size:100%;
     background-color:white;
@@ -238,23 +240,22 @@ section > .content {
 }
 #blurb > h1 {
     margin: 0;
-    text-align: center; /*TODO DESKTOP change to left align*/
+    text-align: center;
     height: fit-content;
-    font-size: var(--title-fsize);
+    font-size: calc(var(--title-fsize));
     font-weight: 600; 
     width: 100%;
 }
 
 #blurb > p {
     margin: 0;
-    text-align: center; /*TODO DESKTOP change to left align*/
+    text-align: center;
     height: fit-content;
     /*TODO? width XS-M: 100%, L-XL: half cols, 100% of blurb */
     font-weight: 300;
-    font-size: clamp(1rem, 2vw + .5rem, 2.5rem);
+    font-size: clamp(1rem, 1vw + 1rem, 2.5rem);
 }
 #blurb > button {
-    /*TODO XS: S:3/7, M:4/10, L-XL:7/10*/
     width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem);
 }
 
@@ -264,7 +265,7 @@ button { /*TODO consider general vs specific buttons*/
     align-items: center;
    
     font-weight: 600;
-    font-size: 1rem; /*TODO S:2, M:2, L:1.5??, XL:1.75??, INVESTIGATE FURTHER */
+    font-size: clamp(1rem, 2vw + 0.5rem, 2rem); /*XS: 1, S: 2, M: 2*/
     color: #F3FBFB;
     
     background-color: #3B7577;
@@ -309,6 +310,9 @@ button { /*TODO consider general vs specific buttons*/
     #blurb > button {
         width: calc((100% - 5rem)/2 + 2rem);
         align-self: start;
+    }
+    button {
+        font-size: clamp(1.5rem, 2vw + 0.25rem, 2rem); /*XS: 1, S: 2, M: 2*/
     }
     #transition {
         display: flex  !important;
