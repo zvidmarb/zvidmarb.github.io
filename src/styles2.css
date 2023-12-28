@@ -191,25 +191,24 @@ section > .content {
     height: calc(100vh - var(--header-height) - .5rem); /*TODO bigger background transition? */
     background-color: #F3FBFB;
 }
-
+#hero > .content {
+    margin-top: clamp(1rem,.5vw, 7rem); /*top margin = XS:1rem, S:3, M:5, L-XL:6-7rem*/
+}
 #hero > .content > div {
     --cols: calc(var(--total-cols)/2); /* XS-S: 2 or 4col, saving myself a media query */
-    --top-margin: clamp(1rem,.5vw, 7rem); /*top margin = XS:1rem, S:3, M:5, L-XL:6-7rem*/
 
     /*50% of content height - half a gutter for each div*/
-    height: calc(50% - 0.5rem);
+    max-height: calc(50% - 0.5rem);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     gap: 0.5rem 1rem;
-    margin-top: var(--top-margin); 
 }
 #face {
     --face-width: calc( (100% - var(--gutters))/2 + (var(--cols) + 1)*1rem ); /*XS: 2c+3g, S:4c+5g;*/
-    
+
     flex: 5 1 auto; /*ideally 5fr 1fr*/
-    max-height: calc(100% - var(--top-margin)); /*is this necessary? */
     width: var(--face-width); /*XS: 2c+3g, S:4c+5g, M:8c+9g, L-XL:5c+4g */
     margin: 0 calc((100% - var(--face-width))/2); /* left, right = XS-M: complements of face-width, L-XL: 0 */
     object-fit: cover;
@@ -293,6 +292,7 @@ button { /*TODO consider general vs specific buttons*/
     }
     #hero > .content > div {
         height: inherit;
+        max-height: 100%;
     }
 
     #hero-media {
@@ -302,6 +302,7 @@ button { /*TODO consider general vs specific buttons*/
         --face-width: 100%; 
         margin-left: 0;
         margin-right: 0;
+        max-height: 100%;
     }
     .socials {
         width: 100%;
@@ -319,13 +320,13 @@ button { /*TODO consider general vs specific buttons*/
     button {
         font-size: clamp(1.5rem, 3vw - .75rem, 2rem); /*XS: 1, S: 2, M: 2*/
     }
-    #transition {
+    /* #transition {
         display: flex  !important;
         width: 100%;
         height: 4rem;
         justify-content: center;
         align-items: center;
-    }
+    } */
 }
 
 .material-symbols-outlined {
