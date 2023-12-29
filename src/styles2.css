@@ -253,7 +253,7 @@ section > .content {
     height: fit-content;
     /*TODO? width XS-M: 100%, L-XL: half cols, 100% of blurb */
     font-weight: 300;
-    font-size: clamp(1rem, 1vw + 1rem, 2.5rem);
+    font-size: clamp(1rem, 3vw + .75rem, 2.5rem);
 }
 #blurb > button {
     --button-width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem); /*half of cols */
