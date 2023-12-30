@@ -339,56 +339,75 @@ button { /*TODO consider general vs specific buttons*/
 /* PROJECTS */
 #project-section {
     background-color: #DAF2F3;
-    height: calc(100vh - .5rem) /* disappearing header on scroll down */
-
+    height: fit-content /* TODO desktop = 100vh-.5rem */
 }
 #project-section > .content {
     display: flex;
-    flex-direction: column; /*TODO DESKTOP row w/ flex wrap*/
-    padding: 1.5rem 0; /*same for desktop?*/
-    row-gap: 1rem;
+    flex-direction: column; /*keep column*/
+    padding: 1.5rem 0; /*same for desktop, adjust for responsiveness */
+    row-gap: 1rem; /* same for desktop, adjust for responsiveness */
 }
-#featured-projects {
+#featured-projects { /*width = 100%, what proportion of content height?*/
     display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
-    align-items: stretch;
-}
-.project {
-    background-color: #F3FBFB;
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5rem;
-    position: relative;
-    
-}
-.project > h3 {
-    padding-bottom: 0.5rem;
-    padding-left: 0.5rem;
-}
-.project img {
-    object-fit: cover;
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem 0.5rem 0 0;
+    flex-direction: column; /*TODO DESKTOP row + flex-wrap */
+    row-gap: 1rem; /* TODO adjust to gap for 2-row desktop */
+    align-items: stretch; /* keep (?)*/
 }
 
-.project a {
-    width: 2.5rem;
-    height: 2.5rem;
+/* TODO PROJECT CARD paragraph => dropdown for mobile/tablet, hover for desktop*/
+.project-card {
+    background-color: #F3FBFB;
+    border-radius: 0.5rem; /*TODO possible responsive adjust; M-XL on figma = 1rem*/
+    display: flex;
+    flex-direction: column;
+  
+    
+}
+.project-card img {
+    object-fit: cover; /* = fill + clip to fit apsect ratio */
+    width: 100%;
+    height: auto; /*TODO w+h might cause trouble later with diff images, check for consistent sizing */
+    border-radius: 0.5rem 0.5rem 0 0; /* TODO responsive adjust */
+}
+.card-header {
+    display: flex;
+    justify-content: space-between;
+
+    box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
+    border-radius: 0 0 1rem 1rem;
+}
+.card-header > h3 {
+    padding-bottom: 0.5rem; /* TODO responsive adjust */
+    padding-left: 0.5rem; /* TODO responsive adjust */
+}
+
+/*TODO chevron functionality; XS-M = down icon, expand; L-XL = right icon, redirect*/
+.card-header a {
+    width: 2.5rem; /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
+    height: 2.5rem; /*1:1*/
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: 0.25rem;
-    right: 1rem;
+    position: relative;
+    bottom: 0.25rem; /*TODO XS = .25, S-M = .5, L-XL = .5 */
+    right: 1rem; /*TODO XS = .5, M = 1, L-XL = 1*/
     background-color: #3B7577;
-    border-radius: 50%;
+    border-radius: 50%; /* perfect circle */
 }
-.project a span {color: white}
+.card-header a span {color: white}
+
+/* .card-expand {
+
+}
+
+.card-expand p {
+
+}
+.card-expand button {
+
+} */
 #project-section button {
-    width: calc((100% - 3rem)/2 + 1rem);
+    width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
     align-self: center;
 }
 

@@ -58,41 +58,70 @@
         <div class="content">
             <h2>Featured Projects</h2>
             <div id="featured-projects">
-                <div class="project">
+            <!-- PROJECT CARD - MOBILE -->
+                <!-- THUMBNAIL
+                        CARD HEADER
+                        TITLE
+                        CHEVRON DOWN/UP
+                        DROPDOWN
+                        SUMMARY
+                        BUTTON -->
+
+            <!-- PROJECT CARD - DESKTOP -->
+                <!-- THUMBNAIL
+                        CARD HEADER
+                        TITLE
+                        CHEVRON RIGHT
+                        SUMMARY -->
+
+                <div class="project-card">
                     <img src="img/temp.png">
-                    <h3>First Project Name</h3>
-                    <!--<p>This is a blurb about the project. 
-                        Keep it brief and keep it simple, 
-                        but make sure it hooks the reader!
-                    </p>
-                    <button>Read more</button>-->
-                    <a href="#">
-                        <span class="material-symbols-outlined">chevron_right</span>
-                    </a>
+                    <div class="card-header">
+                        <h3>First Project Name</h3>
+                        <a href="javascript:void(0)" onclick="dropdown2()"> <!--TODO refactor dropdown -->
+                            <span class="material-symbols-outlined">expand_less</span>
+                        </a> <!--consider alternate desktop anchor vs single anchor w separate classes-->
+                    </div>
+                    <div class="card-expand">
+                        <p>This is a blurb about the project. 
+                            Keep it brief and keep it simple, 
+                            but make sure it hooks the reader!
+                        </p>
+                        <button>Read more</button>
+                    </div>
+                    
                 </div>
-                <div class="project">
+                <div class="project-card">
                     <img src="img/temp.png">
-                    <h3>Second Project Name</h3>
-                    <!--<p>This is a blurb about the project. 
-                        Keep it brief and keep it simple, 
-                        but make sure it hooks the reader!
-                    </p>
-                    <button>Read more</button>-->
-                    <a href="#">
-                        <span class="material-symbols-outlined">chevron_right</span>
-                    </a>
+                    <div class="card-header">
+                        <h3>Second Project Name</h3>
+                        <a href="javascript:void(0)" onclick="dropdown2()"> <!--TODO refactor dropdown -->
+                            <span class="material-symbols-outlined">expand_less</span>
+                        </a>
+                    </div>
+                    <div class="card-expand">
+                        <p>This is a blurb about the project. 
+                            Keep it brief and keep it simple, 
+                            but make sure it hooks the reader!
+                        </p>
+                        <button>Read more</button>
+                    </div>
                 </div>
-                <div class="project">
+                <div class="project-card">
                     <img src="img/temp.png">
-                    <h3>Third Project Name</h3>
-                    <!--<p>This is a blurb about the project. 
-                        Keep it brief and keep it simple, 
-                        but make sure it hooks the reader!
-                    </p>
-                    <button>Read more</button>-->
-                    <a href="#">
-                        <span class="material-symbols-outlined">chevron_right</span>
-                    </a>
+                    <div class="card-header">
+                        <h3>Third Project Name</h3>
+                        <a href="javascript:void(0)" onclick="dropdown2()"> <!--TODO refactor dropdown -->
+                            <span class="material-symbols-outlined">expand_less</span>
+                        </a>
+                    </div>
+                    <div class="card-expand">
+                        <p>This is a blurb about the project. 
+                            Keep it brief and keep it simple, 
+                            but make sure it hooks the reader!
+                        </p>
+                        <button>Read more</button>
+                    </div>
                 </div>
             </div>
             <button>See more ></button>
