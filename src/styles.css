@@ -99,8 +99,8 @@ a { /*TODO generalize? */
 }
 
 #menu {
-    border: 2px solid #F3FBFB;
-    border-radius: 4px;
+    border: .125rem solid #F3FBFB;
+    border-radius: .25rem;
     display: flex;
 }
 nav {
@@ -356,11 +356,12 @@ button { /*TODO consider general vs specific buttons*/
 
 /* TODO PROJECT CARD paragraph => dropdown for mobile/tablet, hover for desktop*/
 .project-card {
-    background-color: #F3FBFB;
+    background-color: #EEEEEE;
     border-radius: 0.5rem; /*TODO possible responsive adjust; M-XL on figma = 1rem*/
     display: flex;
     flex-direction: column;
-  
+    position: relative; /*purpose ??*/
+    box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
     
 }
 .project-card img {
@@ -373,6 +374,7 @@ button { /*TODO consider general vs specific buttons*/
     display: flex;
     justify-content: space-between;
 
+    background-color: white; /*background-color: #F3FBFB;*/
     box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
     border-radius: 0 0 1rem 1rem;
 }
@@ -382,6 +384,7 @@ button { /*TODO consider general vs specific buttons*/
 }
 
 /*TODO chevron functionality; XS-M = down icon, expand; L-XL = right icon, redirect*/
+/*TODO why does it look so BIG*/
 .card-header a {
     width: 2.5rem; /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
     height: 2.5rem; /*1:1*/
@@ -390,24 +393,34 @@ button { /*TODO consider general vs specific buttons*/
     align-items: center;
     position: relative;
     bottom: 0.25rem; /*TODO XS = .25, S-M = .5, L-XL = .5 */
-    right: 1rem; /*TODO XS = .5, M = 1, L-XL = 1*/
-    background-color: #3B7577;
+    right: .5rem; /*TODO XS = .5, M = 1, L-XL = 1 */
+    /*background-color: #3B7577;  WHEN EXPAND MORE*/
+    
+    background-color: #FFF;
+    border: .125rem solid #3B7577;
     border-radius: 50%; /* perfect circle */
 }
-.card-header a span {color: white}
+.card-header a span {color: #3B7577} /*white WHEN EXPAND MORE */
 
-/* .card-expand {
-
+/*TODO mobile->desktop = dropdown->overlay*/
+.card-expand {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.5rem 0.5rem; /*TODO XS: .5, S-XL: 1rem */
+    /*TODO consider having a consistent height / max height */
 }
 
-.card-expand p {
-
+.card-expand p { /* possibly match with other p tags */
+    font-size: 1rem; /*TODO XS:~1, S-M:~2, L-XL: ~2? */
 }
 .card-expand button {
-
-} */
-#project-section button {
-    width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
+    --button-width: calc((100% - 2rem)/4 + 2.5rem); /*1c+1g, compensating for 2 separate paddings!!!*/
+    align-self: flex-end;
+}
+#project-section > .content > button {
+    --button-width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
     align-self: center;
 }
 
