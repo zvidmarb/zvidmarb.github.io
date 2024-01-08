@@ -423,7 +423,9 @@ button { /*TODO consider general vs specific buttons*/
     --button-width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
     align-self: center;
 }
-
+@media screen and (min-width: 77.5rem) {
+    
+}
 
 /* FOOTER */
 footer {
