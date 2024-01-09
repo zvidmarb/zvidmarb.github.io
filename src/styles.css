@@ -104,8 +104,8 @@ a { /*TODO generalize? */
     display: flex;
 }
 nav {
-    position: relative;
-    display: flex;
+    position: none;
+    display: none;
     width: 100vw;
     height: var(--nav-height);
     overflow: inherit; /*"visible", from header*/
@@ -377,7 +377,7 @@ button { /*TODO consider general vs specific buttons*/
 
     background-color: white; /*background-color: #F3FBFB;*/
     box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
-    border-radius: 0 0 1rem 1rem;
+    border-radius: 0 0 0.5rem 1rem;
 }
 .card-header h3 {
     padding-bottom: 0.5rem; /* TODO responsive adjust */

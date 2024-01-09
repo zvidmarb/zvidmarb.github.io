@@ -8,6 +8,12 @@ document.querySelectorAll('.number').forEach(function(number){
 });
 
 /*expanded class toggles display:flex by default */
+function expandNav(event) {
+    let nav = this.nextElementSibling; //this = #menu
+    nav.classList.toggle("expanded"); 
+    nav.firstElementChild.classList.toggle("expanded");
+}
+
 document.getElementById("menu").addEventListener("click", () => document.getElementById("nav-items").classList.toggle("expanded"));
 
 /* expandCard - abstracts JS styling changes thru a single CSS modifier class
