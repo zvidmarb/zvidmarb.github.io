@@ -34,7 +34,6 @@ html { /*TODO consider :root selector for variables? */
     html {
         --total-cols: 12;
         --gutters: 11rem;
-        --face-width: calc(...+2rem);
         /*M 905-1239dp = scaling margin w 840dp body*/
         --margins: calc((100vw - 52.5rem)/2);
     }
@@ -192,7 +191,7 @@ section > .content {
 #hero > .content {
     margin-top: clamp(1rem,.5vw, 7rem); /*top margin = XS:1rem, S:3, M:5, L-XL:6-7rem*/
 }
-#hero > .content > div {
+#hero-media {
     --cols: calc(var(--total-cols)/2); /* XS-S: 2 or 4col, saving myself a media query */
 
     /*50% of content height - half a gutter for each div*/
@@ -215,6 +214,7 @@ section > .content {
 }
 .socials {
     --icon-size: clamp(2rem, 4vw + 1rem, 4rem);
+    
     flex: 1 1 auto; /*ideally 5fr 1fr*/
     /* XS:2c+1g, S: 4c+3g, M: 6c+5g, L-XL: 5c+4g*/
     width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem);
@@ -421,6 +421,7 @@ button { /*TODO consider general vs specific buttons*/
 }
 #project-section > .content > button {
     --button-width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
+    margin-top: 1rem;
     align-self: center;
 }
 @media screen and (min-width: 77.5rem) {
@@ -436,24 +437,29 @@ footer {
     padding: 0.5rem 0;
 }
 footer > .content {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem 1rem;
+    height: inherit;
 }
 footer a, footer p {
     color: #F3FBFB;
     font-weight: 600;
 }
 .footer-top {
-    grid-column: 1 / span 4;
     display: flex;
-    justify-content: space-between;
+    align-self: stretch;
+    justify-content: space-around;
 }
 .footer-main {
-    grid-area: 2 / 2 / 3 / 4;
+    width: calc(2*(100% - var(--gutters))/var(--total-cols) + 1rem);
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
+.footer-main > p {align-self: center}
+
 
 /* MODIFIER CLASSES: to be toggled via JS, at bottom to beat out precedence */
 #nav-items.expanded, *.expanded {
