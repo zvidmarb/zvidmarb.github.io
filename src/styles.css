@@ -21,9 +21,6 @@ html { /*TODO consider :root selector for variables? */
     --total-cols: 4;
     --gutters: 3rem;
     --margins: 1rem; /*XS 0-599dp = 16dp fixed*/
-
-    /*absolute-refrenced width of 1 column; ONLY USE WHEN % NOT APPLICABLE */
-    --width-1col: calc((100vw - 2*var(--margins) - var(--gutters))/ var(--total-cols));
 }
 @media screen and (min-width: 37.5rem) { 
     html {
@@ -272,7 +269,7 @@ button { /*TODO consider general vs specific buttons*/
     color: #F3FBFB;
     
     background-color: #3B7577;
-    border-radius: 5px;
+    border-radius: 1rem;
     box-shadow: 0 1px 3px rgba(0,0,0,15%), 0 1px 2px rgba(0,0,0,30%);
     margin: 0.5rem 0 0.5rem; /*TODO anything? */
     padding: 1rem 0.5rem;
@@ -374,13 +371,12 @@ button { /*TODO consider general vs specific buttons*/
 .card-header {
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
     background-color: white; /*background-color: #F3FBFB;*/
     box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
-    border-radius: 0 0 0.5rem 1rem;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 .card-header h3 {
-    padding-bottom: 0.5rem; /* TODO responsive adjust */
     padding-left: 0.5rem; /* TODO responsive adjust */
 }
 
@@ -396,12 +392,12 @@ button { /*TODO consider general vs specific buttons*/
     bottom: 0.25rem; /*TODO XS = .25, S-M = .5, L-XL = .5 */
     right: .5rem; /*TODO XS = .5, M = 1, L-XL = 1 */
     background-color: #3B7577;  
-    border: none;
     border-radius: 50%; /* perfect circle */
 }
 .card-header a.expanded {
     background-color: #F3FBFB;
-    border: .125rem solid #3B7577;
+    outline: .125rem solid #3B7577;
+    outline-offset: -.125rem;
 }
 .card-header a span {color: #F3FBFB}
 .card-header a span.expanded {color: #3B7577} /*white WHEN EXPAND MORE */
