@@ -7,4 +7,4 @@
 - [Default Breakpoints are Dead](https://www.rainbowarray.com/responsive-web-design/2011/12/29/default-breakpoints-are-dead)
 - [Simpler Responsive Viewer](https://www.responsivepx.com/)
 - [Don't use inline event handlers HTML/JS](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#inline_event_handlers_%E2%80%94_dont_use_these)
-- 
+- [Useful lesson on CSS specificity!](https://www.w3schools.com/css/css_specificity.asp)

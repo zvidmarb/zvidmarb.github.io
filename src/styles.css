@@ -13,7 +13,7 @@ max-width: 100%;
    }
 html { /*TODO consider :root selector for variables? */
     font-size:100%;
-    background-color:white;
+    background-color:#F3FBFB;
     font-family: "Source Sans 3", sans-serif;
     --header-height: clamp(3rem, 8vw, 4.5rem);
     --title-fsize: clamp(1.5rem, 2vw + 1rem, 3rem);
@@ -122,9 +122,10 @@ nav {
     border: 1px solid black; /*TODO replace w drop shadow*/
 }
 
+
 #nav-items li {
     width: inherit;
-    height: calc(var(--nav-height)/3)
+    height: calc(var(--nav-height)/3);
 }
 #nav-items li a {
     color: black;
@@ -238,7 +239,7 @@ section > .content {
 .socials span {
     font-size: var(--icon-size); /*XS: ~2rem, S: ~3rem, M-XL: ~4rem*/
 }
-#blurb > h1 {
+#blurb h1 {
     margin: 0;
     text-align: center;
     height: fit-content;
@@ -247,7 +248,7 @@ section > .content {
     width: 100%;
 }
 
-#blurb > p {
+#blurb p {
     margin: 0;
     text-align: center;
     height: fit-content;
@@ -255,7 +256,7 @@ section > .content {
     font-weight: 300;
     font-size: clamp(1rem, 3vw + .75rem, 2.5rem);
 }
-#blurb > button {
+#blurb button {
     --button-width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem); /*half of cols */
 }
 
@@ -356,7 +357,7 @@ button { /*TODO consider general vs specific buttons*/
 
 /* TODO PROJECT CARD paragraph => dropdown for mobile/tablet, hover for desktop*/
 .project-card {
-    background-color: #EEEEEE;
+    background-color: #F3FBFB;
     border-radius: 0.5rem; /*TODO possible responsive adjust; M-XL on figma = 1rem*/
     display: flex;
     flex-direction: column;
@@ -378,7 +379,7 @@ button { /*TODO consider general vs specific buttons*/
     box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
     border-radius: 0 0 1rem 1rem;
 }
-.card-header > h3 {
+.card-header h3 {
     padding-bottom: 0.5rem; /* TODO responsive adjust */
     padding-left: 0.5rem; /* TODO responsive adjust */
 }
@@ -394,17 +395,20 @@ button { /*TODO consider general vs specific buttons*/
     position: relative;
     bottom: 0.25rem; /*TODO XS = .25, S-M = .5, L-XL = .5 */
     right: .5rem; /*TODO XS = .5, M = 1, L-XL = 1 */
-    /*background-color: #3B7577;  WHEN EXPAND MORE*/
-    
-    background-color: #FFF;
-    border: .125rem solid #3B7577;
+    background-color: #3B7577;  
+    border: none;
     border-radius: 50%; /* perfect circle */
 }
-.card-header a span {color: #3B7577} /*white WHEN EXPAND MORE */
+.card-header a.expanded {
+    background-color: #F3FBFB;
+    border: .125rem solid #3B7577;
+}
+.card-header a span {color: #F3FBFB}
+.card-header a span.expanded {color: #3B7577} /*white WHEN EXPAND MORE */
 
 /*TODO mobile->desktop = dropdown->overlay*/
-.card-expand {
-    display: flex;
+.card-dropdown {
+    display: none;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
@@ -412,10 +416,10 @@ button { /*TODO consider general vs specific buttons*/
     /*TODO consider having a consistent height / max height */
 }
 
-.card-expand p { /* possibly match with other p tags */
+.card-dropdown p { /* possibly match with other p tags */
     font-size: 1rem; /*TODO XS:~1, S-M:~2, L-XL: ~2? */
 }
-.card-expand button {
+.card-dropdown button {
     --button-width: calc((100% - 2rem)/4 + 2.5rem); /*1c+1g, compensating for 2 separate paddings!!!*/
     align-self: flex-end;
 }
@@ -441,7 +445,7 @@ footer > .content {
     gap: 0.5rem 1rem;
 }
 footer a, footer p {
-    color: white;
+    color: #F3FBFB;
     font-weight: 600;
 }
 .footer-top {
@@ -455,4 +459,7 @@ footer a, footer p {
     flex-direction: column;
 }
 
-
+/* MODIFIER CLASSES: to be toggled via JS, at bottom to beat out precedence */
+#nav-items.expanded, *.expanded {
+    display: flex; /*target: nav-items, card-dropdown, card-header > a ??*/
+}
