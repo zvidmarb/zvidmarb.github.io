@@ -14,7 +14,7 @@ function expandNav(event) {
     nav.firstElementChild.classList.toggle("expanded");
 }
 
-document.getElementById("menu").addEventListener("click", () => document.getElementById("nav-items").classList.toggle("expanded"));
+document.getElementById("menu").addEventListener("click", expandNav);
 
 /* expandCard - abstracts JS styling changes thru a single CSS modifier class
     @param elem: the target button element
