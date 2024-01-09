@@ -347,8 +347,8 @@ button { /*TODO consider general vs specific buttons*/
 }
 #featured-projects { /*width = 100%, what proportion of content height?*/
     display: flex;
-    flex-direction: column; /*TODO DESKTOP row + flex-wrap */
-    row-gap: 1rem; /* TODO adjust to gap for 2-row desktop */
+    flex-direction: column;
+    gap: 1rem 1rem; /* TODO adjust to gap for 2-row desktop */
     align-items: stretch; /* keep (?)*/
 }
 
@@ -393,6 +393,7 @@ button { /*TODO consider general vs specific buttons*/
     right: .5rem; /*TODO XS = .5, M = 1, L-XL = 1 */
     background-color: #3B7577;  
     border-radius: 50%; /* perfect circle */
+    z-index: 2;
 }
 .card-header a.expanded {
     background-color: #F3FBFB;
@@ -403,7 +404,7 @@ button { /*TODO consider general vs specific buttons*/
 .card-header a span.expanded {color: #3B7577} /*white WHEN EXPAND MORE */
 
 /*TODO mobile->desktop = dropdown->overlay*/
-.card-dropdown {
+.card-details {
     display: none;
     flex-direction: column;
     justify-content: space-between;
@@ -412,10 +413,10 @@ button { /*TODO consider general vs specific buttons*/
     /*TODO consider having a consistent height / max height */
 }
 
-.card-dropdown p { /* possibly match with other p tags */
+.card-details p { /* possibly match with other p tags */
     font-size: 1rem; /*TODO XS:~1, S-M:~2, L-XL: ~2? */
 }
-.card-dropdown button {
+.card-details button {
     --button-width: calc((100% - 2rem)/4 + 2.5rem); /*1c+1g, compensating for 2 separate paddings!!!*/
     align-self: flex-end;
 }
@@ -425,7 +426,30 @@ button { /*TODO consider general vs specific buttons*/
     align-self: center;
 }
 @media screen and (min-width: 77.5rem) {
-    
+    #featured-projects {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .project-card {
+        width: calc((100% - var(--gutters))/2 + 5rem);
+    }
+    .card-details {
+        position: absolute;
+        justify-content: start;
+        top: 0;
+        left: 0;
+        background-color: rgba(30,30,30,80%);
+        height: calc(95% - 2.5rem);
+        border-radius: 0.5rem 0.5rem 0 0;
+        z-index: 1;
+    }
+    .card-details p {
+        color: #F3FBFB;
+    }
+    .card-details button {
+        display: none;
+    }
 }
 
 /* FOOTER */
@@ -463,5 +487,5 @@ footer a, footer p {
 
 /* MODIFIER CLASSES: to be toggled via JS, at bottom to beat out precedence */
 #nav-items.expanded, *.expanded {
-    display: flex; /*target: nav-items, card-dropdown, card-header > a ??*/
+    display: flex; /*target: nav-items, card-details, card-header > a ??*/
 }
