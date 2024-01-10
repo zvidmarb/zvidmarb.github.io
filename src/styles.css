@@ -422,7 +422,7 @@ button { /*TODO consider general vs specific buttons*/
 }
 #project-section > .content > button {
     --button-width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
-    margin-top: 1rem;
+    margin-top: 1rem; /*TODO temp hack due to not having same featured project > title + tiles structure*/
     align-self: center;
 }
 @media screen and (min-width: 77.5rem) {
@@ -440,7 +440,7 @@ button { /*TODO consider general vs specific buttons*/
         top: 0;
         left: 0;
         background-color: rgba(30,30,30,80%);
-        height: calc(95% - 2.5rem);
+        height: calc(100% - 3.5rem); /*cover img, compensating for padding*/
         border-radius: 0.5rem 0.5rem 0 0;
         z-index: 1;
     }

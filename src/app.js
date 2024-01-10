@@ -20,7 +20,7 @@ document.getElementById("menu").addEventListener("click", expandNav);
     @param elem: the target button element
     @return: none */
 function expandCard(event) {
-    this.classList.toggle("expanded"); // swap button styling
+    this.classList.toggle("expanded"); // swap button styling - MIGHT BE POSSIBLE W JUST CSS?
 
     //swap icon and icon styling
     let span = this.firstElementChild;
@@ -29,6 +29,30 @@ function expandCard(event) {
                                             span.innerHTML = "expand_more";
     //change dropdown visibility
     this.parentElement.nextElementSibling.classList.toggle("expanded");
+    return false;
 }
-document.querySelectorAll(".card-header a").forEach((elem) => 
-                                elem.addEventListener("click", expandCard));
+function revealCard(event){
+    this.lastElementChild.classList.toggle("expanded"); //just the hovered text
+    return false;
+}
+
+function setCard(){
+    if (window.innerWidth < 1240) {
+        console.log("less than 1240");
+        document.querySelectorAll(".card-header a").forEach((elem) => {
+            elem.href = "#"
+            elem.addEventListener("click", expandCard);
+        });
+        document.querySelectorAll("project-card").forEach( elem => elem.removeEventListener("mouseover", revealCard));
+    } else {
+        console.log("bigger than 1240");
+        document.querySelectorAll(".card-header a").forEach((elem) => {
+            elem.href = "/" + elem.parentElement.parentElement.id;
+            elem.firstElementChild.innerHTML = "chevron_right";
+            elem.removeEventListener("click", expandCard);
+        });
+        document.querySelectorAll("project-card").forEach( elem => elem.addEventListener("mouseover", revealCard));
+    }
+}
+setCard(); // initial ?
+window.addEventListener("resize", setCard); //check any time window is resized
