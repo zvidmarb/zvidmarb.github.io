@@ -236,6 +236,12 @@ section > .content {
 .socials span {
     font-size: var(--icon-size); /*XS: ~2rem, S: ~3rem, M-XL: ~4rem*/
 }
+#blurb {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
 #blurb h1 {
     margin: 0;
     text-align: center;

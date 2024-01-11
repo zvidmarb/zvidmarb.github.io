@@ -9,6 +9,7 @@ document.querySelectorAll('.number').forEach(function(number){
 
 /*expanded class toggles display:flex by default */
 function expandNav(event) {
+    event.preventDefault();
     let nav = this.nextElementSibling; //this = #menu
     nav.classList.toggle("expanded"); 
     nav.firstElementChild.classList.toggle("expanded");
@@ -20,6 +21,8 @@ document.getElementById("menu").addEventListener("click", expandNav);
     @param elem: the target button element
     @return: none */
 function expandCard(event) {
+    event.preventDefault();
+    
     this.classList.toggle("expanded"); // swap button styling - MIGHT BE POSSIBLE W JUST CSS?
 
     //swap icon and icon styling
@@ -29,11 +32,9 @@ function expandCard(event) {
                                             span.innerHTML = "expand_more";
     //change dropdown visibility
     this.parentElement.nextElementSibling.classList.toggle("expanded");
-    return false;
 }
 function revealCard(event){
     this.lastElementChild.classList.toggle("expanded"); //just the hovered text
-    return false;
 }
 
 function setCard(){ /* TODO all the event listeners starting to look cluttered*/
