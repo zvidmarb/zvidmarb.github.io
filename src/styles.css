@@ -21,6 +21,8 @@ html { /*TODO consider :root selector for variables? */
     --total-cols: 4;
     --gutters: 3rem;
     --margins: 1rem; /*XS 0-599dp = 16dp fixed*/
+
+    --box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
 }
 @media screen and (min-width: 37.5rem) { 
     html {
@@ -36,6 +38,7 @@ html { /*TODO consider :root selector for variables? */
         --gutters: 11rem;
         /*M 905-1239dp = scaling margin w 840dp body*/
         --margins: calc((100vw - 52.5rem)/2);
+        --box-shadow: 0 .5rem .5rem rgba(0,0,0,25%), 0 .25rem .25rem rgba(0,0,0,30%);
     }
 }
 @media screen and (min-width: 77.5rem) { 
@@ -211,7 +214,7 @@ section > .content {
     margin: 0 calc((100% - var(--face-width))/2); /* left, right = XS-M: complements of face-width, L-XL: 0 */
     object-fit: cover;
     border: 1px solid black;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,25%);
+    box-shadow: 0 0 1rem 0 rgba(0,0,0,25%); /*TODO responsive adjust??*/
 }
 .socials {
     --icon-size: clamp(2rem, 4vw + 1rem, 4rem);
@@ -247,7 +250,7 @@ section > .content {
     margin: 0;
     text-align: center;
     height: fit-content;
-    font-size: calc(var(--title-fsize));
+    font-size: var(--title-fsize);
     font-weight: 600; 
     width: 100%;
 }
@@ -277,7 +280,7 @@ button { /*TODO consider general vs specific buttons*/
     
     background-color: #3B7577;
     border-radius: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,15%), 0 1px 2px rgba(0,0,0,30%);
+    box-shadow: var(--box-shadow);
     margin: 0.5rem 0 0.5rem; /*TODO anything? */
     padding: 1rem 0.5rem;
     width: var(--button-width);
@@ -344,29 +347,29 @@ button { /*TODO consider general vs specific buttons*/
 /* PROJECTS */
 #project-section {
     background-color: #DAF2F3;
-    height: fit-content /* TODO desktop = 100vh-.5rem */
+    height: fit-content
 }
 #project-section > .content {
     display: flex;
-    flex-direction: column; /*keep column*/
-    padding: 1.5rem 0; /*same for desktop, adjust for responsiveness */
-    row-gap: 1rem; /* same for desktop, adjust for responsiveness */
+    flex-direction: column;
+    padding: 1.5rem 0; /* TODO same for desktop, adjust for responsiveness */
+    row-gap: 1rem; /* TODO same for desktop, adjust for responsiveness */
+}
+#project-section h2 {
+    font-size: clamp(1.25rem, 6.5vw - 1.5rem, 2.5rem); /*XS: 1.25rem, S-M: 2.25rem, L-XL: 2.5rem*/
 }
 #featured-projects { /*width = 100%, what proportion of content height?*/
     display: flex;
     flex-direction: column;
-    gap: 1rem 1rem; /* TODO adjust to gap for 2-row desktop */
-    align-items: stretch; /* keep (?)*/
+    gap: 1rem 1rem; /* TODO adjust for responsiveness */
 }
-
-/* TODO PROJECT CARD paragraph => dropdown for mobile/tablet, hover for desktop*/
 .project-card {
-    --border-radius: clamp(0.5rem, -.375rem + 2.5vw, 1rem);
+    --border-radius: clamp(0.5rem, -.375rem + 2.5vw, 1rem); /*approximate 0.5rem for XS->S, 1rem for M->XL*/
     background-color: #F3FBFB;
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
+    box-shadow: var(--box-shadow);
     
 }
 .project-card img {
@@ -380,24 +383,26 @@ button { /*TODO consider general vs specific buttons*/
     justify-content: space-between;
     align-items: center;
     background-color: white; /*background-color: #F3FBFB;*/
-    box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
+    box-shadow: var(--box-shadow);
     border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 .card-header h3 {
-    padding-left: 0.5rem; /* TODO responsive adjust */
+    padding-left: var(--border-radius); /*XS=0.5, M-XL: 1*/
+    font-size: clamp(1rem, 5vw - 1rem, 2rem); /*XS = 1rem, S-XL = 2rem*/
 }
 
 /*TODO chevron functionality; XS-M = down icon, expand; L-XL = right icon, redirect*/
 /*TODO why does it look so BIG*/
 .card-header a {
-    width: 2.5rem; /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
-    height: 2.5rem; /*1:1*/
+    --icon-size: clamp(2.25rem, 18vw - 4.5rem, 5.25rem);
+    width: var(--icon-size); /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
+    height: var(--icon-size);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    bottom: 0.25rem; /*TODO XS = .25, S-M = .5, L-XL = .5 */
-    right: .5rem; /*TODO XS = .5, M = 1, L-XL = 1 */
+    bottom: calc(var(--border-radius) - 0.5rem);
+    right: var(--border-radius);
     background-color: #3B7577;  
     border-radius: 50%; /* perfect circle */
     z-index: 2;
@@ -407,7 +412,10 @@ button { /*TODO consider general vs specific buttons*/
     outline: .125rem solid #3B7577;
     outline-offset: -.125rem;
 }
-.card-header a span {color: #F3FBFB}
+.card-header a span {
+    color: #F3FBFB;
+    font-size: calc(var(--icon-size) - 0.5rem);
+}
 .card-header a span.expanded {color: #3B7577} /*white WHEN EXPAND MORE */
 
 /*TODO mobile->desktop = dropdown->overlay*/
@@ -421,7 +429,7 @@ button { /*TODO consider general vs specific buttons*/
 }
 
 .card-details p { /* possibly match with other p tags */
-    font-size: 1rem; /*TODO XS:~1, S-M:~2, L-XL: ~2? */
+    font-size: clamp(1rem, 3vw + .75rem, 2rem);
 }
 .card-details button {
     --button-width: calc((100% - 2rem)/4 + 2.5rem); /*1c+1g, compensating for 2 separate paddings!!!*/
@@ -433,6 +441,9 @@ button { /*TODO consider general vs specific buttons*/
     align-self: center;
 }
 @media screen and (min-width: 77.5rem) {
+    #project-section {
+        height: 100vh; /*transition offset already made with hero?*/
+    }
     #featured-projects {
         flex-direction: row;
         flex-wrap: wrap;
@@ -440,6 +451,9 @@ button { /*TODO consider general vs specific buttons*/
 
     .project-card {
         width: calc((100% - var(--gutters))/2 + 5rem);
+    }
+    .card-header {
+        --icon-size: 4rem;
     }
     .card-details {
         position: absolute;

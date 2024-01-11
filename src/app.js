@@ -39,16 +39,15 @@ function revealCard(event){
 
 function setCard(){ /* TODO all the event listeners starting to look cluttered*/
     if (window.innerWidth < 1240) {
-        console.log("less than 1240");
         document.querySelectorAll(".card-header a").forEach((elem) => {
             elem.href = "#"
+            elem.firstElementChild.innerHTML = "expand_more";
             elem.addEventListener("click", expandCard);
         });
         document.querySelectorAll(".project-card").forEach( elem => {
             elem.removeEventListener("mouseenter", revealCard)
             elem.removeEventListener("mouseleave", revealCard)});
     } else {
-        console.log("bigger than 1240");
         document.querySelectorAll(".card-header a").forEach((elem) => {
             elem.href = "/" + elem.parentElement.parentElement.id;
             elem.firstElementChild.innerHTML = "chevron_right";
