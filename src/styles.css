@@ -142,6 +142,7 @@ nav {
     }
   
     nav {
+      display: flex;
       position: initial;
       width: calc((100% - var(--gutters))/3 + 3rem);  /*4 out of 12 cols*/
       height: inherit;
@@ -360,11 +361,11 @@ button { /*TODO consider general vs specific buttons*/
 
 /* TODO PROJECT CARD paragraph => dropdown for mobile/tablet, hover for desktop*/
 .project-card {
+    --border-radius: clamp(0.5rem, -.375rem + 2.5vw, 1rem);
     background-color: #F3FBFB;
-    border-radius: 0.5rem; /*TODO possible responsive adjust; M-XL on figma = 1rem*/
+    border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
-    position: relative; /*purpose ??*/
     box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
     
 }
@@ -372,7 +373,7 @@ button { /*TODO consider general vs specific buttons*/
     object-fit: cover; /* = fill + clip to fit apsect ratio */
     width: 100%;
     height: auto; /*TODO w+h might cause trouble later with diff images, check for consistent sizing */
-    border-radius: 0.5rem 0.5rem 0 0; /* TODO responsive adjust */
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 .card-header {
     display: flex;
@@ -380,7 +381,7 @@ button { /*TODO consider general vs specific buttons*/
     align-items: center;
     background-color: white; /*background-color: #F3FBFB;*/
     box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 .card-header h3 {
     padding-left: 0.5rem; /* TODO responsive adjust */
@@ -456,6 +457,7 @@ button { /*TODO consider general vs specific buttons*/
     .card-details button {
         display: none;
     }
+
 }
 
 /* FOOTER */
