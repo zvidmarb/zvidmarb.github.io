@@ -43,7 +43,7 @@ function setCard(){
             elem.href = "#"
             elem.addEventListener("click", expandCard);
         });
-        document.querySelectorAll("project-card").forEach( elem => elem.removeEventListener("mouseover", revealCard));
+        document.querySelectorAll(".project-card").forEach( elem => elem.removeEventListener("mouseover", revealCard));
     } else {
         console.log("bigger than 1240");
         document.querySelectorAll(".card-header a").forEach((elem) => {
@@ -51,7 +51,7 @@ function setCard(){
             elem.firstElementChild.innerHTML = "chevron_right";
             elem.removeEventListener("click", expandCard);
         });
-        document.querySelectorAll("project-card").forEach( elem => elem.addEventListener("mouseover", revealCard));
+        document.querySelectorAll(".project-card").forEach( elem => elem.addEventListener("mouseover", revealCard));
     }
 }
 setCard(); // initial ?
