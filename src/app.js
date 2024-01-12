@@ -50,6 +50,11 @@ function setCard(){ /* TODO all the event listeners starting to look cluttered*/
             elem.removeEventListener("mouseleave", revealCard)});
     } else {
         document.querySelectorAll(".card-header a").forEach((elem) => {
+            //assumes a and span are both expanded
+            if (elem.classList.contains("expanded")) {
+                elem.classList.toggle("expanded");
+                elem.firstElementChild.classList.toggle("expanded");
+            }
             elem.href = "/" + elem.parentElement.parentElement.id;
             elem.firstElementChild.innerHTML = "chevron_right";
             elem.removeEventListener("click", expandCard);
