@@ -370,6 +370,7 @@ button { /*TODO consider general vs specific buttons*/
     display: flex;
     flex-direction: column;
     box-shadow: var(--box-shadow);
+    position: relative;
     
 }
 .project-card img {

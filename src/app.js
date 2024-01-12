@@ -35,6 +35,7 @@ function expandCard(event) {
 }
 function revealCard(event){
     this.lastElementChild.classList.toggle("expanded"); //just the hovered text
+    console.log("hover event triggered");
 }
 
 function setCard(){ /* TODO all the event listeners starting to look cluttered*/
