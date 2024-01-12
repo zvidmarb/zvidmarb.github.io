@@ -203,13 +203,13 @@ section > .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    gap: 0.5rem 1rem;
+    justify-content: center;
+    row-gap: 1rem; /*TODO responsive adjust*/
 }
 #face {
     --face-width: calc( (100% - var(--gutters))/2 + (var(--cols) + 1)*1rem ); /*XS: 2c+3g, S:4c+5g;*/
-
-    flex: 5 1 auto; /*ideally 5fr 1fr*/
+    height: auto;
+    aspect-ratio: 0.84;
     width: var(--face-width); /*XS: 2c+3g, S:4c+5g, M:8c+9g, L-XL:5c+4g */
     margin: 0 calc((100% - var(--face-width))/2); /* left, right = XS-M: complements of face-width, L-XL: 0 */
     object-fit: cover;
@@ -219,7 +219,7 @@ section > .content {
 .socials {
     --icon-size: clamp(2rem, 4vw + 1rem, 4rem);
     
-    flex: 1 1 auto; /*ideally 5fr 1fr*/
+    /* flex: 1 1 auto; ideally 5fr 1fr */
     /* XS:2c+1g, S: 4c+3g, M: 6c+5g, L-XL: 5c+4g*/
     width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem);
     list-style-type: none;
@@ -305,6 +305,7 @@ button { /*TODO consider general vs specific buttons*/
 
     #hero-media {
         width: calc(5*(100% - var(--gutters))/var(--total-cols) + 4rem ); /*L-XL: 5c+4g*/
+        justify-content: center;
     }
     #face {
         --face-width: 100%; 
