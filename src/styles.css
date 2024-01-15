@@ -193,7 +193,7 @@ section > .content {
     background-color: #F3FBFB;
 }
 #hero > .content {
-    margin-top: clamp(1rem,.5vw, 7rem); /*top margin = XS:1rem, S:3, M:5, L-XL:6-7rem*/
+    margin-top: 1rem;
 }
 #hero-media {
     --cols: calc(var(--total-cols)/2); /* XS-S: 2 or 4col, saving myself a media query */
@@ -243,7 +243,7 @@ section > .content {
 #blurb {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 #blurb h1 {
@@ -255,13 +255,16 @@ section > .content {
     width: 100%;
 }
 
-#blurb p {
+#blurb div {
     margin: 0;
     text-align: center;
     height: fit-content;
     /*TODO? width XS-M: 100%, L-XL: half cols, 100% of blurb */
     font-weight: 300;
     font-size: clamp(1rem, 3vw + .75rem, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
 }
 #blurb button {
     --button-width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem); /*half of cols */
@@ -296,7 +299,8 @@ button { /*TODO consider general vs specific buttons*/
 @media screen and (min-width: 77.5rem) {
     #hero > .content {
         align-items: center;
-        height: calc(100% - 4rem);
+        height: calc(100% - 1rem);
+        container-type: size;
     }
     #hero > .content > div {
         height: inherit;
@@ -319,7 +323,10 @@ button { /*TODO consider general vs specific buttons*/
     #blurb {
         width: calc((100% - var(--gutters))/2 + 5rem); /*L-XL: 6c+5g*/
     }
-    #blurb > h1, #blurb > p { /*cascade not working*/
+    #blurb > div {
+        font-size: clamp(1.5rem, 2cqh + 0.75rem, 2.5rem);
+    }
+    #blurb > h1, #blurb > div { /*cascade not working*/
         text-align: left;
     }
     #blurb > button {
