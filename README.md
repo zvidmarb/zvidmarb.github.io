@@ -12,3 +12,6 @@
 - [Modern Fluid Typography using CSS Clamp](https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/)
 - [Modern fluid typography editor](https://modern-fluid-typography.vercel.app/)
 - [Ahmad Shadeed article on Container Queries, consider for height-responsive design?](https://ishadeed.com/article/say-hello-to-css-container-queries/)
+- [RSCSS Documentation](https://ricostacruz.com/rscss/index.html)
+- [Custom Properties in BEM](https://www.imarc.com/blog/block-property-modifier-a-bem-like-css-custom-properties-methodology)
+- 

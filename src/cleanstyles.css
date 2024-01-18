@@ -1,0 +1,221 @@
+/* Reasonal System for CSS (RSCSS) / BEM methodologies
+    component = .name-with-dashes 
+    element = .namewithoutdashes
+    variant = .component-name .-variant
+            = .elementname .-variant 
+*/
+:root {
+    --fsz-primary: clamp(1.5rem, 2vw + 1rem, 3rem);
+    /* GRID SYSTEM UNITS */
+    --colgap-all: 3rem;
+    --col-all: 4;
+    --margin: 1rem; /*XS 0-599dp = 16dp fixed*/
+
+    --color-accent: #F3FBFB;
+}
+@media screen and (min-width: 37.5rem) { 
+    :root {
+        --margin: 2rem; /*S 600-904dp = 32dp fixed*/
+        
+        --col-all: 8;
+        --colgap-all: 7rem;
+    }
+}
+/* TODO material trippin with this ugly breakpoint */
+@media screen and (min-width: 56.6rem) { 
+    :root {
+        /*M 905-1239dp = scaling margin w 840dp body*/
+        --margin: calc((100% - 52.5rem)/2);
+        --col-all: 12;
+        --colgap-all: 11rem;
+    }
+}
+@media screen and (min-width: 77.5rem) { 
+    html {
+        --margin: 12.5rem; /*L 1240-1439dp = 200dp fixed margin*/
+    }
+}
+@media screen and (min-width: 90rem) { 
+    html {
+        /*XL 1440+dp = scaling margin w 1040dp body*/
+        --margin: calc((100% - 65rem)/2); 
+    }
+}
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 700,
+    'GRAD' 0,
+    'opsz' 48
+}
+h1 {}
+h2 {}
+h3 {}
+p {}
+.home-page {
+    --header-height: clamp(3rem, 8vw, 4.5rem);
+
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+
+    > .header-section {
+        width: 100%;
+        height: var(--header-height);
+        top: 0;
+        align-self: start;
+        position: sticky;
+        z-index: 1;
+    }
+    > .hero-section {}
+    > .project-section {}
+    > .footer-section {}
+    .content {
+        margin: 0 var(--margin);
+    }
+}
+/*TODO abstract icon-media*/
+.icon-media.-nav {
+    border: .125rem solid var(--color-accent);
+    border-radius: .25rem;
+    display: flex;
+    text-decoration: none;
+    color: var(--color-accent);
+    > material-symbols-outlined {}
+}
+.site-nav {
+
+}
+.site-nav.-mobile {
+    --h-dropdown: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
+
+    > .icon-media.-nav {
+
+    }
+    > .navitems {
+        position: absolute;
+        left: calc(100% - var(--margin));
+        background-color: #F3FBFB; 
+        list-style: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: var(--h-dropdown);
+        border: 1px solid black; /*TODO replace w drop shadow*/
+    }
+    > .navitems.-hidden {
+        display: none;
+    }
+    > .navitems.-expanded {
+        display: flex;
+    }
+    > .navitems > .itembox {
+        width: inherit;
+        height: calc(var(--h-dropdown)/3);
+    }
+    > .navitems > .itembox > .itemtext {
+        color: black;
+        font-variant: small-caps;
+        font-weight: 400;
+        font-size: clamp(1rem, 2vw + 1rem, 2rem);
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: inherit;
+    }
+}
+.site-nav.-desktop {
+    > .icon-media.-nav {}
+    > .navitems {}
+    > .navitems > .item {}
+}
+
+.header-section {
+    background-color: #3B7577;
+    > .content {
+        height: inherit;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        align-content: space-between;
+    }
+    > .content > .title {
+        font-family: "Oswald", sans-serif;
+        text-decoration: none;
+        color: #F3FBFB;
+
+        font-size: var(--fsz-primary); /*TODO define by grid instead??*/
+        line-height:  var(--header-height); /*TODO constrain by width AND height of text? */
+
+    }
+    > .content > .site-nav.-mobile {
+
+    }
+    > .content > .site-nav.-desktop {
+
+    }
+}
+
+.img-media.-portrait {
+    object-fit: cover;
+    border: 1px solid black;
+    box-shadow: 0 0 1rem 0 rgba(0,0,0,25%); /*TODO responsive adjust??*/
+}
+
+.hero-section {
+    > .content {}
+    >.content > .medias {
+        --w-cols: calc(var(--col-all)/2);
+        width: calc((100% - var(--colgap-all))/2 + (var(--w-cols) + 1)*1rem);
+    }
+    > .content > .medias > .img-media.-portrait {
+        width: inherit;
+        height: auto;
+        aspect-ratio: 0.84;
+        margin: 0 calc((100% - var(--face-width))/2); /* left, right = XS-M: complements of face-width, L-XL: 0 */
+    } 
+    > .content > .medias > .social-icons {}
+
+    > .content > .blurb {}
+    > .content > .blurb > h1 {}
+    > .content > .blurb > .blurbtext {}
+    > .content > .blurb > .button {}
+}
+
+.project-list {
+    > .title {}
+
+    > .featuredlist {}
+    > .featuredlist > .project-card {}
+
+    > button {}
+}
+
+.project-card { /*clickable, hoverable*/
+    > .thumbnail {}
+
+    > .header {}
+    > .header > .title {}
+    > .header > .icon {} /*expand_more, expand_less, chevron_right*/
+
+    > .details {}
+}
+
+.footer-content {
+    > .top {}
+    > .top > .copyright {}
+    > .top > .pagejump {}
+
+    > .main {}
+    > .main > .label {}
+    > .main > .social-icons {}
+}
+
+.icon {}
+
+
+
