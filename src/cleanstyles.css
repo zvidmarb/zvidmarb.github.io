@@ -4,12 +4,20 @@
     variant = .component-name .-variant
             = .elementname .-variant 
 */
+* {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+}
 :root {
     --fsz-primary: clamp(1.5rem, 2vw + 1rem, 3rem);
     /* GRID SYSTEM UNITS */
     --colgap-all: 3rem;
     --col-all: 4;
     --margin: 1rem; /*XS 0-599dp = 16dp fixed*/
+
+    --font-primary: "Oswald", sans-serif;
+    --font-secondary: "Source Sans 3", sans-serif;
 
     --color-accent: #F3FBFB;
 }
@@ -52,18 +60,19 @@ h1 {}
 h2 {}
 h3 {}
 p {}
+
 .home-page {
     --header-height: clamp(3rem, 8vw, 4.5rem);
-
+    z-index: -1;
     display: flex;
     flex-direction: column;
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
+    
+    font-family: var(--font-secondary);
 
     > .header-section {
         width: 100%;
         height: var(--header-height);
+        position: absolute;
         top: 0;
         align-self: start;
         position: sticky;
@@ -86,18 +95,18 @@ p {}
     > material-symbols-outlined {}
 }
 .site-nav {
-
+    
 }
 .site-nav.-mobile {
     --h-dropdown: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
-
+    overflow: visible;
     > .icon-media.-nav {
-
     }
     > .navitems {
         position: absolute;
-        left: calc(100% - var(--margin));
-        background-color: #F3FBFB; 
+        left: 0;
+        top: var(--header-height);
+        background-color: var(--color-accent);
         list-style: none;
         flex-direction: column;
         align-items: center;
@@ -117,9 +126,12 @@ p {}
     }
     > .navitems > .itembox > .itemtext {
         color: black;
+
         font-variant: small-caps;
         font-weight: 400;
         font-size: clamp(1rem, 2vw + 1rem, 2rem);
+        text-decoration: none;
+
         line-height: 100%;
         display: flex;
         align-items: center;
@@ -144,7 +156,7 @@ p {}
         align-content: space-between;
     }
     > .content > .title {
-        font-family: "Oswald", sans-serif;
+        font-family: var(--font-primary);
         text-decoration: none;
         color: #F3FBFB;
 
@@ -153,7 +165,7 @@ p {}
 
     }
     > .content > .site-nav.-mobile {
-
+        
     }
     > .content > .site-nav.-desktop {
 

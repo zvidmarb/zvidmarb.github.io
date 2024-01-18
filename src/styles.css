@@ -37,7 +37,7 @@ html { /*TODO consider :root selector for variables? */
         --total-cols: 12;
         --gutters: 11rem;
         /*M 905-1239dp = scaling margin w 840dp body*/
-        --margins: calc((100vw - 52.5rem)/2);
+        --margins: calc((100% - 52.5rem)/2);
         --box-shadow: 0 .5rem .5rem rgba(0,0,0,25%), 0 .25rem .25rem rgba(0,0,0,30%);
     }
 }
@@ -49,7 +49,7 @@ html { /*TODO consider :root selector for variables? */
 @media screen and (min-width: 90rem) { 
     html {
         /*XL 1440+dp = scaling margin w 1040dp body*/
-        --margins: calc((100vw - 65rem)/2); 
+        --margins: calc((100% - 65rem)/2); 
     }
 }
 
@@ -65,7 +65,6 @@ body {
 
 /* HEADER */
 header {
-    /*grid-area: header / 1 / auto / end;*/
     width: 100%;
     background-color: #3B7577;
     height: var(--header-height);
