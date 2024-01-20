@@ -3,6 +3,8 @@
     element = .namewithoutdashes
     variant = .component-name .-variant
             = .elementname .-variant 
+    
+        LAYOUT > POSITION > COLOR > FONT > BORDER > OTHER PROPERTIES
 */
 * {
     margin: 0;
@@ -25,19 +27,27 @@
         url(https://fonts.gstatic.com/s/sourcesans3/v15/nwpBtKy2OAdR1K-IwhWudF-R9QMylBJAV3Bo8Ky462EK9Cs.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 100 700;
+    src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v156/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsI.woff2) format('woff2');
+  }
 
 :root {
-    /* LAYOUT */
     --colgap-all: 3rem;
     --col-all: 4;
     --margin: 1rem; /*XS 0-599dp = 16dp fixed*/
 
     --fsz-primary: clamp(1.5rem, 2vw + 1rem, 3rem);
+    --fsz-icon: clamp(2rem, 4vw + 1rem, 4rem);
     --font-primary: "Oswald", sans-serif;
     --font-secondary: "Source Sans 3", sans-serif;
+    
 
     --color-primary: #3B7577;
-    --color-accent: #F3FBFB;
+    --color-neutral1: #F3FBFB;
+    --color-neutral2: #DAF2F3;
 
 }
 @media screen and (min-width: 37.5rem) { 
@@ -69,12 +79,18 @@
     }
 }
 .material-symbols-outlined {
-    font-variation-settings:
-    'FILL' 1,
-    'wght' 700,
-    'GRAD' 0,
-    'opsz' 48
-}
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.5rem;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  }
 h1 {}
 h2 {}
 h3 {}
@@ -98,8 +114,14 @@ p {}
         position: sticky;
         z-index: 1;
     }
-    > .hero-section {}
-    > .project-section {}
+    > .hero-section {
+        /*viewport height - header - .5rem for section color transition */
+        height: calc(100vh - var(--h-header) - .5rem); /*TODO bigger background transition? */
+        background-color: var(--color-neutral1);
+    }
+    > .project-section {
+        background-color: var(--color-neutral2);
+    }
     > .footer-section {}
 
     .content {
@@ -113,19 +135,58 @@ p {}
     box-shadow: 0 0 1rem 0 rgba(0,0,0,25%); /*TODO responsive adjust??*/
 }
 
+.icon-media.-social {
+    > .iconcontent.-img {
+        width: inherit;
+        height: inherit;
+    }
+    > .material-symbols-outlined{
+        font-variation-settings: "FILL" 1;
+        font-size: inherit;
+    }
+}
+
+.social-icons {
+    
+    /* flex: 1 1 auto; ideally 5fr 1fr */
+    /* XS:2c+1g, S: 4c+3g, M: 6c+5g, L-XL: 5c+4g*/
+    width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem);
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > .icon-media.-social {
+        width: var(--fsz-icon);
+        height: auto;
+        font-size: var(--fsz-icon);
+    }
+}
+
 .hero-section {
-    > .content {}
+    > .content {
+        margin-top: 1rem;
+    }
     >.content > .medias {
         --w-cols: calc(var(--col-all)/2);
-        width: calc((100% - var(--colgap-all))/2 + (var(--w-cols) + 1)*1rem);
+        width: 100%;
+        max-height: calc(50% - 0.5rem); /*50% of content height - half a gutter for each div*/
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 1rem; /*TODO responsive adjust*/
     }
     > .content > .medias > .img-media.-portrait {
-        width: inherit;
+        width: calc((100% - var(--colgap-all))/2 + (var(--w-cols) + 1)*1rem);
         height: auto;
         aspect-ratio: 0.84;
-        margin: 0 calc((100% - var(--face-width))/2); /* left, right = XS-M: complements of face-width, L-XL: 0 */
+        margin: 0 auto; /* left, right = XS-M: complements of face-width, L-XL: 0 */
     } 
-    > .content > .medias > .social-icons {}
+    > .content > .medias > .social-icons {
+        width: calc((100% - var(--colgap-all))/2 + (var(--cols) - 1)*1rem);
+        
+    }
 
     > .content > .blurb {}
     > .content > .blurb > h1 {}

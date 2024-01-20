@@ -1,17 +1,17 @@
-/*@import url('../components/icon-media*/
-
 /*TODO abstract icon-media*/
 .icon-media.-nav {
     display: flex;
 
-    color: var(--color-accent);
+    color: var(--color-neutral1);
 
     text-decoration: none;
 
-    border: .125rem solid var(--color-accent);
+    border: .125rem solid var(--color-neutral1);
     border-radius: .25rem;
 
-    > material-symbols-outlined {}
+    > .material-symbols-outlined {
+        font-weight: 500;
+    }
 }
 
 .site-nav {
@@ -52,7 +52,7 @@
         left: 0;
         top: var(--h-header);
 
-        background-color: var(--color-accent);
+        background-color: var(--color-neutral1);
         border: 1px solid black; /*TODO replace w drop shadow*/ 
     }
     > .navitems > .itembox {
@@ -84,7 +84,7 @@
             height: inherit;
         }
         > .navitems > .itembox > .itemtext {
-            color: #F3FBFB;
+            color: var(--color-neutral1);
             font-size: 1.5rem; /*TODO check if clamp is needed 1.25<>1.5rem */
         }
     }
