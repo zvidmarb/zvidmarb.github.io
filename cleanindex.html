@@ -46,90 +46,91 @@
             </div>
             
             
-            <div>
-                <h1>Hi, I'm Zeven!</h1>
-                <div>
-                    <p>I’m a recent college graduate from UC San Diego, with a B.S. in 
+            <div class="blurb">
+                <!--possible rework to be h1 RSCSS component? instead of element: -->
+                <h1 class="title">Hi, I'm Zeven!</h1>
+                <div class="blurbtext">
+                    <p class="paragraph">I’m a recent college graduate from UC San Diego, with a B.S. in 
                         Math-Computer Science and a minor in Cognitive Science.</p>
-                    <p>I’m currently looking for entry-level Software Engineer positions across 
+                    <p class="paragraph">I’m currently looking for entry-level Software Engineer positions across 
                         SoCal and the Bay Area. Feel free to contact me anywhere!</p>
                 </div>
-                <button>More about me</button>
+                <button class="site-button">More about me</button>
             </div>
         </div>
         <!-- <div id="transition" style="display:none;">Scroll to preview my projects ↓</div> -->
     </section>
     <section class="project-section">
-        <div>
-            <h2>Featured Projects</h2>
-            <div>
-                <div>
-                    <img src="img/temp.png">
-                    <div>
-                        <h3>First Project Name</h3>
-                        <a href="#"> <!--TODO refactor dropdown -->
+        <div class="content">
+            <h2 class="title">Featured Projects</h2>
+            <div class="featuredlist">
+                <div class="project-card">
+                    <img src="img/temp.png" class="img-media -card">
+                    <div class="header">
+                        <h3 class="title">First Project Name</h3>
+                        <a href="#" class="icon-media -card"> <!--TODO refactor dropdown -->
                             <span class="material-symbols-outlined">expand_less</span>
                         </a> <!--consider alternate desktop anchor vs single anchor w separate classes-->
                     </div>
-                    <div>
-                        <p>This is a blurb about the project. 
+                    <div class="details">
+                        <p class="paragraph">This is a blurb about the project. 
                             Keep it brief and keep it simple, 
                             but make sure it hooks the reader!
                         </p>
-                        <button href="/project1">Read more</button>
+                        <button href="/project1" class="site-button -card">Read more</button>
                     </div>
                     
                 </div>
-                <div>
-                    <img src="img/temp.png">
-                    <div>
-                        <h3>Second Project Name</h3>
-                        <a href="#"> <!--TODO refactor dropdown -->
+                <div class="project-card">
+                    <img src="img/temp.png" class="img-media -card">
+                    <div class="header">
+                        <h3 class="title">Second Project Name</h3>
+                        <a href="#" class="icon-media -card"> <!--TODO refactor dropdown -->
                             <span class="material-symbols-outlined">expand_less</span>
                         </a>
                     </div>
-                    <div>
-                        <p>This is a blurb about the project. 
+                    <div class="details">
+                        <p class="paragraph">This is a blurb about the project. 
                             Keep it brief and keep it simple, 
                             but make sure it hooks the reader!
                         </p>
-                        <button href="/project2">Read more</button>
+                        <button href="/project2" class="site-button -card">Read more</button>
                     </div>
                 </div>
-                <div>
-                    <img src="img/temp.png">
-                    <div>
-                        <h3>Third Project Name</h3>
-                        <a href="#"> <!--TODO refactor dropdown -->
+                <div class="project-card">
+                    <img src="img/temp.png" class="img-media -card">
+                    <div class="header">
+                        <h3 class="title">Third Project Name</h3>
+                        <a href="#" class="icon-media -card"> <!--TODO refactor dropdown -->
                             <span class="material-symbols-outlined">expand_less</span>
                         </a>
                     </div>
-                    <div>
-                        <p>This is a blurb about the project. 
+                    <div class="details">
+                        <p class="paragrph">This is a blurb about the project. 
                             Keep it brief and keep it simple, 
                             but make sure it hooks the reader!
                         </p>
-                        <button href="/project3">Read more</button>
+                        <button href="/project3" class="site-button -card">Read more</button>
                     </div>
                 </div>
-                <div>
-                    <img src="img/temp.png">
-                    <div>
-                        <h3>Fourth Project Name</h3>
-                        <a href="#"> <!--TODO refactor dropdown -->
+                <div class="project-card">
+                    <img src="img/temp.png" class="img-media -card">
+                    <div class="header">
+                        <h3 class="title">Fourth Project Name</h3>
+                        <a href="#" class="paragraph"> <!--TODO refactor dropdown -->
                             <span class="material-symbols-outlined">expand_less</span>
                         </a>
                     </div>
-                    <div>
-                        <p>This is a blurb about the project. 
+                    <div class="details">
+                        <p class="paragraph">This is a blurb about the project. 
                             Keep it brief and keep it simple, 
                             but make sure it hooks the reader!
                         </p>
-                        <button href="/project4">Read more</button>
+                        <button href="/project4" class="site-button -card">Read more</button>
                     </div>
                 </div>
             </div>
-            <button>Other projects</button>
+            <button class="site-button">Other projects</button>
         </div>
             
 <!-- indecisive over information architecture
@@ -144,18 +145,18 @@
         </div>-->
             
     </section>
-    <footer>
-        <div>
-            <div>
-                <p>Zeven Vidmar Barker © 2022</p>
-                <a href="#">^ Back to Top</a>
+    <footer class="site-footer">
+        <div class="content">
+            <div class="top">
+                <p class="copyright">Zeven Vidmar Barker © 2022</p>
+                <a href="#" class="pagejump">^ Back to Top</a>
             </div>
-            <div>
-                <p>Contact me!</p>
-                <ul>
-                    <li><img src="img/linkedinfill.svg"></li>
-                    <li><span class="material-symbols-outlined">mail</span></li>
-                    <li><img src="img/github-mark.svg"></li> 
+            <div class="main">
+                <p class="label">Contact me!</p>
+                <ul class="social-icons">
+                    <li class="icon-media -social"><img src="img/linkedinfill.svg"></li>
+                    <li class="icon-media -social"><span class="material-symbols-outlined">mail</span></li>
+                    <li class="icon-media -social"><img src="img/github-mark.svg"></li> 
                 </ul>
             </div>
         </div>
