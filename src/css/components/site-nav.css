@@ -1,0 +1,91 @@
+/*@import url('../components/icon-media*/
+
+/*TODO abstract icon-media*/
+.icon-media.-nav {
+    display: flex;
+
+    color: var(--color-accent);
+
+    text-decoration: none;
+
+    border: .125rem solid var(--color-accent);
+    border-radius: .25rem;
+
+    > material-symbols-outlined {}
+}
+
+.site-nav {
+    > .navitems {
+        list-style: none;
+    }
+    > .navitems > .itembox > .itemtext {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        line-height: 100%;
+        font-variant: small-caps;
+        text-decoration: none;
+        font-size: 1.5rem;
+    }
+}
+
+.site-nav.-mobile {
+    --h-dropdown: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
+    overflow: visible;
+
+    > .navitems {
+        width: 100%;
+        height: var(--h-dropdown);
+        flex-direction: column;
+        align-items: center; 
+    }
+
+    > .navitems.-hidden {
+        display: none;
+    }
+    > .navitems.-expanded {
+        display: flex;
+        
+        position: absolute;
+        left: 0;
+        top: var(--h-header);
+
+        background-color: var(--color-accent);
+        border: 1px solid black; /*TODO replace w drop shadow*/ 
+    }
+    > .navitems > .itembox {
+        width: inherit;
+        height: calc(100%/3);
+    }
+    > .navitems > .itembox > .itemtext {
+        color: black;
+
+        font-size: clamp(1rem, 2vw + 1rem, 2rem);
+    }
+}
+
+@media screen and (min-width: 77.5rem) {
+    .site-nav.-desktop {
+        display: flex;
+        > .icon-media.-nav {
+            display: none;    
+        }
+        > .navitems.-fixed {
+            width: 100%;
+            height: inherit;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem; /*TODO responsive adjust? */
+        }
+        > .navitems > .itembox {
+            width: calc((100% - 2rem)/3); /*(parent - gutters) / 3*/
+            height: inherit;
+        }
+        > .navitems > .itembox > .itemtext {
+            color: #F3FBFB;
+            font-size: 1.5rem; /*TODO check if clamp is needed 1.25<>1.5rem */
+        }
+    }
+}

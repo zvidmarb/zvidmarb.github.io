@@ -1,0 +1,30 @@
+@import url('../components/site-nav.css');
+
+.site-header {
+    background-color: var(--color-primary);
+    > .content {
+        position: relative;
+
+        height: inherit;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: space-between;
+
+        
+    }
+    > .content > .title {
+        font-family: var(--font-primary);
+        text-decoration: none;
+        color: #F3FBFB;
+
+        font-size: var(--fsz-primary); /*TODO define by grid instead??*/
+        line-height:  var(--h-header); /*TODO constrain by width AND height of text? */
+
+    }
+    > .content > .site-nav.-desktop {
+        width: calc((100% - var(--colgap-all))/3 + 3rem);  /*4 out of 12 cols*/
+        height: inherit;
+    }
+}
