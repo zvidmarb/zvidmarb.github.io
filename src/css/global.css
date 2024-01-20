@@ -9,33 +9,52 @@
     padding: 0;
     max-width: 100%;
 }
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Oswald'),
+        url(https://fonts.gstatic.com/s/oswald/v53/TK3_WkUHHAIjg75cFRf3bXL8LICs1_FvsUZiZQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 300 600;
+    src: local('Source Sans 3'), 
+        url(https://fonts.gstatic.com/s/sourcesans3/v15/nwpBtKy2OAdR1K-IwhWudF-R9QMylBJAV3Bo8Ky462EK9Cs.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
-    --fsz-primary: clamp(1.5rem, 2vw + 1rem, 3rem);
-    /* GRID SYSTEM UNITS */
+    /* LAYOUT */
     --colgap-all: 3rem;
     --col-all: 4;
     --margin: 1rem; /*XS 0-599dp = 16dp fixed*/
 
+    --fsz-primary: clamp(1.5rem, 2vw + 1rem, 3rem);
     --font-primary: "Oswald", sans-serif;
     --font-secondary: "Source Sans 3", sans-serif;
 
+    --color-primary: #3B7577;
     --color-accent: #F3FBFB;
+
 }
 @media screen and (min-width: 37.5rem) { 
     :root {
-        --margin: 2rem; /*S 600-904dp = 32dp fixed*/
-        
         --col-all: 8;
         --colgap-all: 7rem;
+        --margin: 2rem; /*S 600-904dp = 32dp fixed*/ 
     }
 }
 /* TODO material trippin with this ugly breakpoint */
 @media screen and (min-width: 56.6rem) { 
     :root {
-        /*M 905-1239dp = scaling margin w 840dp body*/
-        --margin: calc((100% - 52.5rem)/2);
         --col-all: 12;
         --colgap-all: 11rem;
+        /*M 905-1239dp = scaling margin w 840dp body*/
+        --margin: calc((100% - 52.5rem)/2);
+
     }
 }
 @media screen and (min-width: 77.5rem) { 
@@ -62,16 +81,17 @@ h3 {}
 p {}
 
 .home-page {
-    --header-height: clamp(3rem, 8vw, 4.5rem);
-    z-index: -1;
+    --h-header: clamp(3rem, 8vw, 4.5rem);
     display: flex;
     flex-direction: column;
+
+    z-index: -1;
     
     font-family: var(--font-secondary);
 
     > .header-section {
         width: 100%;
-        height: var(--header-height);
+        height: var(--h-header);
         position: absolute;
         top: 0;
         align-self: start;
@@ -81,79 +101,112 @@ p {}
     > .hero-section {}
     > .project-section {}
     > .footer-section {}
+
     .content {
         margin: 0 var(--margin);
     }
 }
 /*TODO abstract icon-media*/
 .icon-media.-nav {
+    display: flex;
+
+    color: var(--color-accent);
+
+    text-decoration: none;
+
     border: .125rem solid var(--color-accent);
     border-radius: .25rem;
-    display: flex;
-    text-decoration: none;
-    color: var(--color-accent);
+
     > material-symbols-outlined {}
 }
+
 .site-nav {
-    
+    > .navitems {
+        list-style: none;
+    }
+    > .navitems > .itembox > .itemtext {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        line-height: 100%;
+        font-variant: small-caps;
+        text-decoration: none;
+        font-size: 1.5rem;
+    }
 }
 .site-nav.-mobile {
     --h-dropdown: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
     overflow: visible;
-    > .icon-media.-nav {
-    }
+
     > .navitems {
-        position: absolute;
-        left: 0;
-        top: var(--header-height);
-        background-color: var(--color-accent);
-        list-style: none;
-        flex-direction: column;
-        align-items: center;
         width: 100%;
         height: var(--h-dropdown);
-        border: 1px solid black; /*TODO replace w drop shadow*/
+        flex-direction: column;
+        align-items: center; 
     }
+
     > .navitems.-hidden {
         display: none;
     }
     > .navitems.-expanded {
         display: flex;
+        
+        position: absolute;
+        left: 0;
+        top: var(--h-header);
+
+        background-color: var(--color-accent);
+        border: 1px solid black; /*TODO replace w drop shadow*/ 
     }
     > .navitems > .itembox {
         width: inherit;
-        height: calc(var(--h-dropdown)/3);
+        height: calc(100%/3);
     }
     > .navitems > .itembox > .itemtext {
         color: black;
 
-        font-variant: small-caps;
-        font-weight: 400;
         font-size: clamp(1rem, 2vw + 1rem, 2rem);
-        text-decoration: none;
-
-        line-height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: inherit;
     }
 }
-.site-nav.-desktop {
-    > .icon-media.-nav {}
-    > .navitems {}
-    > .navitems > .item {}
+@media screen and (min-width: 77.5rem) {
+    .site-nav.-desktop {
+        display: flex;
+        > .icon-media.-nav {
+            display: none;    
+        }
+        > .navitems.-fixed {
+            width: 100%;
+            height: inherit;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem; /*TODO responsive adjust? */
+        }
+        > .navitems > .itembox {
+            width: calc((100% - 2rem)/3); /*(parent - gutters) / 3*/
+            height: inherit;
+        }
+        > .navitems > .itembox > .itemtext {
+            color: #F3FBFB;
+            font-size: 1.5rem; /*TODO check if clamp is needed 1.25<>1.5rem */
+        }
+    }
 }
 
 .header-section {
-    background-color: #3B7577;
+    background-color: var(--color-primary);
     > .content {
+        position: relative;
+
         height: inherit;
+
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: relative;
         align-content: space-between;
+
+        
     }
     > .content > .title {
         font-family: var(--font-primary);
@@ -161,14 +214,12 @@ p {}
         color: #F3FBFB;
 
         font-size: var(--fsz-primary); /*TODO define by grid instead??*/
-        line-height:  var(--header-height); /*TODO constrain by width AND height of text? */
+        line-height:  var(--h-header); /*TODO constrain by width AND height of text? */
 
-    }
-    > .content > .site-nav.-mobile {
-        
     }
     > .content > .site-nav.-desktop {
-
+        width: calc((100% - var(--colgap-all))/3 + 3rem);  /*4 out of 12 cols*/
+        height: inherit;
     }
 }
 
