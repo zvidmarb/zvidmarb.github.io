@@ -33,6 +33,7 @@
     --color-neutral1: #F3FBFB;
     --color-neutral2: #DAF2F3;
 
+    --box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
 }
 @media screen and (min-width: 37.5rem) { 
     :root {
@@ -52,12 +53,12 @@
     }
 }
 @media screen and (min-width: 77.5rem) { 
-    html {
+    :root {
         --margin: 12.5rem; /*L 1240-1439dp = 200dp fixed margin*/
     }
 }
 @media screen and (min-width: 90rem) { 
-    html {
+    :root {
         /*XL 1440+dp = scaling margin w 1040dp body*/
         --margin: calc((100% - 65rem)/2); 
     }
@@ -128,60 +129,153 @@ p {}
 
     > .icon-media.-social {
         width: var(--fsz-icon);
-        height: auto;
+        height: var(--fsz-icon);
         font-size: var(--fsz-icon);
     }
 }
 .site-button {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0 0.5rem; /*TODO anything? */
+    padding: 1rem 0.5rem;
+    /* height: clamp(var(--button-width)/3.5, 2vh, var(--button-width)/3); */
+    aspect-ratio: 3.4 / 1;
 
+    font-weight: 600;
+    font-family: "Source Sans 3", sans-serif; /* TODO determine issue with specificity */
+    font-size: clamp(1rem, 4vw + 0.25rem, 2.5rem); /*XS: 1, S: 2, M: 2*/
+
+    color: #F3FBFB;
+    background-color: #3B7577;
+    
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+
+    @media screen and (min-width: 77.5rem) {
+    font-size: clamp(1.5rem, 3vw - .75rem, 2rem); /*XS: 1, S: 2, M: 2*/
+    }
 }
 
 .hero-section {
     > .content {
         margin-top: 1rem;
         display: flex;
+    }
+    > .content > .medias {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 1rem; /*TODO responsive adjust*/
+    }
+    > .content > .medias > .img-media.-portrait {
+        height: auto;
+        aspect-ratio: 0.84;
+        margin: 0;
+    }
+    > .content > .blurb {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    > .content > .blurb > .title {
+        height: fit-content; 
+        width: 100%;
+
+        text-align: center;
+        font-size: var(--fsz-primary);
+        font-weight: 600;
+    }
+    > .content > .blurb > .blurbtext {
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    > .content > .blurb > .blurbtext > .paragraph {
+        font-weight: 300;
+    }
+    > .content > .blurb > .site-button {
+        height: auto;
+    }
+}
+
+.hero-section.-mobile {
+    > .content {
         flex-direction: column;
         gap: 1rem;
+        
     }
     >.content > .medias {
         --n-cols: calc(var(--col-all)/2);
         width: 100%;
         max-height: calc(50% - 0.5rem); /*50% of content height - half a gutter for each div*/
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        row-gap: 1rem; /*TODO responsive adjust*/
     }
     > .content > .medias > .img-media.-portrait {
         width: calc((100% - var(--colgap-all))/2 + (var(--n-cols) + 1)*1rem);
-        height: auto;
-        aspect-ratio: 0.84;
         margin: 0 auto; /* left, right = XS-M: complements of face-width, L-XL: 0 */
+        @media screen and (min-width: 56.6rem) {
+            width: calc(2*(100% - var(--colgap-all))/3 + 5rem); /*M: 8c+9g*/
+        }
+        
+        
     } 
     > .content > .medias > .social-icons {
         /* XS:2c+1g, S: 4c+3g, M: 6c+5g, L-XL: 5c+4g*/
         width: calc((100% - var(--colgap-all))/2 + (var(--n-cols) - 1)*1rem);
     }
-
-    > .content > .blurb {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;        
-    }
-    > .content > .blurb > .title {
-        margin: 0;
+    > .content > .blurb > .blurbtext > .paragraph {
         text-align: center;
-        height: fit-content;
-        font-size: var(--fsz-primary);
-        font-weight: 600; 
-        width: 100%;
+        /*TODO? width XS-M: 100%, L-XL: half cols, 100% of blurb */
+        font-weight: 300;
+        font-size: clamp(1rem, 3vw + .75rem, 2.5rem);
     }
-    > .content > .blurb > .blurbtext {
-        
+    > .content > .blurb > .site-button {
+        width: calc((100% - var(--gutters))/2 + (var(--cols) - 1)*1rem); /*half of cols */
     }
-    > .content > .blurb > .site-button {}
+}
+
+@media screen and (min-width: 77.5rem) {
+    .hero-section.-desktop {
+        > .content {
+            flex-direction: row;
+            column-gap: calc((100% - var(--colgap-all))/var(--col-all) + 2rem); /*1 col + 2 gutter*/
+            align-items: center;
+            height: calc(100% - 1rem);
+            container-type: size;
+        }
+        >.content > .medias {
+            height: inherit;
+            max-height: 100%;
+            width: calc(5*(100% - var(--colgap-all))/var(--col-all) + 4rem ); /*L-XL: 5c+4g*/
+        }
+        > .content > .medias > .img-media.-portrait {
+            width: 100%;
+            max-height: 100%;
+        } 
+        > .content > .medias > .social-icons {
+            width: 100%;
+        }
+
+        > .content > .blurb {
+            height: inherit; /*TODO DRY, maybe variantize? */
+            max-height: 100%;
+            align-items: start;
+            width: calc((100% - var(--colgap-all))/2 + 5rem); /*L-XL: 6c+5g*/
+        }
+        > .content > .blurb > .title { 
+            text-align: left;
+        }
+        > .content > .blurb > .blurbtext > .paragraph {
+            text-align: left;
+            font-size: clamp(1.5rem, 2cqh + 0.75rem, 2.5rem);
+        }
+        > .content > .blurb > .site-button {
+            width: calc((100% - 5rem)/2 + 2rem); /*half of blurb width (3 cols)*/            
+        }
+    }
 }
 
 .project-section {
