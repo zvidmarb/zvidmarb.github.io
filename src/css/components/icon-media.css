@@ -1,11 +1,41 @@
+.icon-media.-card {
+    
+}
 .icon-media.-social {
     > .iconcontent.-img {
         width: var(--fsz-icon);
         height: var(--fsz-icon);
     }
-    > .material-symbols-outlined{
+    > .material-symbols-outlined {
         font-variation-settings: "FILL" 1;
         font-size: var(--fsz-icon);
         font-weight: 700;
+    }
+}
+
+.icon-media.-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    border-radius: 50%; /* perfect circle */
+    
+    > .material-symbols-outlined {
+        font-size: calc(var(--icon-size) - 0.5rem);
+    }
+    &> .-hidden {
+        background-color: var(--color-primary);  
+        > .material-symbols-outlined {
+            color: var(--color-neutral1);
+        }
+    } 
+    &> .-expanded {
+        background-color: var(--color-neutral1);
+        outline: .125rem solid var(--color-primary);
+        outline-offset: -.125rem;
+        > .material-symbols-outlined {
+            color: var(--color-primary);
+        }
     }
 }

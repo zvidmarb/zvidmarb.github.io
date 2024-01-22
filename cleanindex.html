@@ -15,11 +15,11 @@
     <header class="site-header">
         <div class="content">
             <a href="#" class="title">ZEVEN VIDMAR BARKER</a>
-            <nav class="site-nav -desktop">
+            <nav class="site-nav -mobile">
                 <a href="#" class="icon-media -nav">
                     <span class="material-symbols-outlined">menu</span>
                 </a>
-                <ul class="navitems -fixed">
+                <ul class="navitems -hidden">
                     <li class="itembox"><a href="#" class="itemtext">About</a></li>
                     <li class="itembox"><a href="#" class="itemtext">Projects</a></li>
                     <li class="itembox"><a href="#" class="itemtext">Resume</a></li>
@@ -29,7 +29,7 @@
     </header>
     
     <link rel="stylesheet" href="src/css/layout/hero-section.css">
-    <section class="hero-section -desktop">
+    <section class="hero-section -mobile">
         <div class="content">
             <div class="medias">
                 <img src="img/sunnypic.jpg" class="img-media -portrait">
@@ -69,7 +69,7 @@
                     <img src="img/temp.png" class="img-media -card">
                     <div class="header">
                         <h3 class="title">First Project Name</h3>
-                        <a href="#" class="icon-media -card"> <!--TODO refactor dropdown -->
+                        <a href="#" class="icon-media -card -hidden"> <!--TODO refactor dropdown -->
                             <span class="material-symbols-outlined">expand_less</span>
                         </a> <!--consider alternate desktop anchor vs single anchor w separate classes-->
                     </div>
@@ -86,7 +86,7 @@
                     <img src="img/temp.png" class="img-media -card">
                     <div class="header">
                         <h3 class="title">Second Project Name</h3>
-                        <a href="#" class="icon-media -card"> <!--TODO refactor dropdown -->
+                        <a href="#" class="icon-media -card -expanded"> <!--TODO refactor dropdown -->
                             <span class="material-symbols-outlined">expand_less</span>
                         </a>
                     </div>

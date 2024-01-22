@@ -94,8 +94,12 @@ p {}
     }
     > .project-section {
         background-color: var(--color-neutral2);
+        height: fit-content;
     }
-    > .footer-section {}
+    > .footer-section {
+
+        
+    }
 
     .content {
         margin: 0 var(--margin);
@@ -112,23 +116,71 @@ p {}
 
 }
 .project-card { /*clickable, hoverable*/
-    > .img-media.-card {}
+    display: flex;
+    flex-direction: column;
 
-    > .header {}
-    > .header > .title {}
-    > .header > .icon-media.-card {} /*expand_more, expand_less, chevron_right*/
+    position: relative;
 
-    > .details {}
+    background-color: #F3FBFB;
+
+    --border-radius: clamp(0.5rem, -.375rem + 2.5vw, 1rem); /*approximate 0.5rem for XS->S, 1rem for M->XL*/
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    
+    > .img-media.-card {
+        object-fit: cover; /* = fill + clip to fit apsect ratio */
+        width: 100%;
+        height: auto; /*TODO w+h might cause trouble later with diff images, check for consistent sizing */
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    > .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--color-neutral1); /*background-color: #F3FBFB;*/
+        box-shadow: var(--box-shadow);
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+    > .header > .title {
+        padding-left: var(--border-radius); /*XS=0.5, M-XL: 1*/
+        font-size: clamp(1rem, 5vw - 1rem, 2rem); /*XS = 1rem, S-XL = 2rem*/
+    }
+    > .header > .icon-media.-card {
+        --icon-size: clamp(2.25rem, 18vw - 4.5rem, 5.25rem);
+        width: var(--icon-size); /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
+        height: var(--icon-size);
+
+        position: relative;
+        bottom: calc(var(--border-radius) - 0.5rem);
+        right: var(--border-radius);
+    } /*expand_more, expand_less, chevron_right*/
+    > .details {
+        
+    }
     > .details > .paragraph {}
     > .details > .site-button.-card {}
 }
 
 .project-section {
-    > .content {}
-    > .content > .title {}
+    > .content {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 0; /* TODO same for desktop, adjust for responsiveness */
+        row-gap: 1rem; /* TODO same for desktop, adjust for responsiveness */
+    }
+    > .content > .title {
+        font-size: clamp(1.25rem, 6.5vw - 1.5rem, 2.5rem); /*XS: 1.25rem, S-M: 2.25rem, L-XL: 2.5rem*/
+    }
 
-    > .content > .featuredlist {}
-    > .content > .featuredlist > .project-card {}
+    > .content > .featuredlist { /*width = 100%, what proportion of content height?*/
+        display: flex;
+        flex-direction: column;
+        gap: 1rem 1rem; /* TODO adjust for responsiveness */
+    } 
+    > .content > .featuredlist > .project-card {
+
+    }
 
     > .content > .site-button {}
 }
