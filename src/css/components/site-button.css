@@ -1,0 +1,23 @@
+.site-button {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0 0.5rem; /*TODO anything? */
+    padding: 1rem 0.5rem;
+    /* height: clamp(var(--button-width)/3.5, 2vh, var(--button-width)/3); */
+    aspect-ratio: 3.4 / 1;
+
+    font-weight: 600;
+    font-family: "Source Sans 3", sans-serif; /* TODO determine issue with specificity */
+    font-size: clamp(1rem, 4vw + 0.25rem, 2.5rem); /*XS: 1, S: 2, M: 2*/
+
+    color: #F3FBFB;
+    background-color: #3B7577;
+    
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+
+    @media screen and (min-width: 77.5rem) {
+    font-size: clamp(1.5rem, 3vw - .75rem, 2rem); /*XS: 1, S: 2, M: 2*/
+    }
+}

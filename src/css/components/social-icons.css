@@ -1,0 +1,15 @@
+@import url(icon-media.css);
+
+.social-icons {
+    /* flex: 1 1 auto; ideally 5fr 1fr */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    list-style-type: none;
+
+    > .icon-media.-social {
+        width: fit-content;
+        height: fit-content;
+    }
+}
