@@ -1,18 +1,5 @@
 /*TODO abstract icon-media*/
-.icon-media.-nav {
-    display: flex;
-
-    color: var(--color-neutral1);
-
-    text-decoration: none;
-
-    border: .125rem solid var(--color-neutral1);
-    border-radius: .25rem;
-
-    > .material-symbols-outlined {
-        font-weight: 500;
-    }
-}
+@import url(icon-media.css);
 
 .site-nav {
     > .navitems {

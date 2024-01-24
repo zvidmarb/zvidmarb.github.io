@@ -24,7 +24,8 @@
     --margin: 1rem; /*XS 0-599dp = 16dp fixed*/
 
     --fsz-primary: clamp(1.5rem, 2vw + 1rem, 3rem);
-    --fsz-icon: clamp(2rem, 4vw + 1rem, 4rem);
+    --fsz-social-icons: clamp(2rem, 4vw + 1rem, 4rem);
+    --fsz-card-icons: clamp(2.25rem, 18vw - 4.5rem, 5.25rem);
     --font-primary: "Oswald", sans-serif;
     --font-secondary: "Source Sans 3", sans-serif;
     
@@ -97,8 +98,7 @@ p {}
         height: fit-content;
     }
     > .footer-section {
-
-        
+         
     }
 
     .content {
@@ -106,12 +106,6 @@ p {}
     }
 }
 
-.img-media.-card {
-    
-}
-.icon-media.-card {
-
-}
 .site-button.-card {
 
 }
@@ -128,10 +122,8 @@ p {}
     box-shadow: var(--box-shadow);
     
     > .img-media.-card {
-        object-fit: cover; /* = fill + clip to fit apsect ratio */
         width: 100%;
         height: auto; /*TODO w+h might cause trouble later with diff images, check for consistent sizing */
-        border-radius: var(--border-radius) var(--border-radius) 0 0;
     }
 
     > .header {
@@ -156,10 +148,20 @@ p {}
         right: var(--border-radius);
     } /*expand_more, expand_less, chevron_right*/
     > .details {
-        
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0.5rem 0.5rem; /*TODO XS: .5, S-XL: 1rem */
+        /*TODO consider having a consistent height / max height */
     }
-    > .details > .paragraph {}
-    > .details > .site-button.-card {}
+    > .details.-hidden {display: none}
+    > .details.-expanded {display: flex}
+    > .details > .paragraph { /* possibly match with other p tags */
+        font-size: clamp(1rem, 3vw + .75rem, 2rem);
+    }
+    > .details > .site-button.-card {
+        width: calc((100% - 2rem)/4 + 2.5rem); /*1c+1g, compensating for 2 separate paddings!!!*/
+    }
 }
 
 .project-section {
@@ -178,11 +180,13 @@ p {}
         flex-direction: column;
         gap: 1rem 1rem; /* TODO adjust for responsiveness */
     } 
-    > .content > .featuredlist > .project-card {
+    > .content > .featuredlist > .project-card {}
 
+    > .content > .site-button {
+        --width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
+        margin-top: 1rem; /*TODO temp hack due to not having same featured project > title + tiles structure*/
+        align-self: center;
     }
-
-    > .content > .site-button {}
 }
 
 

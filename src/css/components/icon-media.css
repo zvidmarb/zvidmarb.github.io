@@ -1,41 +1,56 @@
-.icon-media.-card {
-    
+.icon-media {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .icon-media.-social {
     > .iconcontent.-img {
-        width: var(--fsz-icon);
-        height: var(--fsz-icon);
+        width: var(--fsz-social-icons);
+        height: var(--fsz-social-icons);
     }
     > .material-symbols-outlined {
         font-variation-settings: "FILL" 1;
-        font-size: var(--fsz-icon);
+        font-size: var(--fsz-social-icons);
         font-weight: 700;
     }
 }
 
 .icon-media.-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     z-index: 2;
 
     border-radius: 50%; /* perfect circle */
     
     > .material-symbols-outlined {
-        font-size: calc(var(--icon-size) - 0.5rem);
+        font-size: calc(var(--fsz-card-icons) - 0.5rem);
     }
-    &> .-hidden {
+    &.-hidden {
         background-color: var(--color-primary);  
         > .material-symbols-outlined {
             color: var(--color-neutral1);
         }
     } 
-    &> .-expanded {
+    &.-expanded {
         background-color: var(--color-neutral1);
         outline: .125rem solid var(--color-primary);
         outline-offset: -.125rem;
         > .material-symbols-outlined {
             color: var(--color-primary);
         }
+    }
+}
+.icon-media.-nav { /*TODO responsive adjust still?*/
+    display: flex;
+
+    color: var(--color-neutral1);
+
+    text-decoration: none;
+
+    border: .125rem solid var(--color-neutral1);
+    border-radius: .25rem;
+
+    > .material-symbols-outlined {
+        font-weight: 500;
     }
 }
