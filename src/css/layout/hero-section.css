@@ -3,6 +3,8 @@
 @import url(../components/site-button.css);
 
 .hero-section {
+    background-color: var(--color-neutral1);
+    
     > .content {
         margin-top: 1rem;
         display: flex;

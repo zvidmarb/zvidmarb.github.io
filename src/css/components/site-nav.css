@@ -21,7 +21,7 @@
 .site-nav.-mobile {
     --h-dropdown: clamp(9rem, 30vw, 13.5rem); /*midpt @ 600dp = 11.25rem, or 30vw*/
     overflow: visible;
-
+    
     > .navitems {
         width: 100%;
         height: var(--h-dropdown);
