@@ -1,0 +1,40 @@
+@import url(../components/project-card.css);
+@import url(../components/site-button.css);
+.project-section {
+    > .content {}
+    > .content > .title {}
+    > .content > .featuredlist {}
+    > .content > .featuredlist > .project-card.-desktop {}
+    > .content > .site-button {}
+}
+.project-section.-mobile {
+    > .content {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 0; /* TODO same for desktop, adjust for responsiveness */
+        row-gap: 1rem; /* TODO same for desktop, adjust for responsiveness */
+    }
+    > .content > .title {
+        font-size: clamp(1.25rem, 6.5vw - 1.5rem, 2.5rem); /*XS: 1.25rem, S-M: 2.25rem, L-XL: 2.5rem*/
+    }
+
+    > .content > .featuredlist { /*width = 100%, what proportion of content height?*/
+        display: flex;
+        flex-direction: column;
+        gap: 1rem 1rem; /* TODO adjust for responsiveness */
+    } 
+    > .content > .featuredlist > .project-card.-mobile {}
+
+    > .content > .site-button {
+        --width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
+        margin-top: 1rem; /*TODO temp hack due to not having same featured project > title + tiles structure*/
+        align-self: center;
+    }
+}
+.project-section.-desktop {
+    > .content {}
+    > .content > .title {}
+    > .content > .featuredlist {}
+    > .content > .featuredlist > .project-card.-desktop {}
+    > .content > .site-button {}
+}
