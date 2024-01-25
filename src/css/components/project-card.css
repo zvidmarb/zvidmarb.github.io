@@ -3,35 +3,17 @@
 @import url(site-button.css);
 
 .project-card {
-
-
-
-
-    > .img-media.-card {}
-
-    > .header {}
-    > .header > .title {}
-    > .header > .icon-media.-card {}
-    
-    > .details {}
-    > .details.-hidden {}
-    > .details.-expanded {}
-    > .details > .paragraph {}
-    > .details > .site-button.-card {}
-}
-
-.project-card.-mobile { /*clickable, hoverable*/
     display: flex;
     flex-direction: column;
 
     position: relative;
 
-    background-color: #F3FBFB;
+    background-color: var(--color-neutral1);
 
     --border-radius: clamp(0.5rem, -.375rem + 2.5vw, 1rem); /*approximate 0.5rem for XS->S, 1rem for M->XL*/
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    
+
     > .img-media.-card {
         width: 100%;
         height: auto; /*TODO w+h might cause trouble later with diff images, check for consistent sizing */
@@ -49,27 +31,37 @@
         padding-left: var(--border-radius); /*XS=0.5, M-XL: 1*/
         font-size: clamp(1rem, 5vw - 1rem, 2rem); /*XS = 1rem, S-XL = 2rem*/
     }
-    > .header > .icon-media.-card {
-        --icon-size: clamp(2.25rem, 18vw - 4.5rem, 5.25rem);
-        width: var(--icon-size); /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
-        height: var(--icon-size);
+    > .header > .icon-media.-card { /*clickable, hoverable*/  
+        width: var(--fsz-card-icons); /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
+        height: var(--fsz-card-icons);
 
         position: relative;
         bottom: calc(var(--border-radius) - 0.5rem);
         right: var(--border-radius);
     } /*expand_more, expand_less, chevron_right*/
-
+    
     > .details {
         flex-direction: column;
-        justify-content: space-between;
         align-items: flex-start;
         padding: 0.5rem 0.5rem; /*TODO XS: .5, S-XL: 1rem */
-        /*TODO consider having a consistent height / max height */
     }
-    > .details.-hidden {display: none}
+    > .details.-hidden {display:none}
     > .details.-expanded {display: flex}
     > .details > .paragraph { /* possibly match with other p tags */
+        color: black;
         font-size: clamp(1rem, 3vw + .75rem, 2rem);
+    } /*> .details > .site-button.-card: currently no master variation */
+}
+
+.project-card.-mobile {  
+    > .header > .icon-media.-card {
+        --fsz-card-icons: clamp(2.25rem, 18vw - 4.5rem, 5.25rem);
+    } 
+
+    > .details {
+        justify-content: space-between;
+        align-items: flex-start;
+        /*TODO consider having a consistent height / max height */
     }
     > .details > .site-button.-card {
         width: calc((100% - 2rem)/4 + 2.5rem); /*1c+1g, compensating for 2 separate paddings!!!*/
@@ -77,19 +69,28 @@
 }
 
 .project-card.-desktop {
-
-
-
-
-    > .img-media.-card {}
-
-    > .header {}
-    > .header > .title {}
-    > .header > .icon-media.-card {}
+    > .header > .icon-media.-card {
+        --fsz-card-icons: 4rem;
+    }
     
-    > .details {}
-    > .details.-hidden {}
-    > .details.-expanded {}
-    > .details > .paragraph {}
-    > .details > .site-button.-card {}
+    > .details {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0.5rem 0.5rem; /*TODO XS: .5, S-XL: 1rem */
+        /*TODO consider having a consistent height / max height */
+
+        position: absolute;
+        justify-content: flex-start;
+        background-color: rgba(30,30,30,80%);
+        height: calc(100% - 3.5rem); /*cover img, compensating for padding*/
+        border-radius: 0.5rem 0.5rem 0 0;
+        z-index: 1;
+    }
+    > .details > .paragraph {
+        color: var(--color-neutral1);
+    }
+    > .details > .site-button.-card {
+        display: none;
+    }
 }

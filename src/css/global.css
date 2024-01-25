@@ -88,15 +88,16 @@ p {}
         position: sticky;
         z-index: 1;
     }
+
     > .hero-section {
         /*viewport height - header - .5rem for section color transition */
         height: calc(100vh - var(--h-header) - .5rem); /*TODO bigger background transition? */
         background-color: var(--color-neutral1);
     }
-    > .project-section {
-        background-color: var(--color-neutral2);
-        height: fit-content;
-    }
+
+    > .project-section.-mobile {height: fit-content}
+    > .project-section.-desktop {height: calc(100vh - var(--header-height) -.5rem)}
+
     > .footer-section {
          
     }

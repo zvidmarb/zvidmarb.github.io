@@ -1,40 +1,46 @@
 @import url(../components/project-card.css);
 @import url(../components/site-button.css);
+
 .project-section {
-    > .content {}
-    > .content > .title {}
-    > .content > .featuredlist {}
-    > .content > .featuredlist > .project-card.-desktop {}
-    > .content > .site-button {}
-}
-.project-section.-mobile {
+    background-color: var(--color-neutral2);
+    
     > .content {
         display: flex;
         flex-direction: column;
         padding: 1.5rem 0; /* TODO same for desktop, adjust for responsiveness */
         row-gap: 1rem; /* TODO same for desktop, adjust for responsiveness */
     }
+    /*> .content > .featuredlist : currently no master variation */
     > .content > .title {
         font-size: clamp(1.25rem, 6.5vw - 1.5rem, 2.5rem); /*XS: 1.25rem, S-M: 2.25rem, L-XL: 2.5rem*/
     }
-
-    > .content > .featuredlist { /*width = 100%, what proportion of content height?*/
+    > .content > .featuredlist {
         display: flex;
-        flex-direction: column;
         gap: 1rem 1rem; /* TODO adjust for responsiveness */
     } 
-    > .content > .featuredlist > .project-card.-mobile {}
+    /*> .content > .site-button: currently no master variation */
+}
+.project-section.-mobile {
+    > .content > .featuredlist { /*width = 100%, what proportion of content height?*/
+        flex-direction: column;
+    }
 
     > .content > .site-button {
-        --width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
+        width: calc((100% - 3rem)/2 + 1rem); /*XS = 2c1g, S = 4c3g, M= 6c5g, L-XL = 4c3g*/
         margin-top: 1rem; /*TODO temp hack due to not having same featured project > title + tiles structure*/
         align-self: center;
     }
 }
 .project-section.-desktop {
-    > .content {}
-    > .content > .title {}
-    > .content > .featuredlist {}
-    > .content > .featuredlist > .project-card.-desktop {}
-    > .content > .site-button {}
+    > .content > .featuredlist {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    > .content > .featuredlist > .project-card.-desktop {
+        width: calc((100% - var(--colgap-all))/2 + 5rem);
+    }
+    > .content > .site-button {
+        width: calc((100% - 11rem)/3 + 3rem); /*L-XL = 4c3g*/
+        align-self: flex-end;
+    }
 }
