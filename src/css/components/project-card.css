@@ -30,6 +30,7 @@
     > .header > .title {
         padding-left: var(--border-radius); /*XS=0.5, M-XL: 1*/
         font-size: clamp(1rem, 5vw - 1rem, 2rem); /*XS = 1rem, S-XL = 2rem*/
+        font-weight: 600;
     }
     > .header > .icon-media.-card { /*clickable, hoverable*/  
         width: var(--fsz-card-icons); /*TODO XS = 2.25, S-M = 5.25, L-XL: 4rem*/
@@ -83,7 +84,7 @@
         position: absolute;
         justify-content: flex-start;
         background-color: rgba(30,30,30,80%);
-        height: calc(100% - 3.5rem); /*cover img, compensating for padding*/
+        height: calc(100% - var(--fsz-card-icons) + 0.25rem); /*cover img, compensating for padding*/
         border-radius: 0.5rem 0.5rem 0 0;
         z-index: 1;
     }

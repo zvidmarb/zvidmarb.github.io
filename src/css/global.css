@@ -86,19 +86,21 @@ p {}
         top: 0;
         align-self: start;
         position: sticky;
-        z-index: 1;
+        z-index: 3;
     }
 
     > .hero-section {
         /*viewport height - header - .5rem for section color transition */
         height: calc(100vh - var(--h-header) - .5rem); /*TODO bigger background transition? */
+        z-index: 1;
     }
-
+    > .project-section {z-index: 0}
     > .project-section.-mobile {height: fit-content}
     > .project-section.-desktop {height: calc(100vh - var(--header-height) -.5rem)}
 
-    > .footer-section {
+    > .site-footer {
         height: 7.5rem;
+        z-index: 2;
     }
 
     .content {
@@ -131,10 +133,11 @@ p {}
     > .content > .top > .pagejump {
         color: #F3FBFB;
         font-weight: 600;
+        text-decoration: none;
     }
 
     > .content > .main {
-        width: calc(2*(100% - var(--gutters))/var(--total-cols) + 1rem);
+        width: calc(2*(100% - var(--colgap-all))/var(--col-all) + 1rem);
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -145,7 +148,8 @@ p {}
         font-weight: 600;
     }
     > .content > .main > .social-icons {
-        
+        /* TODO abstract across mobile social-icons ?*/
+        width: 100%;
     }
 }
 
