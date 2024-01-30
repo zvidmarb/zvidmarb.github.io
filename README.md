@@ -16,3 +16,4 @@
 - [Custom Properties in BEM](https://www.imarc.com/blog/block-property-modifier-a-bem-like-css-custom-properties-methodology)
 - [Old Fashioned CSS without dependencies](https://itnext.io/old-fashioned-css-without-dependencies-a78852b2553a)
 - [Blog post on using RSCSS: "...my CSS is no longer a mess"](https://medium.com/@mik01aj/rscss-77043f4fafb1)
+- [Reasonal System for Javascript (counterpart to RSCSS)](https://ricostacruz.com/rsjs/)

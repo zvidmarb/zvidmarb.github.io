@@ -73,7 +73,6 @@
     > .header > .icon-media.-card {
         --fsz-card-icons: 4rem;
     }
-    
     > .details {
         flex-direction: column;
         justify-content: space-between;
