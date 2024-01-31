@@ -27,9 +27,6 @@
         height: var(--h-dropdown);
         flex-direction: column;
         align-items: center; 
-    }
-
-    > .navitems.-hidden {
         display: none;
     }
     > .navitems.-expanded {

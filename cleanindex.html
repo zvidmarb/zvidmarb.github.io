@@ -10,16 +10,16 @@
     <link rel="stylesheet" href="src/css/global.css">
 </head>
 
-<body class="home-page">
+<body class="home-page" data-js-responsive-layout>
     <link rel="stylesheet" href="src/css/layout/site-header.css">
     <header class="site-header">
         <div class="content">
             <a href="#" class="title">ZEVEN VIDMAR BARKER</a>
-            <nav class="site-nav -desktop">
-                <a href="#" class="icon-media -nav">
+            <nav class="site-nav -desktop" data-js-collapsible-nav>
+                <a href="#" class="icon-media -nav" data-js-toggle>
                     <span class="iconcontent material-symbols-outlined">menu</span>
                 </a>
-                <ul class="navitems -fixed">
+                <ul class="navitems" data-js-dropdown>
                     <li class="itembox"><a href="#" class="itemtext">About</a></li>
                     <li class="itembox"><a href="#" class="itemtext">Projects</a></li>
                     <li class="itembox"><a href="#" class="itemtext">Resume</a></li>
@@ -63,19 +63,19 @@
     </section>
 
     <link rel="stylesheet" href="src/css/layout/project-section.css">
-    <section class="project-section -desktop">
+    <section class="project-section -desktop" data-js-responsive-layout>
         <div class="content">
             <h2 class="title">Featured Projects</h2>
             <div class="featuredlist">
-                <div class="project-card -desktop">
+                <div class="project-card -desktop" data-js-expandable-card>
                     <img src="img/temp.png" class="img-media -card">
                     <div class="header">
                         <h3 class="title">First Project Name</h3>
-                        <a href="#" class="icon-media -card -hidden"> <!--TODO refactor dropdown -->
+                        <a href="#" class="icon-media -card" data-href="/project1" data-js-toggle> <!--TODO refactor dropdown -->
                             <span class="iconcontent material-symbols-outlined">expand_less</span>
                         </a> <!--consider alternate desktop anchor vs single anchor w separate classes-->
                     </div>
-                    <div class="details -hidden">
+                    <div class="details" data-js-expand>
                         <p class="paragraph">This is a blurb about the project. 
                             Keep it brief and keep it simple, 
                             but make sure it hooks the reader!
@@ -84,11 +84,11 @@
                     </div>
                     
                 </div>
-                <div class="project-card -desktop">
+                <div class="project-card -desktop" data-js-expandable-card>
                     <img src="img/temp.png" class="img-media -card">
                     <div class="header">
                         <h3 class="title">Second Project Name</h3>
-                        <a href="#" class="icon-media -card -expanded"> <!--TODO refactor dropdown -->
+                        <a href="#" class="icon-media -card" data-href="/project2" data-js-toggle> <!--TODO refactor dropdown -->
                             <span class="iconcontent material-symbols-outlined">expand_less</span>
                         </a>
                     </div>
@@ -100,15 +100,15 @@
                         <button href="/project2" class="site-button -card">Read more</button>
                     </div>
                 </div>
-                <div class="project-card -desktop">
+                <div class="project-card -desktop" data-js-expandable-card>
                     <img src="img/temp.png" class="img-media -card">
                     <div class="header">
                         <h3 class="title">Third Project Name</h3>
-                        <a href="#" class="icon-media -card -hidden"> <!--TODO refactor dropdown -->
+                        <a href="#" class="icon-media -card" data-href="/project3" data-js-toggle> <!--TODO refactor dropdown -->
                             <span class="iconcontent material-symbols-outlined">expand_less</span>
                         </a>
                     </div>
-                    <div class="details -hidden">
+                    <div class="details">
                         <p class="paragrph">This is a blurb about the project. 
                             Keep it brief and keep it simple, 
                             but make sure it hooks the reader!
@@ -116,15 +116,15 @@
                         <button href="/project3" class="site-button -card">Read more</button>
                     </div>
                 </div>
-                <div class="project-card -desktop">
+                <div class="project-card -desktop" data-js-expandable-card>
                     <img src="img/temp.png" class="img-media -card">
                     <div class="header">
                         <h3 class="title">Fourth Project Name</h3>
-                        <a href="#" class="icon-media -card -hidden"> <!--TODO refactor dropdown -->
+                        <a href="#" class="icon-media -card" data-href="/project4" data-js-toggle> <!--TODO refactor dropdown -->
                             <span class="iconcontent material-symbols-outlined">expand_less</span>
                         </a>
                     </div>
-                    <div class="details -hidden">
+                    <div class="details">
                         <p class="paragraph">This is a blurb about the project. 
                             Keep it brief and keep it simple, 
                             but make sure it hooks the reader!
