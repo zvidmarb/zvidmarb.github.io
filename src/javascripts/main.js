@@ -23,7 +23,7 @@
 */
 
 /* 
-   site-header: switchLayout()
+   site-header:
    site-nav: switchLayout(), switchNav()
    hero-section: switchLayout()
    icon-media: 
@@ -32,25 +32,45 @@
    project-section: responsiveLayout()
    project-card: responsiveLayout(), responsive(), icon-media-card, hoverEvent
  */
-function toggleElement(element) {
-    return element.classList.toggle("-expanded");
-}
-function collapseElement(element) {
-    return element.classList.toggle("-expanded", false);
+const MOBILE = 0, DESKTOP = 1;
+let state = {
+    view : ,
+
+};
+
+let getView = () => state.view;
+let setMobile = () => state.view = MOBILE;
+let setDesktop = () => state.view = DESKTOP;
+let isMobile = () => state.view === MOBILE;
+let isDesktop = () => state.view === DESKTOP;
+
+
+
+
+
+var toggleElement = element => element.classList.toggle("-expanded");
+var collapseElement = element => element.classList.toggle("-expanded", false);
+function switchLayout (element) {
+    element.classList.toggle("-desktop");
+    element.classList.toggle("-mobile");
+    console.log("switchLayout results in: " + element.class);
 }
 
-function switchLayout(element) {
+function topLevelResponsive() {
+    var start = document.querySelector("[data-js-responsive]");
+    //top-level?
+    start.querySelectorAll("[data-js-responsive]").forEach(elem => switchLayout(elem));
     
-}
-function switchLayout(root) {
-    if (window.innerWidth < 1240) {
-        
-    } else {
+    //header - switchLayout() on site-nav; switchNav() on navitems
 
-    }
-}
+    //hero - switchLayout() on hero-section
 
-window.addEventListener("resize", )
+    //projects - switchLayout() on project-section, project-cards; 
+    //           changeicon()s, changelink()s, change event listeners
+
+    //footer?
+}
+window.addEventListener("resize", topLevelResponsive());
 
 
 /* site-nav, collapsible-nav.js:
@@ -58,16 +78,20 @@ window.addEventListener("resize", )
     switchNav() - toggle fixed class on nav-items, toggleDropdown if expanded class is present
     icon-media-nav, clickEvent: toggleDropdown on nav-items
 */
-    var siteNav = document.querySelector('[data-js-collapsible-nav]');
-    var navItems = nav.querySelector('[data-js-dropdown]');
-    
-    function switchNav(element) {
-        collapseElement(element);
-        return element.classList.toggle("-fixed");
-    }
-    
-    nav.querySelector('[data-js-toggle]').addEventListener('click', toggleElement(navItems));
+ let nav = document.querySelector('[data-js-collapsible-nav]');
+ let dropdown = nav.querySelector('[data-js-dropdown]');
+ let toggle = nav.querySelector('[data-js-toggle]');
 
+function switchNav(nav) {
+    App.collapseElement(nav);
+    return nav.classList.toggle("-fixed");
+}
+
+toggle.addEventListener('click', toggleElement(dropdown));
+
+CollapsibleNav.responsive = switchNav(dropdown);
+
+/* hero-section */
 /* project-card, expandable-card.js:
     toggleElement() - toggles expanded class for card details and for card icon
     changeIcon() - updates icon inner text to change to selected material name
@@ -75,16 +99,34 @@ window.addEventListener("resize", )
     project-card, hover (desktop): toggleElement on details
     project-card, click (mobile): toggleELement on details/card icon, changeIcon more<->less
 */
+function ResponsiveCard(node) {
+    this.node = node;
+    this.toggle = node.querySelector("[data-js-toggle]");
+    this.href = toggle.dataset.href;
+    this.details = node.querySelector("[data-js-expand]");
+}
+cards = document.querySelectorAll("[data-js-expandable-card]").forEach(el => new ResponsiveCard(el));
 
-function changeIcon(element) {
-    element.innerHTML = (element.innerHTML == "chevron_right") ? "expand_more" : "chevron_right"; 
-    return element.innerHTML;
+function changeIcon(element, isMobile) {
+    element.innerHTML = (element.innerHTML == "expand_more" && isMobile) ? "expand_less" : 
+                            (isMobile) ? "expand_more" : "chevron_right"; 
 }
 function changeLink(element) {
     anchor.href = (anchor.href == '#') ? element.getAttribute("data-href") : "#";
-    return anchor.href
 }
-function responsiveCard() {
+
+function cardExpand(card) {
+    toggleElement(card.details);
+    changeIcon(card.toggle, isMobile);
+}
+//project-section responsive
+function responsive(element) {
+
+    changeLink(element);
+    changeIcon(element, isMobile);
+    // mobile version - changeicon, changelink, add click, remove hover events
+
+    // desktop version - changeicon, changelink, add hover events, remove click
 
 }
 
