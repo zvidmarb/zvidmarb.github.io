@@ -34,15 +34,16 @@
  */
 const MOBILE = 0, DESKTOP = 1;
 let state = {
-    view : ,
+    view : MOBILE,
+    
 
 };
 
 let getView = () => state.view;
-let setMobile = () => state.view = MOBILE;
-let setDesktop = () => state.view = DESKTOP;
-let isMobile = () => state.view === MOBILE;
-let isDesktop = () => state.view === DESKTOP;
+let setViewMobile = () => state.view = MOBILE;
+let setViewDesktop = () => state.view = DESKTOP;
+let isViewMobile = () => state.view === MOBILE;
+let isViewDesktop = () => state.view === DESKTOP;
 
 
 
