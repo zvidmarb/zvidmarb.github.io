@@ -17,3 +17,5 @@
 - [Old Fashioned CSS without dependencies](https://itnext.io/old-fashioned-css-without-dependencies-a78852b2553a)
 - [Blog post on using RSCSS: "...my CSS is no longer a mess"](https://medium.com/@mik01aj/rscss-77043f4fafb1)
 - [Reasonal System for Javascript (counterpart to RSCSS)](https://ricostacruz.com/rsjs/)
+- [Basic Vanilla JS Project Setupo](https://plainenglish.io/blog/the-basic-vanilla-js-project-setup-9290dce6403f)
+- [Mastering State Management in Vanilla JS](https://medium.com/@asierr/back-to-basics-mastering-state-management-in-vanilla-javascript-e3be7377ac46)

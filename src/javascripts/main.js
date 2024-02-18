@@ -32,31 +32,75 @@
    project-section: responsiveLayout()
    project-card: responsiveLayout(), responsive(), icon-media-card, hoverEvent
  */
+/* CONSTANTS, HELPERS */
 const MOBILE = 0, DESKTOP = 1;
-let state = {
-    view : MOBILE,
-    
+const S = 600, M = 905, L = 1240, XL = 1440; //minimum breakpoints of each screen size, XS-M: mobile/tablet, L-XL: desktop 
+function ResponsiveCard(node) {
+    this.node = node;
+    this.toggle = node.querySelector("[data-js-toggle]");
+    this.href = toggle.dataset.href;
+    this.details = node.querySelector("[data-js-expand]");
+}
 
-};
+/* STATE */
+let State = function () {
+    this.view = (window.innerWidth < L) ? MOBILE : DESKTOP;
+}
 
-let getView = () => state.view;
-let setViewMobile = () => state.view = MOBILE;
-let setViewDesktop = () => state.view = DESKTOP;
-let isViewMobile = () => state.view === MOBILE;
-let isViewDesktop = () => state.view === DESKTOP;
+/* STATE ACCESSOR FUNCTIONS */
+State.getView = () => this.view;
+State.setViewMobile = () => state.view = MOBILE;
+State.setViewDesktop = () => state.view = DESKTOP;
+State.isViewMobile = () => state.view === MOBILE;
+State.isViewDesktop = () => state.view === DESKTOP;
+
+/* DOM node references */
 
 
+let nav = document.querySelector('[data-js-collapsible-nav]');
+let dropdown = nav.querySelector('[data-js-dropdown]');
+let toggle = nav.querySelector('[data-js-toggle]');
+/* project-card, expandable-card.js:
+    toggleElement() - toggles expanded class for card details and for card icon
+    changeIcon() - updates icon inner text to change to selected material name
+    changeLink() - updates href link "#" <-> link from button href
+    project-card, hover (desktop): toggleElement on details
+    project-card, click (mobile): toggleELement on details/card icon, changeIcon more<->less
+*/
 
+let cards = document.querySelectorAll("[data-js-expandable-card]").forEach(el => new ResponsiveCard(el));
 
-
+/* DOM update functions */
 var toggleElement = element => element.classList.toggle("-expanded");
 var collapseElement = element => element.classList.toggle("-expanded", false);
 function switchLayout (element) {
-    element.classList.toggle("-desktop");
-    element.classList.toggle("-mobile");
+    if (isViewMobile) {
+        element.classList.replace("-mobile", "-desktop");
+    } else {
+        element.classList.replace("-desktop", "-mobile");
+    }
     console.log("switchLayout results in: " + element.class);
 }
+function changeIcon(element, isMobile) {
+    element.innerHTML = (element.innerHTML == "expand_more" && isMobile) ? "expand_less" : 
+                            (isMobile) ? "expand_more" : "chevron_right"; 
+}
+function changeLink(element) {
+    anchor.href = (anchor.href == '#') ? element.getAttribute("data-href") : "#";
+}
 
+
+/* site-nav, collapsible-nav.js:
+    toggleDropdown() - toggles expanded class
+    switchNav() - toggle fixed class on nav-items, toggleDropdown if expanded class is present
+    icon-media-nav, clickEvent: toggleDropdown on nav-items
+*/
+function switchNav(nav) {
+    App.collapseElement(nav);
+    return nav.classList.toggle("-fixed");
+}
+
+/* Event Handlers */
 function topLevelResponsive() {
     var start = document.querySelector("[data-js-responsive]");
     //top-level?
@@ -71,55 +115,7 @@ function topLevelResponsive() {
 
     //footer?
 }
-window.addEventListener("resize", topLevelResponsive());
-
-
-/* site-nav, collapsible-nav.js:
-    toggleDropdown() - toggles expanded class
-    switchNav() - toggle fixed class on nav-items, toggleDropdown if expanded class is present
-    icon-media-nav, clickEvent: toggleDropdown on nav-items
-*/
- let nav = document.querySelector('[data-js-collapsible-nav]');
- let dropdown = nav.querySelector('[data-js-dropdown]');
- let toggle = nav.querySelector('[data-js-toggle]');
-
-function switchNav(nav) {
-    App.collapseElement(nav);
-    return nav.classList.toggle("-fixed");
-}
-
-toggle.addEventListener('click', toggleElement(dropdown));
-
 CollapsibleNav.responsive = switchNav(dropdown);
-
-/* hero-section */
-/* project-card, expandable-card.js:
-    toggleElement() - toggles expanded class for card details and for card icon
-    changeIcon() - updates icon inner text to change to selected material name
-    changeLink() - updates href link "#" <-> link from button href
-    project-card, hover (desktop): toggleElement on details
-    project-card, click (mobile): toggleELement on details/card icon, changeIcon more<->less
-*/
-function ResponsiveCard(node) {
-    this.node = node;
-    this.toggle = node.querySelector("[data-js-toggle]");
-    this.href = toggle.dataset.href;
-    this.details = node.querySelector("[data-js-expand]");
-}
-cards = document.querySelectorAll("[data-js-expandable-card]").forEach(el => new ResponsiveCard(el));
-
-function changeIcon(element, isMobile) {
-    element.innerHTML = (element.innerHTML == "expand_more" && isMobile) ? "expand_less" : 
-                            (isMobile) ? "expand_more" : "chevron_right"; 
-}
-function changeLink(element) {
-    anchor.href = (anchor.href == '#') ? element.getAttribute("data-href") : "#";
-}
-
-function cardExpand(card) {
-    toggleElement(card.details);
-    changeIcon(card.toggle, isMobile);
-}
 //project-section responsive
 function responsive(element) {
 
@@ -131,4 +127,15 @@ function responsive(element) {
 
 }
 
+function cardExpand(card) {
+    toggleElement(card.details);
+    changeIcon(card.toggle, isMobile);
+}
+
+/* Event Handler Bindings */
+window.addEventListener("resize", topLevelResponsive());
+toggle.addEventListener('click', toggleElement(dropdown));
 var projectCard = document.querySelectorAll('[data-js-expandable-card]').forEach(addEventListener('click'))
+
+/* Initial Setup */
+let state = new State();
