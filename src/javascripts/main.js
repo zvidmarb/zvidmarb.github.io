@@ -56,7 +56,10 @@ class ResponsiveCard extends ResponsiveElem {
         this.update();
     }
     expanded = false;
-    
+    setExpanded() {
+        this.expanded = !this.expanded;
+    }
+
     changeIcon() {
         this.toggle.innerHTML = (!expanded && State.isViewMobile) ? "expand_less" : 
         (State.isViewMobile) ? "expand_more" : "chevron_right"; 
@@ -101,6 +104,9 @@ class ResponsiveSection extends ResponsiveElem {
             return new ResponsiveElem(child); //normal element case
         })
     }
+    find(element) {
+        return this.children.find(child => (child.elem === element) ? child : false)
+    }
     update() {
         super.update();
         this.children.forEach(c => c.update());
@@ -130,14 +136,21 @@ State.setViewMobile = () => this.view = MOBILE;
 State.setViewDesktop = () => this.view = DESKTOP;
 State.isViewMobile = () => this.view === MOBILE;
 State.isViewDesktop = () => this.view === DESKTOP;
-
+//takes HTMLElement and returns responsive element class instance (DFS, 2 levels)
+State.getResponsiveInstance = function(element) {
+    this.Responsives.find(section => { 
+        if (element === section.elem) {
+            return section;
+        }
+        search = i.find(element);
+        if (search) return search; //TODO DFS BEST?
+        else return false;
+    })
+}  
 
 /* DOM node references */
 const root = document.querySelector('[data-js-responsive-layout]');
 
-let nav = document.querySelector('[data-js-collapsible-nav]');
-let navDropdown = nav.querySelector('[data-js-dropdown]');
-let toggle = nav.querySelector('[data-js-toggle]');
 
 /* project-card, expandable-card.js:
     toggleElement() - toggles expanded class for card details and for card icon
@@ -170,11 +183,14 @@ function onResize() {
     updateViewUI();
 }
 
-function onCardClick() {
+function onCardClick(elem) {
+    const card = State.getResponsiveInstance(elem);
     toggleElement(card.details);
-    changeIcon(card.toggle, State.isViewMobile);
+    card.changeIcon();
+    card.setExpanded();
 }
-function onCardHover() {
+function onCardHover(card) {
+    const card = State.getResponsiveInstance(elem);
     toggleElement(card.details);
     console.log("hover event triggered");
 }
@@ -185,11 +201,11 @@ toggle.addEventListener('click', toggleElement(dropdown));
 
 function updateCardEvents (card, toggle) {
     if (State.isViewMobile) {
-        toggle.addEventListener("click", onCardClick);
-        ["mouseenter", "mouseleave"].forEach(t => card.removeEventListener(t, onCardHover));
+        toggle.addEventListener("click", onCardClick(card));
+        ["mouseenter", "mouseleave"].forEach(t => card.removeEventListener(t, onCardHover(card)));
     } else if (State.isViewDesktop) {
-        ["mouseenter", "mouseleave"].forEach(t => card.addEventListener(t, onCardHover));
-        toggle.removeEventListener("click", onCardClick);
+        ["mouseenter", "mouseleave"].forEach(t => card.addEventListener(t, onCardHover(card)));
+        toggle.removeEventListener("click", onCardClick(card));
     }
 }
 
