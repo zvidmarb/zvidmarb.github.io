@@ -53,7 +53,6 @@ class ResponsiveCard extends ResponsiveElem {
         this.toggle = this.elem.querySelector("[data-js-toggle]");
         this.link = this.toggle.getAttribute("data-href");
         this.details = this.elem.querySelector("[data-js-expand]");
-        this.update();
     }
     expanded = false;
     setExpanded() {
@@ -125,9 +124,10 @@ class ResponsiveElem {
 }
 /* STATE */
 let State = function () {
-    this.view = (window.innerWidth < L) ? MOBILE : DESKTOP;
+    this.view = (window.innerWidth < L) ? MOBILE : DESKTOP; //initialize which screen view
+    //initialize responsive elements
     this.Responsives = root.querySelectorAll('> [data-js-responsive]')
-                                .forEach(s => new ResponsiveSection(s)); 
+                                .forEach(s => new ResponsiveSection(s));
 }
 
 /* STATE ACCESSOR FUNCTIONS */
@@ -164,10 +164,7 @@ const root = document.querySelector('[data-js-responsive-layout]');
 const toggleElement = element => element.classList.toggle("-expanded");
 const collapseElement = element => element.classList.toggle("-expanded", false);
 
-function updateViewUI() {
-    
-    State.Responsives.forEach(update)
-}
+const updateViewUI = () => State.Responsives.forEach(update);
 
 /* site-nav, collapsible-nav.js:
     toggleDropdown() - toggles expanded class
@@ -211,3 +208,4 @@ function updateCardEvents (card, toggle) {
 
 /* Initial Setup */
 const state = new State();
+updateViewUI();
