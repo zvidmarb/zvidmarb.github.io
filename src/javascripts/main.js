@@ -47,21 +47,35 @@ document.querySelectorAll('.number').forEach(function(number){
 const MOBILE = 0, DESKTOP = 1;
 const S = 600, M = 905, L = 1240, XL = 1440; //minimum breakpoints of each screen size, XS-M: mobile/tablet, L-XL: desktop 
 
+//HTMLElement wrapper to more efficiently update based on responsive resizing
+class ResponsiveElem {
+    constructor (element) {
+        this.elem = element;
+        //console.log(this.elem);
+    }
+    update() {
+        console.log(this.elem);
+        state.isViewDesktop() && this.elem.classList.replace("-mobile", "-desktop");
+        state.isViewMobile() && this.elem.classList.replace("-desktop", "-mobile");
+        console.log("updated classes: " + this.elem.classList);
+    }
+}
+//ResponsiveElement wrapper for cards, allowing to change button, link, details
 class ResponsiveCard extends ResponsiveElem {
     constructor (elem) {
         super(elem);
         this.toggle = this.elem.querySelector("[data-js-toggle]");
         this.link = this.toggle.getAttribute("data-href");
         this.details = this.elem.querySelector("[data-js-expand]");
+        this.expanded = false;
     }
-    expanded = false;
     setExpanded() {
         this.expanded = !this.expanded;
     }
 
     changeIcon() {
-        this.toggle.innerHTML = (!expanded && State.isViewMobile) ? "expand_less" : 
-        (State.isViewMobile) ? "expand_more" : "chevron_right"; 
+        this.toggle.innerHTML = (!this.expanded && state.isViewMobile()) ? "expand_less" : 
+        (state.isViewMobile()) ? "expand_more" : "chevron_right"; 
     }
     changeLink() {
         this.toggle.href = (this.toggle.href == "#") ? this.link : "#";
@@ -74,82 +88,104 @@ class ResponsiveCard extends ResponsiveElem {
     }
 
 }
+//ResponsiveElement wrapper for nav elements, giving functionality for enabling dropdown and changing styles
 class ResponsiveNav extends ResponsiveElem {
     constructor (element) {
         super(element);
         this.dropdown = this.elem.querySelector("[data-js-dropdown]");
         this.toggle = this.elem.querySelector("[data-js-toggle]");
     }
-
-    update() {
-        super.update();
-        switchNav();
-    }
     switchNav() {
         collapseElement(this.dropdown);
-        this.dropdown.classList.toggle("-fixed", State.isViewDesktop);
+        console.log(state.isViewDesktop());
+        console.log(this.dropdown.classList.toggle("-fixed", state.isViewDesktop()));
+        console.log("HERE " + this.dropdown.classList);
     }
+    update() {
+        super.update();
+        this.switchNav();
+    }
+
 }
+//special wrapper for page sections, initializing and observing other elements  
 class ResponsiveSection extends ResponsiveElem {
     constructor (element) {
         super(element);
-        this.children = this.node.querySelectorAll("[data-js-responsive]").forEach(
-        function (child) {
-            if ('js-expandable-card' in child.dataset) { //card element case
-                return new ResponsiveCard(child);
-            } else if ('js-collapsible-nav' in child.dataset) {
-                return new ResponsiveNav(child);
-            }
-            return new ResponsiveElem(child); //normal element case
-        })
+        this.children = Array.from(this.elem.querySelectorAll("[data-js-responsive]"),
+            child => {
+                console.log(child.dataset);
+                if ('jsExpandableCard' in child.dataset) { //card element case
+                    console.log("card found");
+                    const Card = new ResponsiveCard(child);
+                    return Card;
+                    //return new ResponsiveCard(child);
+                } else if ('jsCollapsibleNav' in child.dataset) {
+                    console.log("nav found");
+                    const Nav = new ResponsiveNav(child) //store and use for its event listener, TODO rough
+                    console.log(Nav);
+                    return Nav;
+                    
+                }
+                return new ResponsiveElem(child); //normal element case
+            })
     }
     find(element) {
         return this.children.find(child => (child.elem === element) ? child : false)
     }
     update() {
+        console.log(this.elem);
         super.update();
+        console.log("entering child updates");
         this.children.forEach(c => c.update());
     }
 
 }
-class ResponsiveElem {
-    constructor (element) {
-        this.elem = element;
-    }
-    update() {
-        State.isViewDesktop && this.elem.classList.replace("-mobile", "-desktop");
-        State.isViewMobile && this.elem.classList.replace("-desktop", "-mobile");
-        console.log("updated classes: " + this.elem.class);
-    }
-}
+
 /* STATE */
-let State = function () {
-    this.view = (window.innerWidth < L) ? MOBILE : DESKTOP; //initialize which screen view
+const state = {
+    view : (window.innerWidth < L) ? MOBILE : DESKTOP, //initialize which screen view
     //initialize responsive elements
-    this.Responsives = root.querySelectorAll('> [data-js-responsive]')
-                                .forEach(s => new ResponsiveSection(s));
+    responsives : Array.from(document.querySelectorAll('[data-js-responsive-layout] > [data-js-responsive]'),
+        s => {
+            const section = new ResponsiveSection(s);
+            console.log(section);
+            return section;
+        })
+    //console.log(this.responsives.length);
 }
 
 /* STATE ACCESSOR FUNCTIONS */
-State.getView = () => this.view;
-State.setViewMobile = () => this.view = MOBILE;
-State.setViewDesktop = () => this.view = DESKTOP;
-State.isViewMobile = () => this.view === MOBILE;
-State.isViewDesktop = () => this.view === DESKTOP;
+state.getView = () => state.view;
+state.setViewMobile = () => state.view = MOBILE;
+state.setViewDesktop = () => state.view = DESKTOP;
+state.isViewDesktop = () => state.getView() === DESKTOP;
+state.isViewMobile = () => state.getView() === MOBILE;
+
 //takes HTMLElement and returns responsive element class instance (DFS, 2 levels)
-State.getResponsiveInstance = function(element) {
-    this.Responsives.find(section => { 
+state.getResponsiveInstance = function(element) {
+    for (const section of this.responsives) {
         if (element === section.elem) {
-            return section;
+            console.log("matched with section");
         }
-        search = i.find(element);
-        if (search) return search; //TODO DFS BEST?
-        else return false;
-    })
+        console.log(this.responsives);
+        console.log(section);
+        const search = section.find(element);
+        console.log("second-level search: ");
+        console.log(search);
+        if (search) {
+            console.log("search is truthy")
+            return search; //TODO DFS BEST?
+        } 
+        else { 
+            console.log("search false");
+        }
+    }
 }  
 
 /* DOM node references */
-const root = document.querySelector('[data-js-responsive-layout]');
+//const root = document.querySelector('[data-js-responsive-layout]');
+const navToggle = document.querySelector('[data-js-toggle]'); //TODO not ideal, since class member access difficult
+const navDropdown = document.querySelector('[data-js-dropdown]');
 
 
 /* project-card, expandable-card.js:
@@ -164,7 +200,14 @@ const root = document.querySelector('[data-js-responsive-layout]');
 const toggleElement = element => element.classList.toggle("-expanded");
 const collapseElement = element => element.classList.toggle("-expanded", false);
 
-const updateViewUI = () => State.Responsives.forEach(update);
+const updateViewUI = () => {
+    console.log("updating...")
+    console.log(state.responsives);
+    state.responsives.forEach(r => {
+        console.log(r);
+        r.update();
+        });
+}
 
 /* site-nav, collapsible-nav.js:
     toggleDropdown() - toggles expanded class
@@ -175,37 +218,39 @@ const updateViewUI = () => State.Responsives.forEach(update);
 
 /* Event Handlers */
 function onResize() {
-    (window.innerWidth < L) && State.setViewMobile;
-    (window.innerWidth >= L) && State.setViewDesktop;
+    (window.innerWidth < L) && state.setViewMobile();
+    (window.innerWidth >= L) && state.setViewDesktop();
     updateViewUI();
 }
-
-function onCardClick(elem) {
-    const card = State.getResponsiveInstance(elem);
-    toggleElement(card.details);
-    card.changeIcon();
-    card.setExpanded();
+function onDropClick() { 
+    toggleElement(navDropdown);
 }
-function onCardHover(card) {
-    const card = State.getResponsiveInstance(elem);
-    toggleElement(card.details);
+function onCardClick(elem) {
+    const Card = state.getResponsiveInstance(elem);
+    console.log(Card);
+    toggleElement(Card.details);
+    Card.changeIcon();
+    Card.setExpanded();
+}
+function onCardHover(elem) {
+    const Card = state.getResponsiveInstance(elem);
+    toggleElement(Card.details);
     console.log("hover event triggered");
 }
 
 /* Event Handler Bindings */
 window.addEventListener("resize", onResize);
-toggle.addEventListener('click', toggleElement(dropdown));
-
+navToggle.addEventListener("click", onDropClick);
 function updateCardEvents (card, toggle) {
-    if (State.isViewMobile) {
+    if (state.isViewMobile()) {
         toggle.addEventListener("click", onCardClick(card));
         ["mouseenter", "mouseleave"].forEach(t => card.removeEventListener(t, onCardHover(card)));
-    } else if (State.isViewDesktop) {
+    } else if (state.isViewDesktop()) {
         ["mouseenter", "mouseleave"].forEach(t => card.addEventListener(t, onCardHover(card)));
         toggle.removeEventListener("click", onCardClick(card));
     }
 }
 
 /* Initial Setup */
-const state = new State();
+console.log(state);
 updateViewUI();
