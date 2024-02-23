@@ -42,11 +42,11 @@
     } /*expand_more, expand_less, chevron_right*/
     
     > .details {
+        display: none;
         flex-direction: column;
         align-items: flex-start;
         padding: 0.5rem 0.5rem; /*TODO XS: .5, S-XL: 1rem */
     }
-    > .details.-hidden {display:none}
     > .details.-expanded {display: flex}
     > .details > .paragraph { /* possibly match with other p tags */
         color: black;

@@ -55,8 +55,8 @@ class ResponsiveElem {
     }
     update() {
         console.log(this.elem);
-        state.isViewDesktop() && this.elem.classList.replace("-mobile", "-desktop");
-        state.isViewMobile() && this.elem.classList.replace("-desktop", "-mobile");
+        isViewDesktop() && this.elem.classList.replace("-mobile", "-desktop");
+        isViewMobile() && this.elem.classList.replace("-desktop", "-mobile");
         console.log("updated classes: " + this.elem.classList);
     }
 }
@@ -74,8 +74,8 @@ class ResponsiveCard extends ResponsiveElem {
     }
 
     changeIcon() {
-        this.toggle.innerHTML = (!this.expanded && state.isViewMobile()) ? "expand_less" : 
-        (state.isViewMobile()) ? "expand_more" : "chevron_right"; 
+        this.toggle.innerHTML = (!this.expanded && isViewMobile()) ? "expand_less" : 
+        (isViewMobile()) ? "expand_more" : "chevron_right"; 
     }
     changeLink() {
         this.toggle.href = (this.toggle.href == "#") ? this.link : "#";
@@ -97,8 +97,8 @@ class ResponsiveNav extends ResponsiveElem {
     }
     switchNav() {
         collapseElement(this.dropdown);
-        console.log(state.isViewDesktop());
-        console.log(this.dropdown.classList.toggle("-fixed", state.isViewDesktop()));
+        console.log(isViewDesktop());
+        console.log(this.dropdown.classList.toggle("-fixed", isViewDesktop()));
         console.log("HERE " + this.dropdown.classList);
     }
     update() {
@@ -155,11 +155,11 @@ const state = {
 }
 
 /* STATE ACCESSOR FUNCTIONS */
-state.getView = () => state.view;
-state.setViewMobile = () => state.view = MOBILE;
-state.setViewDesktop = () => state.view = DESKTOP;
-state.isViewDesktop = () => state.getView() === DESKTOP;
-state.isViewMobile = () => state.getView() === MOBILE;
+getView = () => state.view;
+setViewMobile = () => state.view = MOBILE;
+setViewDesktop = () => state.view = DESKTOP;
+isViewDesktop = () => getView() === DESKTOP;
+isViewMobile = () => getView() === MOBILE;
 
 //takes HTMLElement and returns responsive element class instance (DFS, 2 levels)
 state.getResponsiveInstance = function(element) {
@@ -218,7 +218,7 @@ const updateViewUI = () => {
 
 /* Event Handlers */
 function onResize() {
-    (window.innerWidth < L) && state.setViewMobile();
+    (window.innerWidth < L) && setViewMobile();
     (window.innerWidth >= L) && state.setViewDesktop();
     updateViewUI();
 }
@@ -242,10 +242,11 @@ function onCardHover(elem) {
 window.addEventListener("resize", onResize);
 navToggle.addEventListener("click", onDropClick);
 function updateCardEvents (card, toggle) {
-    if (state.isViewMobile()) {
+    console.log("updateCardEvents");
+    if (isViewMobile()) {
         toggle.addEventListener("click", onCardClick(card));
         ["mouseenter", "mouseleave"].forEach(t => card.removeEventListener(t, onCardHover(card)));
-    } else if (state.isViewDesktop()) {
+    } else if (isViewDesktop()) {
         ["mouseenter", "mouseleave"].forEach(t => card.addEventListener(t, onCardHover(card)));
         toggle.removeEventListener("click", onCardClick(card));
     }
