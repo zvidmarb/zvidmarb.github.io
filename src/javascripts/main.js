@@ -94,9 +94,10 @@ class ResponsiveCard extends ResponsiveElem {
     handleEvent(Event) {
         if (Event.type == "click") {
             onCardClick(this);
-        } else {
+            Event.preventDefault();
+        } else if (Event.type == "mouseenter" || Event.type == "mouseleave") {
             onCardHover(this);
-        } 
+        } else throw new Error("Event type not handled!");
     }
 
 }
@@ -116,6 +117,11 @@ class ResponsiveNav extends ResponsiveElem {
     update() {
         super.update();
         this.switchNav();
+        updateNavEvent(this);
+    }
+    handleEvent(Event) {
+        Event.preventDefault();
+        onNavClick(this);
     }
 
 }
@@ -194,10 +200,9 @@ state.getResponsiveInstance = function(element) {
     }
 }  
 
-/* DOM node references */
-//const root = document.querySelector('[data-js-responsive-layout]');
-const navToggle = document.querySelector('[data-js-toggle]'); //TODO not ideal, since class member access difficult
-const navDropdown = document.querySelector('[data-js-dropdown]');
+/* DOM node references - none necessary atm */
+
+
 
 
 /* project-card, expandable-card.js:
@@ -234,8 +239,8 @@ function onResize() {
     (window.innerWidth >= L) && setViewDesktop();
     updateViewUI();
 }
-function onDropClick() { 
-    toggleElement(navDropdown);
+function onNavClick(Nav) { 
+    toggleElement(Nav.dropdown);
 }
 function onCardClick(Card) {
     console.log(Card);
@@ -253,7 +258,14 @@ function onCardHover(Card) {
 
 /* Event Handler Bindings */
 window.addEventListener("resize", onResize);
-navToggle.addEventListener("click", onDropClick);
+
+function updateNavEvent(Nav) {
+    if (isViewMobile()) {
+        Nav.toggle.addEventListener("click", Nav);
+    } else if (isViewDesktop()) {
+        Nav.toggle.removeEventListener("click", Nav);
+    } else throw new Error("Nav event updating failed!");
+}
 function updateCardEvents (Card) {
     console.log("updateCardEvents");
     if (isViewMobile()) {
@@ -263,7 +275,7 @@ function updateCardEvents (Card) {
         console.log("adding desktop event listeners, removing mobile if necessary");
         ["mouseenter", "mouseleave"].forEach(t => Card.elem.addEventListener(t, Card));
         Card.toggle.removeEventListener("click", Card);
-    }
+    } else throw new Error ("Card event updating failed!");
 }
 
 /* Initial Setup */
