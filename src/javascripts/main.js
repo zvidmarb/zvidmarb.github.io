@@ -1,40 +1,4 @@
-/*HEADER: RESPONSIVE SWITCH SITE-NAV MODIFIER DESKTOP<-> MOBILE (top-level modifier?),
-              automatically toggles nav icon
-          + SWITCH NAVITEMS FIXED -> HIDDEN, HIDDEN/EXPANDED -> FIXED
-          
-          CLICK NAV-ICON (MOBILE ONLY) FOR HIDDEN <-> EXPANDED
-*/
-
-
-/* HERO: SWITCH HERO-SECTION MODIFIER DESKTOP <-> MOBILE 
-            simply changes layout and sizing, no additional  functions
-*/
-/* PROJECTS: SWITCH PROJECT-SECTION MODIFIER DESKTOP <-> MOBILE
-                simply changes layout and sizing, no additional functions
-             SWITCH PROJECT-CARD MODIFIER DESKTOP <-> MOBILE 
-                automatically toggles details button
-             +SWITCH ICON-MEDIA -CARD AND DETAILS HIDDEN/EXPANDED => HIDDEN
-                SHOULD reset unlike nav items cuz new functionality
-             +SWITCH more/less <-> chevron right
-             SWITCH EVENTLISTENERS DESKTOP <-> MOBILE
-
-        MOBILE CLICK ICON-MEDIA: details hidden <-> expanded + change more <-> less icon
-        DESKTOP HOVER PROJECT-CARD: details hidden <-> expanded
-*/
-
-/* 
-   site-header:
-   site-nav: switchLayout(), switchNav()
-   hero-section: switchLayout()
-   icon-media: 
-      -nav: toggleDropdown(), clickEvent
-      -card: toggleDetails(), changeIcon(), clickEvent
-   project-section: responsiveLayout()
-   project-card: responsiveLayout(), responsive(), icon-media-card, hoverEvent
- */
-
-
-/* TODO doesn't seem to be running?
+/* TODO determine if this is viable - any values that won't do well rounded by 4?
 document.querySelectorAll('.number').forEach(function(number){ 
     /* ROUND BY 4 ON ALL NUMBERS FOR 8PT SYSTEM
     let val = Math.trunc(parseFloat(number.innerHTML));
@@ -47,50 +11,55 @@ document.querySelectorAll('.number').forEach(function(number){
 const MOBILE = 0, DESKTOP = 1;
 const S = 600, M = 905, L = 1240, XL = 1440; //minimum breakpoints of each screen size, XS-M: mobile/tablet, L-XL: desktop 
 
-//HTMLElement wrapper to more efficiently update based on responsive resizing
+/* ResponsiveElem: HTMLElement wrapper to more efficiently update based on responsive resizing
+    Properties: this.elem => the HTML element that the instance wraps
+    Methods: update() => swaps between -mobile and -desktop variants for the given element
+*/
 class ResponsiveElem {
     constructor (element) {
         this.elem = element;
         //console.log(this.elem);
     }
     update() {
-        console.log(this.elem);
+        // console.log(this.elem);
         isViewDesktop() && this.elem.classList.replace("-mobile", "-desktop");
         isViewMobile() && this.elem.classList.replace("-desktop", "-mobile");
-        console.log("updated classes: " + this.elem.classList);
+        // console.log("updated classes: " + this.elem.classList);
     }
 }
-//ResponsiveElement wrapper for cards, allowing to change button, link, details
+/* ResponsiveCard: ResponsiveElement made to wrap Card components
+    Properties: this.elem, this.toggle, this.toggleIcon, this.link, this.details, this.expanded
+    Methods: update(), setExpanded(), changeIcon(), changeLink(), handleEvent(e)
+*/
 class ResponsiveCard extends ResponsiveElem {
     constructor (elem) {
         super(elem);
         this.toggle = this.elem.querySelector("[data-js-toggle]");
         this.toggleIcon = this.toggle.firstElementChild;
-        this.link = this.toggle.getAttribute("data-href");
+        this.link = this.toggle.getAttribute("[data-href]");
         this.details = this.elem.querySelector("[data-js-expand]");
-        this.expanded = false;
-    }
-    setExpanded() {
-        console.log("expanded before: " + this.expanded);
-        this.expanded = !this.expanded;
-        console.log("expanded changed: " + this.expanded);
-    }
 
-    changeIcon() { //change icon to match expanded property and current view
-        console.log(this.toggleIcon);
+        this.expanded = false; //flags whether a card's details are expanded
+    }
+    setExpanded() {this.expanded = !this.expanded}
+
+    //change icon to match expanded property and current view
+    changeIcon() { 
         this.toggleIcon.textContent = (!this.expanded && isViewMobile()) ? "expand_more" : 
         (isViewMobile()) ? "expand_less" : "chevron_right";
-        console.log(this.toggleIcon);
     }
+    //updates href to the separate page for a given card
     changeLink() {
         this.toggle.href = (this.toggle.href == "#") ? this.link : "#";
     }
+
     update() {
         super.update();
         this.changeIcon();
         this.changeLink();
-        updateCardEvents(this);
+        updateCardEvents(this); //assigns event listeners
     }
+
     handleEvent(Event) {
         if (Event.type == "click") {
             onCardClick(this);
@@ -101,7 +70,10 @@ class ResponsiveCard extends ResponsiveElem {
     }
 
 }
-//ResponsiveElement wrapper for nav elements, giving functionality for enabling dropdown and changing styles
+/* ResponsiveNav: ResponsiveElement made to wrap Nav component
+    Properties: this.elem, this.toggle, this.dropdown
+    Methods: update(), switchNav(), handleEvent(e)
+*/
 class ResponsiveNav extends ResponsiveElem {
     constructor (element) {
         super(element);
@@ -110,9 +82,6 @@ class ResponsiveNav extends ResponsiveElem {
     }
     switchNav() {
         collapseElement(this.dropdown);
-        console.log(isViewDesktop());
-        console.log(this.dropdown.classList.toggle("-fixed", isViewDesktop()));
-        console.log("HERE " + this.dropdown.classList);
     }
     update() {
         super.update();
@@ -125,7 +94,10 @@ class ResponsiveNav extends ResponsiveElem {
     }
 
 }
-//special wrapper for page sections, initializing and observing other elements  
+/* ResponsiveSection: ResponsiveElement made to wrap sections, and initializing other responsive elements
+    Properties: this.elem, this.children[]
+    Methods: update(), find(element)
+*/
 class ResponsiveSection extends ResponsiveElem {
     constructor (element) {
         super(element);
@@ -133,14 +105,14 @@ class ResponsiveSection extends ResponsiveElem {
             child => {
                 console.log(child.dataset);
                 if ('jsExpandableCard' in child.dataset) { //card element case
-                    console.log("card found");
+                    // console.log("card found");
                     const Card = new ResponsiveCard(child);
                     return Card;
                     //return new ResponsiveCard(child);
                 } else if ('jsCollapsibleNav' in child.dataset) {
-                    console.log("nav found");
+                    // console.log("nav found");
                     const Nav = new ResponsiveNav(child) //store and use for its event listener, TODO rough
-                    console.log(Nav);
+                    // console.log(Nav);
                     return Nav;
                     
                 }
@@ -151,9 +123,9 @@ class ResponsiveSection extends ResponsiveElem {
         return this.children.find(child => (child.elem === element) ? child : false)
     }
     update() {
-        console.log(this.elem);
+        // console.log(this.elem);
         super.update();
-        console.log("entering child updates");
+        // console.log("entering child updates");
         this.children.forEach(c => c.update());
     }
 
@@ -180,70 +152,49 @@ isViewDesktop = () => getView() === DESKTOP;
 isViewMobile = () => getView() === MOBILE;
 
 //takes HTMLElement and returns responsive element class instance (DFS, 2 levels)
+/* currently not necessary, everything now encapsulated into classes
 state.getResponsiveInstance = function(element) {
     for (const section of this.responsives) {
-        if (element === section.elem) {
-            console.log("matched with section");
-        }
-        console.log(this.responsives);
-        console.log(section);
+        // console.log(this.responsives);
+        // console.log(section);
         const search = section.find(element);
-        console.log("second-level search: ");
-        console.log(search);
+        // console.log("second-level search: ");
+        // console.log(search);
         if (search) {
-            console.log("search is truthy")
+            // console.log("search is truthy")
             return search; //TODO DFS BEST?
         } 
         else { 
-            console.log("search false");
+            // console.log("search false");
         }
     }
-}  
+}  */
 
 /* DOM node references - none necessary atm */
-
-
-
-
-/* project-card, expandable-card.js:
-    toggleElement() - toggles expanded class for card details and for card icon
-    changeIcon() - updates icon inner text to change to selected material name
-    changeLink() - updates href link "#" <-> link from button href
-    project-card, hover (desktop): toggleElement on details
-    project-card, click (mobile): toggleElement on details/card icon, changeIcon more<->less
-*/
 
 /* DOM update functions */
 const toggleElement = element => element.classList.toggle("-expanded");
 const collapseElement = element => element.classList.toggle("-expanded", false);
 
 const updateViewUI = () => {
-    console.log("updating...")
-    console.log(state.responsives);
-    state.responsives.forEach(r => {
-        console.log(r);
-        r.update();
-        });
+    //console.log("updating...")
+    //console.log(state.responsives);
+    state.responsives.forEach(r => r.update());
 }
 
-/* site-nav, collapsible-nav.js:
-    toggleDropdown() - toggles expanded class
-    switchNav() - toggle fixed class on nav-items, toggleDropdown if expanded class is present
-    icon-media-nav, clickEvent: toggleDropdown on nav-items
-*/
-
-
 /* Event Handlers */
-function onResize() {
+function onWindowResize() {
     (window.innerWidth < L) && setViewMobile();
     (window.innerWidth >= L) && setViewDesktop();
     updateViewUI();
+
 }
 function onNavClick(Nav) { 
     toggleElement(Nav.dropdown);
 }
+
 function onCardClick(Card) {
-    console.log(Card);
+    //console.log(Card);
     toggleElement(Card.details);
     toggleElement(Card.toggle);
     Card.setExpanded();
@@ -253,11 +204,10 @@ function onCardClick(Card) {
 function onCardHover(Card) {
     toggleElement(Card.details);
     Card.setExpanded();
-    console.log("hover event triggered");
 }
 
 /* Event Handler Bindings */
-window.addEventListener("resize", onResize);
+window.addEventListener("resize", onWindowResize);
 
 function updateNavEvent(Nav) {
     if (isViewMobile()) {
@@ -266,13 +216,14 @@ function updateNavEvent(Nav) {
         Nav.toggle.removeEventListener("click", Nav);
     } else throw new Error("Nav event updating failed!");
 }
+
 function updateCardEvents (Card) {
-    console.log("updateCardEvents");
+    //console.log("updateCardEvents");
     if (isViewMobile()) {
         Card.toggle.addEventListener("click", Card);
         ["mouseenter", "mouseleave"].forEach(t => Card.elem.removeEventListener(t, Card));
     } else if (isViewDesktop()) {
-        console.log("adding desktop event listeners, removing mobile if necessary");
+        //console.log("adding desktop event listeners, removing mobile if necessary");
         ["mouseenter", "mouseleave"].forEach(t => Card.elem.addEventListener(t, Card));
         Card.toggle.removeEventListener("click", Card);
     } else throw new Error ("Card event updating failed!");
