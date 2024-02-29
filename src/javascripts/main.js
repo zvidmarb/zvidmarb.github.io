@@ -82,6 +82,7 @@ class ResponsiveNav extends ResponsiveElem {
     }
     switchNav() {
         collapseElement(this.dropdown);
+        this.dropdown.classList.toggle("-fixed", isViewDesktop());
     }
     update() {
         super.update();
