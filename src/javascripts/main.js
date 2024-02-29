@@ -65,17 +65,22 @@ class ResponsiveCard extends ResponsiveElem {
     constructor (elem) {
         super(elem);
         this.toggle = this.elem.querySelector("[data-js-toggle]");
+        this.toggleIcon = this.toggle.firstElementChild;
         this.link = this.toggle.getAttribute("data-href");
         this.details = this.elem.querySelector("[data-js-expand]");
         this.expanded = false;
     }
     setExpanded() {
+        console.log("expanded before: " + this.expanded);
         this.expanded = !this.expanded;
+        console.log("expanded changed: " + this.expanded);
     }
 
-    changeIcon() {
-        this.toggle.innerHTML = (!this.expanded && isViewMobile()) ? "expand_less" : 
-        (isViewMobile()) ? "expand_more" : "chevron_right"; 
+    changeIcon() { //change icon to match expanded property and current view
+        console.log(this.toggleIcon);
+        this.toggleIcon.textContent = (!this.expanded && isViewMobile()) ? "expand_more" : 
+        (isViewMobile()) ? "expand_less" : "chevron_right";
+        console.log(this.toggleIcon);
     }
     changeLink() {
         this.toggle.href = (this.toggle.href == "#") ? this.link : "#";
@@ -84,7 +89,14 @@ class ResponsiveCard extends ResponsiveElem {
         super.update();
         this.changeIcon();
         this.changeLink();
-        updateCardEvents(this.elem, this.toggle);
+        updateCardEvents(this);
+    }
+    handleEvent(Event) {
+        if (Event.type == "click") {
+            onCardClick(this);
+        } else {
+            onCardHover(this);
+        } 
     }
 
 }
@@ -219,36 +231,38 @@ const updateViewUI = () => {
 /* Event Handlers */
 function onResize() {
     (window.innerWidth < L) && setViewMobile();
-    (window.innerWidth >= L) && state.setViewDesktop();
+    (window.innerWidth >= L) && setViewDesktop();
     updateViewUI();
 }
 function onDropClick() { 
     toggleElement(navDropdown);
 }
-function onCardClick(elem) {
-    const Card = state.getResponsiveInstance(elem);
+function onCardClick(Card) {
     console.log(Card);
     toggleElement(Card.details);
-    Card.changeIcon();
+    toggleElement(Card.toggle);
     Card.setExpanded();
+    Card.changeIcon();
+    
 }
-function onCardHover(elem) {
-    const Card = state.getResponsiveInstance(elem);
+function onCardHover(Card) {
     toggleElement(Card.details);
+    Card.setExpanded();
     console.log("hover event triggered");
 }
 
 /* Event Handler Bindings */
 window.addEventListener("resize", onResize);
 navToggle.addEventListener("click", onDropClick);
-function updateCardEvents (card, toggle) {
+function updateCardEvents (Card) {
     console.log("updateCardEvents");
     if (isViewMobile()) {
-        toggle.addEventListener("click", onCardClick(card));
-        ["mouseenter", "mouseleave"].forEach(t => card.removeEventListener(t, onCardHover(card)));
+        Card.toggle.addEventListener("click", Card);
+        ["mouseenter", "mouseleave"].forEach(t => Card.elem.removeEventListener(t, Card));
     } else if (isViewDesktop()) {
-        ["mouseenter", "mouseleave"].forEach(t => card.addEventListener(t, onCardHover(card)));
-        toggle.removeEventListener("click", onCardClick(card));
+        console.log("adding desktop event listeners, removing mobile if necessary");
+        ["mouseenter", "mouseleave"].forEach(t => Card.elem.addEventListener(t, Card));
+        Card.toggle.removeEventListener("click", Card);
     }
 }
 

@@ -94,13 +94,13 @@ p {}
         height: calc(100vh - var(--h-header) - .5rem); /*TODO bigger background transition? */
         z-index: 1;
     }
-    > .project-section {z-index: 0}
+    > .project-section {z-index: 2}
     > .project-section.-mobile {height: fit-content}
     > .project-section.-desktop {height: calc(100vh - var(--header-height) -.5rem)}
 
     > .site-footer {
         height: 7.5rem;
-        z-index: 2;
+        z-index: 0;
     }
 
     .content {

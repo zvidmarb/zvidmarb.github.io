@@ -21,16 +21,12 @@
     z-index: 2;
 
     border-radius: 50%; /* perfect circle */
-    
+    background-color: var(--color-primary);  
     > .material-symbols-outlined {
         font-size: calc(var(--fsz-card-icons) - 0.5rem);
+        color: var(--color-neutral1);
     }
-    &.-hidden {
-        background-color: var(--color-primary);  
-        > .material-symbols-outlined {
-            color: var(--color-neutral1);
-        }
-    } 
+
     &.-expanded {
         background-color: var(--color-neutral1);
         outline: .125rem solid var(--color-primary);
