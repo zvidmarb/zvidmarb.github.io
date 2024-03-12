@@ -17,12 +17,12 @@
     > .content > .title {
         font-family: var(--font-primary);
         text-decoration: none;
-        color: #F3FBFB;
+        color: var(--color-neutral1);
 
         font-size: var(--fsz-primary); /*TODO define by grid instead??*/
         line-height:  var(--h-header); /*TODO constrain by width AND height of text? */
-
     }
+    > .content > :is(.title:hover, .title:active) {color: var(--color-neutral2)}   
     > .content > .site-nav.-desktop {
         width: calc((100% - var(--colgap-all))/3 + 3rem);  /*4 out of 12 cols*/
         height: inherit;

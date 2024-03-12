@@ -38,7 +38,6 @@ class ResponsiveCard extends ResponsiveElem {
         this.toggleIcon = this.toggle.firstElementChild;
         this.link = this.toggle.getAttribute("[data-href]");
         this.details = this.elem.querySelector("[data-js-expand]");
-
         this.expanded = false; //flags whether a card's details are expanded
     }
     setExpanded() {this.expanded = !this.expanded}
@@ -79,10 +78,18 @@ class ResponsiveNav extends ResponsiveElem {
         super(element);
         this.dropdown = this.elem.querySelector("[data-js-dropdown]");
         this.toggle = this.elem.querySelector("[data-js-toggle]");
+        this.items = [...this.elem.querySelectorAll("[data-js-navitem]")];
+        this.active = this.items[0]; //default = first item
     }
     switchNav() {
         collapseElement(this.dropdown);
         this.dropdown.classList.toggle("-fixed", isViewDesktop());
+    }
+    getNavItem(id) {
+        for (const item of this.items) {
+            if (item.getAttribute("data-js-nav") == id) return item;
+            else return null; 
+        }
     }
     update() {
         super.update();
@@ -90,8 +97,16 @@ class ResponsiveNav extends ResponsiveElem {
         updateNavEvent(this);
     }
     handleEvent(Event) {
-        Event.preventDefault();
-        onNavClick(this);
+        if (Event.currentTarget === this.toggle) {
+            onNavClick(this);
+        } else if (Event.type == "scroll") {
+            onSectionScroll(this);
+        } else {
+            console.log(Event.currentTarget);
+            
+            onNavItemClick(this, Event.currentTarget);
+        }
+        
     }
 
 }
@@ -102,6 +117,8 @@ class ResponsiveNav extends ResponsiveElem {
 class ResponsiveSection extends ResponsiveElem {
     constructor (element) {
         super(element);
+        this.top = this.elem.offsetTop;
+        this.height = this.elem.offsetHeight;
         this.children = Array.from(this.elem.querySelectorAll("[data-js-responsive]"),
             child => {
                 console.log(child.dataset);
@@ -122,6 +139,10 @@ class ResponsiveSection extends ResponsiveElem {
     }
     find(element) {
         return this.children.find(child => (child.elem === element) ? child : false)
+    }
+    isVisible() {
+        const topWindow = window.scrollY;
+        return (topWindow > this.top && topWindow < (this.top + this.height));
     }
     update() {
         // console.log(this.elem);
@@ -176,6 +197,8 @@ state.getResponsiveInstance = function(element) {
 /* DOM update functions */
 const toggleElement = element => element.classList.toggle("-expanded");
 const collapseElement = element => element.classList.toggle("-expanded", false);
+const activateElement = element => element.classList.toggle("-active", true);
+const deactivateElement = element => element.classList.toggle("-active", false);
 
 const updateViewUI = () => {
     //console.log("updating...")
@@ -190,8 +213,29 @@ function onWindowResize() {
     updateViewUI();
 
 }
+function onSectionScroll(Nav){
+    let current;
+    //for each section, compare scrolly position to that of the section top and the section height
+    for (section of state.responsives) {
+        if (section.isVisible() && section.elem.id) {
+             current = Nav.getNavItem(section.elem.id); //get nav item matching the given section; id and >a[href] matches
+        }
+    }
+    if(current && current !== Nav.active) {
+        deactivateElement(Nav.active);
+        activateElement(current);
+    }
+    
+}
 function onNavClick(Nav) { 
     toggleElement(Nav.dropdown);
+}
+function onNavItemClick(Nav, item) {
+    deactivateElement(Nav.active);
+    activateElement(item);
+    Nav.active = item;
+
+    collapseElement(Nav.dropdown); //only applies to mobile
 }
 
 function onCardClick(Card) {
@@ -209,12 +253,13 @@ function onCardHover(Card) {
 
 /* Event Handler Bindings */
 window.addEventListener("resize", onWindowResize);
-
 function updateNavEvent(Nav) {
+    Nav.items.forEach((item) => item.addEventListener("click", Nav));
     if (isViewMobile()) {
         Nav.toggle.addEventListener("click", Nav);
     } else if (isViewDesktop()) {
         Nav.toggle.removeEventListener("click", Nav);
+        window.addEventListener("scroll", Nav);
     } else throw new Error("Nav event updating failed!");
 }
 

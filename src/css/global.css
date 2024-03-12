@@ -33,6 +33,7 @@
     --color-primary: #3B7577;
     --color-neutral1: #F3FBFB;
     --color-neutral2: #DAF2F3;
+    --color-neutral-active: #FFFFFF;
 
     --box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
 }
@@ -69,12 +70,13 @@ h1 {}
 h2 {}
 h3 {}
 p {}
-
+html {
+    scroll-snap-type: y proximity;
+}
 .home-page {
     --h-header: clamp(3rem, 8vw, 4.5rem);
     display: flex;
     flex-direction: column;
-
     z-index: -1;
     
     font-family: var(--font-secondary);
@@ -93,14 +95,20 @@ p {}
         /*viewport height - header - .5rem for section color transition */
         height: calc(100vh - var(--h-header) - .5rem); /*TODO bigger background transition? */
         z-index: 1;
+        scroll-snap-align: end;
     }
-    > .project-section {z-index: 2}
+    > .project-section {
+        height: calc(100vh - var(--h-header));
+        z-index: 2;
+        scroll-snap-align: start;
+    }
     > .project-section.-mobile {height: fit-content}
     > .project-section.-desktop {height: calc(100vh - var(--header-height) -.5rem)}
 
     > .site-footer {
         height: 7.5rem;
         z-index: 0;
+        scroll-snap-align: end;
     }
 
     .content {
