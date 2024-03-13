@@ -35,3 +35,4 @@
 - [Reasonal System for Javascript (counterpart to RSCSS)](https://ricostacruz.com/rsjs/)
 - [Basic Vanilla JS Project Setupo](https://plainenglish.io/blog/the-basic-vanilla-js-project-setup-9290dce6403f)
 - [Mastering State Management in Vanilla JS](https://medium.com/@asierr/back-to-basics-mastering-state-management-in-vanilla-javascript-e3be7377ac46)
+- [Info on Scroll Throttling, to be implemented later...?](https://www.sitepoint.com/throttle-scroll-events/)
