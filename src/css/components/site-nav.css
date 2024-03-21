@@ -38,7 +38,7 @@
         top: var(--h-header);
 
         background-color: var(--color-neutral1);
-        border: 1px solid black; /*TODO replace w drop shadow*/ 
+        border: 1px solid var(--color-black); /*TODO replace w drop shadow*/ 
     }
     > .navitems > .itembox {
         width: inherit;
@@ -48,7 +48,7 @@
         }
     }
     > .navitems > .itembox > .itemtext {
-        color: black;
+        color: var(--color-black);
 
         font-size: clamp(1rem, 2vw + 1rem, 2rem);
     }
@@ -79,7 +79,7 @@
                 content: '';
                 height: 0.25rem;
                 width: 100%;
-                background: var(--color-neutral-active);
+                background: var(--color-neutral2);
                 position: absolute;
                 left: 0;
                 bottom: 0;
@@ -88,10 +88,10 @@
             }
         }
         > .navitems > .itembox:hover > .itemtext {
-            color: var(--color-neutral-active);
+            color: var(--color-neutral2);
         }
         > .navitems > .itembox.-active > .itemtext {
-            color: var(--color-neutral-active);
+            color: var(--color-neutral2);
             &::after {
                 opacity: 1;
             }

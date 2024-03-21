@@ -61,7 +61,10 @@ class ResponsiveCard extends ResponsiveElem {
 
     handleEvent(Event) {
         if (Event.type == "click") {
-            onCardClick(this);
+            if ((isViewMobile())) {
+                onCardClick(this);
+                console.log("event click on card detected mobile!");
+            }
             Event.preventDefault();
         } else if (Event.type == "mouseenter" || Event.type == "mouseleave") {
             onCardHover(this);
@@ -282,8 +285,9 @@ function updateCardEvents (Card) {
         ["mouseenter", "mouseleave"].forEach(t => Card.elem.removeEventListener(t, Card));
     } else if (isViewDesktop()) {
         //console.log("adding desktop event listeners, removing mobile if necessary");
-        ["mouseenter", "mouseleave"].forEach(t => Card.elem.addEventListener(t, Card));
         Card.toggle.removeEventListener("click", Card);
+        ["click", "mouseenter", "mouseleave"].forEach(t => Card.elem.addEventListener(t, Card));
+        
     } else throw new Error ("Card event updating failed!");
 }
 

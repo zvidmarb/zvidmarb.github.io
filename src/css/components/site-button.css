@@ -11,14 +11,22 @@
     font-family: "Source Sans 3", sans-serif; /* TODO determine issue with specificity */
     font-size: clamp(1rem, 4vw + 0.25rem, 2.5rem); /*XS: 1, S: 2, M: 2*/
 
-    color: #F3FBFB;
-    background-color: #3B7577;
+    color: var(--color-neutral1);
+    background-color: var(--color-primary);
     
     border-radius: 1rem;
     box-shadow: var(--box-shadow);
 
     @media screen and (min-width: 77.5rem) {
     font-size: clamp(1.5rem, 3vw - .75rem, 2rem); /*XS: 1, S: 2, M: 2*/
+    &:hover {
+        background-color: var(--color-primary2);
+    }
+    &:active {
+        box-shadow: none;
+        background-color: var(--color-primary-active);
+        transition: all .4s;
+    }
     }
 }
 .site-button.-card {

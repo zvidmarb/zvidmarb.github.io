@@ -18,13 +18,19 @@
         justify-content: space-around;
     }
     > .content > .top > .copyright {
-        color: #F3FBFB;
+        color: var(--color-neutral1);
         font-weight: 600;
     }
     > .content > .top > .pagejump {
-        color: #F3FBFB;
+        color: var(--color-neutral1);
         font-weight: 600;
         text-decoration: none;
+        &:hover {
+            color: var(--color-neutral2);
+        }
+        &:active {
+            color: var(--color-neutral-active);
+        }
     }
 
     > .content > .main {
@@ -35,7 +41,7 @@
     }
     > .content > .main > .contactlabel {
         align-self: center;
-        color: #F3FBFB;
+        color: var(--color-neutral1);
         font-weight: 600;
     }
     > .content > .main > .social-icons {

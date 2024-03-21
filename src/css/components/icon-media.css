@@ -3,17 +3,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--color-dark);
+    &:hover {
+        color: var(--color-dark-active);
+    }
 }
 
 .icon-media.-social {
     > .iconcontent.-img {
         width: var(--fsz-social-icons);
         height: var(--fsz-social-icons);
+
+        color: var(--color-dark);
     }
     > .material-symbols-outlined {
         font-variation-settings: "FILL" 1;
         font-size: var(--fsz-social-icons);
         font-weight: 700;
+        
+        color: var(--color-dark);
     }
 }
 
@@ -31,10 +39,21 @@
         background-color: var(--color-neutral1);
         outline: .125rem solid var(--color-primary);
         outline-offset: -.125rem;
+        transition: all .2s;
         > .material-symbols-outlined {
             color: var(--color-primary);
         }
     }
+    &:hover {
+        background-color: var(--color-primary2);
+    }
+    &:active { 
+        background-color: var(--color-primary-active);
+        > .material-symbols-outlined {
+            color: var(--color-neutral-active);
+        }
+    }
+
 }
 .icon-media.-nav { /*TODO responsive adjust still?*/
     display: flex;

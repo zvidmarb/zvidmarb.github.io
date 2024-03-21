@@ -49,7 +49,7 @@
     }
     > .details.-expanded {display: flex}
     > .details > .paragraph { /* possibly match with other p tags */
-        color: black;
+        color: var(--color-black);
         font-size: clamp(1rem, 3vw + .75rem, 2rem);
     } /*> .details > .site-button.-card: currently no master variation */
 }

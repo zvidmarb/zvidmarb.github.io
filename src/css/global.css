@@ -32,10 +32,13 @@
 
     --color-primary: #3C7678;
     --color-primary2: #266362;
+    --color-primary-active: #1A4F4B;
     --color-neutral1: #F2FCFF;
     --color-neutral2: #D4F4FD;
-    --color-neutral-active: #D4F4FD;
-    --color-dark: #0B2621;
+    --color-neutral-active: #ADE4EE;
+    --color-dark: #222626;
+    --color-dark-active: #0B2621;
+    
     
 
     --box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
