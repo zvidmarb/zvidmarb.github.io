@@ -43,6 +43,9 @@
     > .navitems > .itembox {
         width: inherit;
         height: calc(100%/3);
+        &:active {
+            background-color: var(--color-neutral2);
+        }
     }
     > .navitems > .itembox > .itemtext {
         color: black;
@@ -76,15 +79,19 @@
                 content: '';
                 height: 0.25rem;
                 width: 100%;
-                background: var(--color-neutral2);
+                background: var(--color-neutral-active);
                 position: absolute;
                 left: 0;
                 bottom: 0;
                 opacity: 0;
+                transition: opacity .2s;
             }
         }
-        > .navitems > :is(.itembox:hover, .itembox.-active) > .itemtext {
-            color: var(--color-neutral2);
+        > .navitems > .itembox:hover > .itemtext {
+            color: var(--color-neutral-active);
+        }
+        > .navitems > .itembox.-active > .itemtext {
+            color: var(--color-neutral-active);
             &::after {
                 opacity: 1;
             }

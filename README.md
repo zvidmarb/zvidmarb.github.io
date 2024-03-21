@@ -1,5 +1,5 @@
 # To-Do List for MVP
-1. Hover/Focus Animations for the Desktop Navbar - active for sections of a single webpage (for MVP) *- 2 pomos*
+1. ~~Hover/Focus Animations for the Desktop Navbar - active for sections of a single webpage (for MVP) *- 2 pomos*~~
 2. Hover/Focus Animations for site-buttons and project-card buttons *- 3 pomos*
 3. Mobile Navbar - focus and collapse on select (collapse only needed when a single webpage?) *- 1 pomos*
 4. Finish Medium write-up for YT Spaces *- 7 pomos*
@@ -10,9 +10,9 @@
 9. Code cleaning and reorganization *- 2 pomos*
 
 # Beyond MVP
-9. Continue tweaking responsive design to better accomodate height differences within screen designs
-10. Design article-page component to host medium articles locally
-11. Consider whether separate about/project pages are still desired, or keep the single page design
+10. Continue tweaking responsive design to better accomodate height differences within screen designs
+11. Design article-page component to host medium articles locally
+12. Consider whether separate about/project pages are still desired, or keep the single page design (INCLUDING SCROLL THROTTLING)
 
 # References
 

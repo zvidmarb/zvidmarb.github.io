@@ -104,6 +104,7 @@ class ResponsiveNav extends ResponsiveElem {
     handleEvent(Event) {
         if (Event.currentTarget === this.toggle) {
             onNavClick(this);
+            Event.preventDefault();
         /*} else if (Event.type == "scroll") {
             onSectionScroll(this);*/
         } else {

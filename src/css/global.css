@@ -30,10 +30,13 @@
     --font-secondary: "Source Sans 3", sans-serif;
     
 
-    --color-primary: #3B7577;
-    --color-neutral1: #F3FBFB;
-    --color-neutral2: #DAF2F3;
-    --color-neutral-active: #FFFFFF;
+    --color-primary: #3C7678;
+    --color-primary2: #266362;
+    --color-neutral1: #F2FCFF;
+    --color-neutral2: #D4F4FD;
+    --color-neutral-active: #D4F4FD;
+    --color-dark: #0B2621;
+    
 
     --box-shadow: 0 .25rem .25rem rgba(0,0,0,25%), 0 .125rem .125rem rgba(0,0,0,30%);
 }

@@ -21,8 +21,10 @@
 
         font-size: var(--fsz-primary); /*TODO define by grid instead??*/
         line-height:  var(--h-header); /*TODO constrain by width AND height of text? */
+
+        transition: color 0.2s;
     }
-    > .content > :is(.title:hover, .title:active) {color: var(--color-neutral2)}   
+    > .content > :is(.title:hover, .title:active) {color: var(--color-neutral-active)}   
     > .content > .site-nav.-desktop {
         width: calc((100% - var(--colgap-all))/3 + 3rem);  /*4 out of 12 cols*/
         height: inherit;

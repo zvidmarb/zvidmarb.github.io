@@ -46,6 +46,7 @@
     border: .125rem solid var(--color-neutral1);
     border-radius: .25rem;
 
+    
     > .material-symbols-outlined {
         font-weight: 500;
     }
