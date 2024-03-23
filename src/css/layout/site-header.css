@@ -24,7 +24,8 @@
 
         transition: color 0.2s;
     }
-    > .content > :is(.title:hover, .title:active) {color: var(--color-neutral-active)}   
+    > .content > :hover {color: var(--color-neutral2)}
+    > .content > :active {color: var(--color-neutral-active)}   
     > .content > .site-nav.-desktop {
         width: calc((100% - var(--colgap-all))/3 + 3rem);  /*4 out of 12 cols*/
         height: inherit;

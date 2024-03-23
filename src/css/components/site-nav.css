@@ -90,6 +90,10 @@
         > .navitems > .itembox:hover > .itemtext {
             color: var(--color-neutral2);
         }
+        > .navitems > .itembox:active > .itemtext {
+            color: var(--color-neutral-active);
+            
+        }
         > .navitems > .itembox.-active > .itemtext {
             color: var(--color-neutral2);
             &::after {
