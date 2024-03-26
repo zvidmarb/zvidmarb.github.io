@@ -10,28 +10,43 @@
 }
 
 .icon-media.-social {
-    > .iconcontent.-img {
+    font-size: var(--fsz-social-icons);
+    > .iconcontent.-svg {
         width: var(--fsz-social-icons);
         height: var(--fsz-social-icons);
-
-        color: var(--color-dark);
+        &:active {
+            width: 95%;
+            transition: 
+                width .1s, 
+                height .1s;
+        }
     }
     > .material-symbols-outlined {
         font-variation-settings: "FILL" 1;
-        font-size: var(--fsz-social-icons);
+        font-size: inherit;
+        line-height: var(--fsz-social-icons);
         font-weight: 700;
+        text-align: center;
         
-        color: var(--color-dark);
+        width: var(--fsz-social-icons);
+        height: var(--fsz-social-icons);
+        &:active {
+            font-size: 95%;
+            transition: font-size .1s;
+        }
     }
 }
 
 .icon-media.-card {
     z-index: 2;
-
     border-radius: 50%; /* perfect circle */
-    background-color: var(--color-primary);  
+    background-color: var(--color-primary);
+    font-size: calc(var(--fsz-card-icons) - 0.5rem);
+    line-height: var(--fsz-social-icons);
+    text-align: center;
+
     > .material-symbols-outlined {
-        font-size: calc(var(--fsz-card-icons) - 0.5rem);
+        font-size: inherit;
         color: var(--color-neutral1);
     }
 
@@ -50,6 +65,8 @@
     &:active { 
         background-color: var(--color-primary-active);
         > .material-symbols-outlined {
+            font-size: 95%;
+            transition: font-size .1s;
             color: var(--color-neutral-active);
         }
     }

@@ -25,7 +25,7 @@
 
     --fsz-primary: clamp(1.5rem, 2vw + 1rem, 3rem);
     --fsz-social-icons: clamp(2rem, 4vw + 1rem, 4rem);
-    --fsz-card-icons: clamp(2.25rem, 18vw - 4.5rem, 5.25rem);
+    --fsz-card-icons: clamp(2.25rem, 18vw - 4.5rem, 4rem);
     --font-primary: "Oswald", sans-serif;
     --font-secondary: "Source Sans 3", sans-serif;
     
