@@ -1,6 +1,6 @@
 # To-Do List for MVP
 1. ~~Hover/Focus Animations for the Desktop Navbar - active for sections of a single webpage (for MVP) *- 2 pomos*~~
-2. Hover/Focus Animations for site-buttons and project-card buttons *- 3 pomos*
+2. ~~Hover/Focus Animations for site-buttons and project-card buttons *- 3 pomos*~~
 3. Mobile Navbar - focus and collapse on select (collapse only needed when a single webpage?) *- 1 pomos*
 4. Finish Medium write-up for YT Spaces *- 7 pomos*
 5. Write a brief MRF Portal write-up ... *- 5 pomos*
