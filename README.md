@@ -4,7 +4,7 @@
 3. Mobile Navbar - focus and collapse on select (collapse only needed when a single webpage?) *- 1 pomos*
 4. Finish Medium write-up for YT Spaces *- 7 pomos*
 5. Write a brief MRF Portal write-up ... *- 5 pomos*
-6. Write a brief TechX write-up *- 3 pomos*
+6. ~~Write a brief TechX write-up *- 3 pomos*~~
 7. Fourth project? ideate or portfolio *- 3 pomos*
 8. Write brief summaries of projects and link articles to project cards (for MVP) *- 2 pomos*
 9. Code cleaning and reorganization *- 2 pomos*

@@ -4,6 +4,8 @@
     box-shadow: 0 0 1rem 0 rgba(0,0,0,25%); /*TODO responsive adjust??*/
 }
 .img-media.-card {
+    width: 100%;
+    aspect-ratio: 12 / 7;
     object-fit: cover; /* = fill + clip to fit apsect ratio */
     border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
