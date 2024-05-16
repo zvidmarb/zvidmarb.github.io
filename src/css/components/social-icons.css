@@ -8,7 +8,7 @@
 
     list-style-type: none;
 
-    > .icon-media.-social {
+    > .iconitem {
         width: fit-content;
         height: fit-content;
     }
