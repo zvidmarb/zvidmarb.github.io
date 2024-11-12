@@ -2,7 +2,7 @@
 document.querySelectorAll('.number').forEach(function(number){ 
     /* ROUND BY 4 ON ALL NUMBERS FOR 8PT SYSTEM
     let val = Math.trunc(parseFloat(number.innerHTML));
-    console.log(val);
+    //console.log(val);
     let diff = val % 4;
     number.innerHTML = (diff < 2) ? val - diff : val + (4 - diff); //0 1 / 2 3 0
 });
@@ -18,13 +18,13 @@ const S = 600, M = 905, L = 1240, XL = 1440; //minimum breakpoints of each scree
 class ResponsiveElem {
     constructor (element) {
         this.elem = element;
-        //console.log(this.elem);
+        ////console.log(this.elem);
     }
     update() {
-        // console.log(this.elem);
+        // //console.log(this.elem);
         isViewDesktop() && this.elem.classList.replace("-mobile", "-desktop");
         isViewMobile() && this.elem.classList.replace("-desktop", "-mobile");
-        // console.log("updated classes: " + this.elem.classList);
+        // //console.log("updated classes: " + this.elem.classList);
     }
 }
 /* ResponsiveCard: ResponsiveElement made to wrap Card components
@@ -55,7 +55,7 @@ class ResponsiveCard extends ResponsiveElem {
     update() {
         super.update();
         this.changeIcon();
-        this.changeLink();
+        //this.changeLink();
         updateCardEvents(this); //assigns event listeners
     }
 
@@ -63,9 +63,9 @@ class ResponsiveCard extends ResponsiveElem {
         if (Event.type == "click") {
             if ((isViewMobile())) {
                 onCardClick(this);
-                console.log("event click on card detected mobile!");
+                ////console.log("event click on card detected mobile!");
             }
-            Event.preventDefault();
+            //Event.preventDefault();
         } else if (Event.type == "mouseenter" || Event.type == "mouseleave") {
             onCardHover(this);
         } else throw new Error("Event type not handled!");
@@ -90,12 +90,12 @@ class ResponsiveNav extends ResponsiveElem {
     }
     /*getNavItem(id) {
         for (const item of this.items) {
-            console.log("retrieving navitem for id " + id + "...");
+            //console.log("retrieving navitem for id " + id + "...");
             if (item.dataset.jsNav == id){
-                console.log("success!");
+                //console.log("success!");
                 return item;
             } else {
-                console.log("failed.")
+                //console.log("failed.")
             }
         }
     }*/
@@ -111,7 +111,7 @@ class ResponsiveNav extends ResponsiveElem {
         /*} else if (Event.type == "scroll") {
             onSectionScroll(this);*/
         } else {
-            console.log(Event.currentTarget);
+            //console.log(Event.currentTarget);
             
             onNavItemClick(this, Event.currentTarget);
         }
@@ -130,16 +130,16 @@ class ResponsiveSection extends ResponsiveElem {
         this.height = this.elem.offsetHeight;*/
         this.children = Array.from(this.elem.querySelectorAll("[data-js-responsive]"),
             child => {
-                console.log(child.dataset);
+                //console.log(child.dataset);
                 if ('jsExpandableCard' in child.dataset) { //card element case
-                    // console.log("card found");
+                    // //console.log("card found");
                     const Card = new ResponsiveCard(child);
                     return Card;
                     //return new ResponsiveCard(child);
                 } else if ('jsCollapsibleNav' in child.dataset) {
-                    // console.log("nav found");
+                    // //console.log("nav found");
                     const Nav = new ResponsiveNav(child) //store and use for its event listener, TODO rough
-                    // console.log(Nav);
+                    // //console.log(Nav);
                     return Nav;
                     
                 }
@@ -154,9 +154,9 @@ class ResponsiveSection extends ResponsiveElem {
         return (topWindow > this.top && topWindow < (this.top + this.height));
     }*/
     update() {
-        // console.log(this.elem);
+        // //console.log(this.elem);
         super.update();
-        // console.log("entering child updates");
+        // //console.log("entering child updates");
         this.children.forEach(c => c.update());
     }
 
@@ -169,10 +169,10 @@ const state = {
     responsives : Array.from(document.querySelectorAll('[data-js-responsive-layout] > [data-js-responsive]'),
         s => {
             const section = new ResponsiveSection(s);
-            console.log(section);
+            //console.log(section);
             return section;
         })
-    //console.log(this.responsives.length);
+    ////console.log(this.responsives.length);
 }
 
 /* STATE ACCESSOR FUNCTIONS */
@@ -186,17 +186,17 @@ isViewMobile = () => getView() === MOBILE;
 /* currently not necessary, everything now encapsulated into classes
 state.getResponsiveInstance = function(element) {
     for (const section of this.responsives) {
-        // console.log(this.responsives);
-        // console.log(section);
+        // //console.log(this.responsives);
+        // //console.log(section);
         const search = section.find(element);
-        // console.log("second-level search: ");
-        // console.log(search);
+        // //console.log("second-level search: ");
+        // //console.log(search);
         if (search) {
-            // console.log("search is truthy")
+            // //console.log("search is truthy")
             return search; //TODO DFS BEST?
         } 
         else { 
-            // console.log("search false");
+            // //console.log("search false");
         }
     }
 }  */
@@ -210,8 +210,8 @@ const activateElement = element => element.classList.toggle("-active", true);
 const deactivateElement = element => element.classList.toggle("-active", false);
 
 const updateViewUI = () => {
-    //console.log("updating...")
-    //console.log(state.responsives);
+    ////console.log("updating...")
+    ////console.log(state.responsives);
     state.responsives.forEach(r => r.update());
 }
 
@@ -226,19 +226,19 @@ function onWindowResize() {
     let iter;
     //for each section, compare scrolly position to that of the section top and the section height
     for (const section of state.responsives) {
-        console.log("checking section " + section.elem.id + " visibility..." )
+        //console.log("checking section " + section.elem.id + " visibility..." )
         if (section.elem.id && section.isVisible()) {
              iter = Nav.getNavItem(section.elem.id); //get nav item matching the given section; id and >a[href] matches
-             console.log("section is visible!")
+             //console.log("section is visible!")
         } else {
-            console.log("not visible.")
+            //console.log("not visible.")
         }
     }
     if(iter && iter !== Nav.active) {
         deactivateElement(Nav.active);
         activateElement(iter);
     } else {
-        console.log("section is same as current active nav item: " + Nav.active);
+        //console.log("section is same as current active nav item: " + Nav.active);
     }
     
 }*/
@@ -254,7 +254,7 @@ function onNavItemClick(Nav, item) {
 }
 
 function onCardClick(Card) {
-    //console.log(Card);
+    ////console.log(Card);
     toggleElement(Card.details);
     toggleElement(Card.toggle);
     Card.setExpanded();
@@ -279,12 +279,12 @@ function updateNavEvent(Nav) {
 }
 
 function updateCardEvents (Card) {
-    //console.log("updateCardEvents");
+    ////console.log("updateCardEvents");
     if (isViewMobile()) {
         Card.toggle.addEventListener("click", Card);
         ["mouseenter", "mouseleave"].forEach(t => Card.elem.removeEventListener(t, Card));
     } else if (isViewDesktop()) {
-        //console.log("adding desktop event listeners, removing mobile if necessary");
+        ////console.log("adding desktop event listeners, removing mobile if necessary");
         Card.toggle.removeEventListener("click", Card);
         ["click", "mouseenter", "mouseleave"].forEach(t => Card.elem.addEventListener(t, Card));
         
@@ -292,5 +292,5 @@ function updateCardEvents (Card) {
 }
 
 /* Initial Setup */
-console.log(state);
+//console.log(state);
 updateViewUI();
